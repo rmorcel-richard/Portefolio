@@ -236,7 +236,7 @@
       max-width: 760px;
     }
 
-    .mini-card, .card, .project-card, .personal-card, .contact-card {
+    .mini-card, .card, .project-card, .personal-card, .contact-card, .guide-download {
       background: rgba(255, 255, 255, 0.76);
       border: 1px solid rgba(23, 50, 79, 0.08);
       border-radius: var(--radius-lg);
@@ -485,7 +485,7 @@
 
     .poste-intro {
       color: #4b5563;
-      max-width: 850px;
+      max-width: 900px;
       margin-bottom: 24px;
     }
 
@@ -496,6 +496,10 @@
       margin-bottom: 24px;
     }
 
+    .projects-grid.four {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
     .project-card {
       padding: 24px;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -503,27 +507,31 @@
 
     .project-card:hover,
     .personal-card:hover,
-    .contact-card:hover {
+    .contact-card:hover,
+    .guide-download:hover {
       transform: translateY(-6px);
       box-shadow: 0 24px 52px rgba(23, 50, 79, 0.14);
     }
 
     .project-card h4,
-    .personal-card h4 {
+    .personal-card h4,
+    .guide-download h3 {
       color: var(--terracotta);
       font-size: 1.05rem;
       margin-bottom: 16px;
     }
 
     .project-card p,
-    .personal-card p {
+    .personal-card p,
+    .guide-download p {
       font-size: 0.94rem;
       color: #4b5563;
       margin-bottom: 10px;
     }
 
     .project-card strong,
-    .personal-card strong {
+    .personal-card strong,
+    .guide-download strong {
       color: var(--marine);
     }
 
@@ -564,6 +572,67 @@
 
     .personal-card {
       padding: 26px;
+    }
+
+    .personal-card.wide {
+      grid-column: span 2;
+    }
+
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .photo-card {
+      position: relative;
+      min-height: 220px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 15px 40px rgba(23, 50, 79, 0.1);
+      border: 1px solid rgba(23, 50, 79, 0.08);
+      background: #d9dee5;
+    }
+
+    .photo-card:first-child {
+      min-height: 320px;
+      grid-row: span 2;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-caption {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      color: white;
+      background: rgba(23, 50, 79, 0.78);
+      font-weight: 800;
+      font-size: 0.86rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .guide-download {
+      padding: 26px;
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
     }
 
     .quote-band {
@@ -681,6 +750,12 @@
       transform: translateY(0);
     }
 
+    @media (max-width: 1100px) {
+      .projects-grid.four {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 980px) {
       .hero,
       .contact-wrap {
@@ -692,8 +767,13 @@
       }
 
       .projects-grid,
-      .personal-grid {
+      .personal-grid,
+      .photo-gallery {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .photo-card:first-child {
+        grid-row: auto;
       }
 
       .metrics {
@@ -702,6 +782,10 @@
 
       .section-title {
         grid-template-columns: 1fr;
+      }
+
+      .personal-card.wide {
+        grid-column: span 2;
       }
     }
 
@@ -743,9 +827,16 @@
 
       .hero-cards,
       .projects-grid,
+      .projects-grid.four,
       .personal-grid,
-      .metrics {
+      .photo-gallery,
+      .metrics,
+      .guide-download {
         grid-template-columns: 1fr;
+      }
+
+      .personal-card.wide {
+        grid-column: span 1;
       }
 
       .profile-panel {
@@ -799,10 +890,10 @@
   <main>
     <section class="section hero page active-page" id="accueil">
       <div class="hero-content reveal">
-        <span class="eyebrow">Fonction publique</span>
+        <span class="eyebrow">Fonction publique · Transformation numérique</span>
         <h1>Portfolio professionnel</h1>
         <p class="lead">
-          Bienvenue sur mon portfolio. J’y présente une sélection de projets professionnels et personnels qui reflètent mon parcours, mes compétences et mon engagement dans l’action publique.
+          Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le service public.
         </p>
         <div class="hero-actions">
           <a href="#projets-professionnels" class="btn btn-primary page-link" data-page="projets-professionnels">Découvrir mes projets</a>
@@ -812,17 +903,17 @@
           <article class="mini-card">
             <div class="icon">●</div>
             <h3>Mon profil</h3>
-            <p>Gestion de projet, organisation, coordination et amélioration de processus.</p>
+            <p>Attaché d’administration de l’État, orienté conduite de projet, coordination et amélioration de processus.</p>
           </article>
           <article class="mini-card">
             <div class="icon orange">▣</div>
             <h3>Mes projets professionnels</h3>
-            <p>Une sélection de projets menés dans différents postes et services.</p>
+            <p>Des projets menés sur des sujets financiers, RH, SIRH et dématérialisation.</p>
           </article>
           <article class="mini-card">
             <div class="icon gray">♡</div>
             <h3>Mes engagements personnels</h3>
-            <p>Formation, transmission, copropriété, recyclerie et projets citoyens.</p>
+            <p>Copropriété, transmission, pédagogie, impression 3D et créations culinaires.</p>
           </article>
         </div>
       </div>
@@ -830,7 +921,7 @@
       <div class="hero-visual reveal" aria-hidden="true">
         <div class="profile-panel">
           <h2>Sobre.<br />Moderne.<br />Professionnel.</h2>
-          <p>Une présentation claire, synthétique et rassurante pour permettre à un recruteur d’identifier rapidement votre valeur ajoutée.</p>
+          <p>Une présentation claire, synthétique et rassurante pour permettre à un recruteur d’identifier rapidement mon parcours, mes compétences et mes réalisations.</p>
         </div>
         <div class="leaf"><span></span><span></span><span></span><span></span><span></span></div>
         <div class="shape-gray"></div>
@@ -846,7 +937,7 @@
         <div>
           <span class="eyebrow">Projets professionnels</span>
           <h2>Des réalisations sélectionnées</h2>
-          <p>Chaque poste est présenté avec quelques projets clés : le contexte, votre rôle, l’apport concret et les compétences développées.</p>
+          <p>Chaque poste est présenté avec quelques projets clés : le contexte, mon rôle, l’apport concret et les compétences développées.</p>
         </div>
         <span class="tag">3 à 4 projets par poste</span>
       </div>
@@ -855,41 +946,43 @@
         <article class="poste reveal">
           <div class="poste-header">
             <div>
-              <h3>Poste 1 — Chargée de mission / Coordinatrice</h3>
-              <p>Période : 2021 – 2024</p>
+              <h3>Poste 1 — Chef de projet réseau financier</h3>
+              <p>Ministère des Armées · Septembre 2021 – Décembre 2023</p>
             </div>
-            <span class="tag">Organisation · Suivi · Coordination</span>
+            <span class="tag">Paie · Référentiels · Pilotage</span>
           </div>
           <div class="poste-body">
-            <p class="poste-intro">Sur ce poste, j’ai contribué à la coordination, au suivi et à l’amélioration de plusieurs actions liées à l’organisation du service et à la qualité du travail.</p>
+            <p class="poste-intro">
+              Sur ce poste, j’ai contribué à la fiabilisation des référentiels de paie, au pilotage d’opérations de transfert comptable et à la coordination fonctionnelle de plusieurs acteurs de la chaîne paie. Mes missions m’ont amené à intervenir sur des enjeux d’organisation, de sécurisation des processus et d’accompagnement au changement.
+            </p>
             <div class="projects-grid">
               <article class="project-card">
                 <div class="icon">▤</div>
-                <h4>Projet 1 — Mise en place d’un outil de suivi</h4>
-                <p><strong>Contexte :</strong> besoin d’un meilleur suivi des dossiers et des échanges.</p>
-                <p><strong>Mon rôle :</strong> structuration, mise à jour et coordination des informations.</p>
-                <p><strong>Apport :</strong> meilleure visibilité et réduction des oublis.</p>
+                <h4>Projet 1 — Fiabilisation des référentiels financiers de la paie en PSOP</h4>
+                <p><strong>Contexte :</strong> préparation du transfert d’assignation sur un comptable unique et nécessité de fiabiliser la cartographie financière de la paie.</p>
+                <p><strong>Mon rôle :</strong> actualisation des outils et référentiels concourant à la paie en PSOP, en veillant à la cohérence des données et à leur exploitation.</p>
+                <p><strong>Apport :</strong> consolidation des bases de travail et sécurisation des opérations préparatoires.</p>
               </article>
               <article class="project-card">
                 <div class="icon orange">☷</div>
-                <h4>Projet 2 — Coordination avec les interlocuteurs</h4>
-                <p><strong>Contexte :</strong> multiplicité d’acteurs et d’échanges.</p>
-                <p><strong>Mon rôle :</strong> échanges, relances et suivi des actions.</p>
-                <p><strong>Apport :</strong> meilleure fluidité et réactivité entre les acteurs.</p>
+                <h4>Projet 2 — Pilotage du transfert d’assignation comptable</h4>
+                <p><strong>Contexte :</strong> chantier structurant nécessitant une vision globale des étapes, risques et actions à conduire jusqu’aux échéances 2024–2025.</p>
+                <p><strong>Mon rôle :</strong> construction et actualisation d’un calendrier de pilotage de type GANTT, avec identification des sous-chantiers et risques.</p>
+                <p><strong>Apport :</strong> mise à disposition d’un fonds de dossier complet, utile à la gouvernance et à la poursuite du projet.</p>
               </article>
               <article class="project-card">
                 <div class="icon gray">⚙</div>
-                <h4>Projet 3 — Amélioration d’une procédure interne</h4>
-                <p><strong>Contexte :</strong> procédure complexe et peu utilisée.</p>
-                <p><strong>Mon rôle :</strong> analyse des besoins, formalisation et simplification.</p>
-                <p><strong>Apport :</strong> procédure plus claire et accessible.</p>
+                <h4>Projet 3 — Refonte du calendrier de paie</h4>
+                <p><strong>Contexte :</strong> besoin d’alléger certaines opérations de traitement de la paie et d’améliorer la performance technique des nuits applicatives.</p>
+                <p><strong>Mon rôle :</strong> contribution à la concertation avec les acteurs de la chaîne paie : MINARM, SLR51 et DGFIP.</p>
+                <p><strong>Apport :</strong> finalisation d’une évolution permettant un fonctionnement plus fluide et mieux structuré.</p>
               </article>
             </div>
             <div class="metrics">
-              <div class="metric"><strong>2 ans</strong><span>d’expérience</span></div>
+              <div class="metric"><strong>2 ans</strong><span>et 4 mois sur le poste</span></div>
               <div class="metric"><strong>3</strong><span>projets structurants</span></div>
-              <div class="metric"><strong>4</strong><span>partenaires mobilisés</span></div>
-              <div class="metric"><strong>50+</strong><span>dossiers suivis</span></div>
+              <div class="metric"><strong>2024–2025</strong><span>trajectoire préparée</span></div>
+              <div class="metric"><strong>Paie</strong><span>coordination fonctionnelle</span></div>
             </div>
           </div>
         </article>
@@ -897,38 +990,50 @@
         <article class="poste reveal">
           <div class="poste-header">
             <div>
-              <h3>Poste 2 — Appui administratif / Gestion de dossiers</h3>
-              <p>Période : 2018 – 2021</p>
+              <h3>Poste 2 — Chef de projet SIRH dématérialisation</h3>
+              <p>Ministère de la Transition écologique · Janvier 2024 – Décembre 2025</p>
             </div>
-            <span class="tag">Analyse · Rigueur · Relation usager</span>
+            <span class="tag">SIRH · Dématérialisation · Déploiement</span>
           </div>
           <div class="poste-body">
-            <p class="poste-intro">Une période marquée par la gestion de dossiers, l’appui aux équipes et la contribution à la fiabilisation des pratiques internes.</p>
-            <div class="projects-grid">
+            <p class="poste-intro">
+              Sur ce poste, j’ai participé à plusieurs projets de transformation numérique RH, avec une forte composante de dématérialisation, d’accompagnement des utilisateurs, de paramétrage fonctionnel et de déploiement. Mon activité porte à la fois sur le maintien en condition opérationnelle des outils, la préparation des évolutions et l’accompagnement des établissements et services.
+            </p>
+            <div class="projects-grid four">
               <article class="project-card">
                 <div class="icon">✓</div>
-                <h4>Projet 1 — Fiabilisation d’un circuit de traitement</h4>
-                <p><strong>Mon rôle :</strong> repérage des points de blocage et proposition de solutions simples.</p>
-                <p><strong>Apport :</strong> traitement plus fluide et meilleure traçabilité.</p>
+                <h4>Projet 1 — Pilotage fonctionnel et évolutions de l’outil Gauddi</h4>
+                <p><strong>Contexte :</strong> outil central dans la dématérialisation du dossier de l’agent, nécessitant suivi, évolutions et assistance.</p>
+                <p><strong>Mon rôle :</strong> MCO, rédaction d’expressions de besoin, recette des évolutions, suivi des incidents, tests de non-régression et assistance de niveau 3.</p>
+                <p><strong>Apport :</strong> continuité de service, meilleure fiabilité des évolutions et accompagnement des gestionnaires.</p>
               </article>
               <article class="project-card">
                 <div class="icon orange">✉</div>
-                <h4>Projet 2 — Amélioration des supports écrits</h4>
-                <p><strong>Mon rôle :</strong> reformulation, harmonisation et clarification des documents.</p>
-                <p><strong>Apport :</strong> communication plus lisible et plus professionnelle.</p>
+                <h4>Projet 2 — Ouverture du dossier agent et déploiement dans les établissements publics</h4>
+                <p><strong>Contexte :</strong> ouverture du dossier individuel agent et déploiement de solutions dématérialisées auprès des établissements publics.</p>
+                <p><strong>Mon rôle :</strong> analyse des processus, préparation des supports, participation aux ateliers et accompagnement des acteurs.</p>
+                <p><strong>Apport :</strong> sécurisation du déploiement et meilleure appropriation des outils par les utilisateurs.</p>
               </article>
               <article class="project-card">
                 <div class="icon gray">☑</div>
-                <h4>Projet 3 — Suivi des demandes récurrentes</h4>
-                <p><strong>Mon rôle :</strong> classement, priorisation et reporting synthétique.</p>
-                <p><strong>Apport :</strong> meilleure anticipation des besoins.</p>
+                <h4>Projet 3 — Mise en œuvre de la Protection Sociale Complémentaire</h4>
+                <p><strong>Contexte :</strong> chantier majeur avec des impacts métiers, techniques et organisationnels.</p>
+                <p><strong>Mon rôle :</strong> suivi des évolutions SIRH, recette, paramétrage, accompagnement des pré-affiliations, appui utilisateurs et MCO du volet PSC.</p>
+                <p><strong>Apport :</strong> contribution à la sécurisation du dispositif et à l’accompagnement des équipes.</p>
+              </article>
+              <article class="project-card">
+                <div class="icon">◇</div>
+                <h4>Projet 4 — Évaluation des risques projets et actions de maîtrise</h4>
+                <p><strong>Contexte :</strong> projets à enjeux nécessitant maîtrise des calendriers, des périmètres et des risques.</p>
+                <p><strong>Mon rôle :</strong> identification des risques, analyse des impacts et proposition d’actions de maîtrise adaptées.</p>
+                <p><strong>Apport :</strong> meilleure anticipation des difficultés et sécurisation de l’avancement des projets.</p>
               </article>
             </div>
             <div class="metrics">
-              <div class="metric"><strong>3 ans</strong><span>sur le poste</span></div>
-              <div class="metric"><strong>+100</strong><span>demandes traitées</span></div>
-              <div class="metric"><strong>3</strong><span>supports améliorés</span></div>
-              <div class="metric"><strong>1</strong><span>méthode de suivi</span></div>
+              <div class="metric"><strong>2 ans</strong><span>sur le poste</span></div>
+              <div class="metric"><strong>4</strong><span>chantiers majeurs</span></div>
+              <div class="metric"><strong>Niveau 3</strong><span>assistance utilisateurs</span></div>
+              <div class="metric"><strong>SIRH</strong><span>projets ministériels</span></div>
             </div>
           </div>
         </article>
@@ -940,38 +1045,68 @@
         <div>
           <span class="eyebrow">Projets personnels</span>
           <h2>Des engagements utiles au parcours</h2>
-          <p>Des projets choisis pour montrer votre sens des responsabilités, votre capacité à apprendre, à structurer et à transmettre, sans entrer dans votre vie privée.</p>
+          <p>Des projets choisis pour montrer mon sens des responsabilités, ma capacité à apprendre, à structurer et à transmettre, sans entrer dans ma vie privée.</p>
         </div>
       </div>
 
       <div class="personal-grid reveal">
-        <article class="personal-card">
+        <article class="personal-card wide">
           <div class="icon">▥</div>
           <h4>Implication dans la copropriété</h4>
-          <p>Participation au suivi de sujets collectifs, échanges avec les interlocuteurs et suivi des travaux.</p>
-          <p><strong>Compétences :</strong> responsabilité, suivi de dossiers, communication.</p>
+          <p>Recherche d’entreprises, pilotage et suivi du syndic, participation au suivi des travaux et contribution à une gestion saine des finances de la copropriété.</p>
+          <p>J’ai également travaillé à la rédaction d’un guide d’accueil destiné aux nouveaux arrivants, afin de faciliter leur intégration et de clarifier les repères utiles.</p>
+          <p><strong>Compétences :</strong> responsabilité, suivi de prestataires, coordination, gestion budgétaire, communication, rédaction.</p>
         </article>
         <article class="personal-card">
           <div class="icon orange">▰</div>
           <h4>Formation et montée en compétences à l’IRA</h4>
-          <p>Structuration d’enseignements et travaux autour de l’administration publique et des politiques publiques.</p>
-          <p><strong>Compétences :</strong> culture administrative, analyse, méthode.</p>
+          <p>Approfondissement des connaissances liées à l’administration publique, aux politiques publiques et à la conduite de projets.</p>
+          <p><strong>Compétences :</strong> culture administrative, méthode, analyse, capacité d’apprentissage.</p>
         </article>
         <article class="personal-card">
           <div class="icon gray">▤</div>
           <h4>Conception de supports pédagogiques</h4>
-          <p>Préparation de contenus adaptés à un public et organisation d’informations complexes.</p>
-          <p><strong>Compétences :</strong> pédagogie, synthèse, communication écrite.</p>
+          <p>Structuration et formalisation de contenus clairs, utiles et accessibles, en veillant à l’organisation des informations et à leur lisibilité.</p>
+          <p><strong>Compétences :</strong> pédagogie, synthèse, communication écrite, structuration.</p>
         </article>
-        <article class="personal-card">
-          <div class="icon">♻</div>
-          <h4>Engagement dans une recyclerie</h4>
-          <p>Participation au réemploi, à la valorisation des objets et à la sensibilisation.</p>
-          <p><strong>Compétences :</strong> engagement citoyen, travail d’équipe, sens du service.</p>
+        <article class="personal-card wide">
+          <div class="icon">⌘</div>
+          <h4>Bricolage, impression 3D et solutions pratiques</h4>
+          <p>Conception et réalisation de petits objets ou solutions utiles, avec une approche créative, technique et orientée usage.</p>
+          <p><strong>Compétences :</strong> créativité, autonomie, expérimentation, logique de conception, résolution de problèmes.</p>
+        </article>
+        <article class="personal-card wide">
+          <div class="icon orange">✦</div>
+          <h4>Créations culinaires — spécialité glaces</h4>
+          <p>Développement de recettes maison autour de la glace, avec un intérêt particulier pour les associations originales comme le yaourt glacé lavande miel.</p>
+          <p><strong>Compétences :</strong> créativité, précision, sens du détail, curiosité, recherche d’équilibre.</p>
         </article>
       </div>
 
-      <div class="quote-band reveal">Ces projets nourrissent mon parcours professionnel : organisation, transmission, sens du collectif et engagement.</div>
+      <div class="guide-download reveal">
+        <div>
+          <h3>Guide des nouveaux arrivants</h3>
+          <p>Un document pratique pensé pour faciliter l’arrivée de nouveaux résidents et présenter les informations utiles de la copropriété.</p>
+        </div>
+        <a href="guide-nouveaux-arrivants.pdf" class="btn btn-primary" download>Télécharger le guide</a>
+      </div>
+
+      <div class="photo-gallery reveal" aria-label="Galerie photo de la copropriété">
+        <article class="photo-card">
+          <img src="copro-1.jpg" alt="Vue extérieure de la copropriété" />
+          <div class="photo-caption">Vue extérieure de la résidence</div>
+        </article>
+        <article class="photo-card">
+          <img src="copro-2.jpg" alt="Hall d’entrée et boîtes aux lettres" />
+          <div class="photo-caption">Espaces communs</div>
+        </article>
+        <article class="photo-card">
+          <img src="copro-3.jpg" alt="Vue de la résidence depuis la rue" />
+          <div class="photo-caption">Cadre de vie et environnement</div>
+        </article>
+      </div>
+
+      <div class="quote-band reveal">Ces projets nourrissent mon parcours professionnel : organisation, transmission, sens du collectif, créativité et engagement.</div>
     </section>
 
     <section class="section page" id="me-contacter">
@@ -985,7 +1120,7 @@
             <li><span class="small-icon">in</span><div><strong>LinkedIn</strong><br />www.linkedin.com/in/richard-morcel/</div></li>
             <li><span class="small-icon">⌖</span><div><strong>Localisation</strong><br />Région Île-de-France</div></li>
           </ul>
-          <a href="#" class="btn btn-primary" style="margin-top: 28px;">Télécharger mon CV</a>
+          <a href="Richard_Morcel_CV.pdf" class="btn btn-primary" style="margin-top: 28px;" download>Télécharger mon CV</a>
         </div>
 
         <div class="contact-visual reveal" aria-hidden="true">
@@ -999,7 +1134,7 @@
   </main>
 
   <footer class="footer">
-    © 2026 — Portfolio professionnel. Design sobre, institutionnel et chaleureux.
+    © 2026 — Richard Morcel. Portfolio professionnel.
   </footer>
 
   <script>
