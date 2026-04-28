@@ -173,7 +173,7 @@
       position: relative;
     }
 
-    /* ACCUEIL REDESIGN */
+    /* ACCUEIL */
     .home-section {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
@@ -345,7 +345,7 @@
 
     .signature-content {
       position: relative;
-      z-index: 4;
+      z-index: 10;
       max-width: 620px;
     }
 
@@ -359,6 +359,8 @@
       color: #4b5563;
       max-width: 580px;
       margin-bottom: 22px;
+      position: relative;
+      z-index: 10;
     }
 
     .signature-pills {
@@ -366,6 +368,8 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 22px;
+      position: relative;
+      z-index: 12;
     }
 
     .signature-pill {
@@ -376,6 +380,8 @@
       color: var(--marine);
       font-size: 0.9rem;
       font-weight: 800;
+      position: relative;
+      z-index: 12;
     }
 
     .signature-visual {
@@ -394,6 +400,7 @@
       background: var(--marine);
       color: white;
       box-shadow: 0 18px 38px rgba(23, 50, 79, 0.25);
+      z-index: 8;
     }
 
     .signature-stat strong {
@@ -424,6 +431,7 @@
       border-radius: 999px;
       border: 2px solid rgba(23, 50, 79, 0.12);
       transform: rotate(28deg);
+      z-index: 3;
     }
 
     .signature-leaf {
@@ -433,6 +441,7 @@
       width: 240px;
       height: 270px;
       opacity: 0.16;
+      z-index: 2;
     }
 
     .signature-leaf span {
@@ -451,13 +460,14 @@
 
     .signature-bg-marine {
       position: absolute;
-      left: -110px;
-      bottom: -150px;
-      width: 430px;
-      height: 300px;
+      left: -130px;
+      bottom: -205px;
+      width: 440px;
+      height: 270px;
       background: var(--marine);
       border-radius: 60% 40% 0 0 / 100% 100% 0 0;
       z-index: 1;
+      pointer-events: none;
     }
 
     .signature-bg-orange {
@@ -469,6 +479,7 @@
       background: var(--terracotta);
       border-radius: 70% 30% 0 0 / 100% 100% 0 0;
       z-index: 1;
+      pointer-events: none;
     }
 
     .signature-bg-gray {
@@ -480,6 +491,7 @@
       background: rgba(156, 163, 175, 0.15);
       border-radius: 50%;
       z-index: 1;
+      pointer-events: none;
     }
 
     /* EN-TÊTES DES AUTRES PAGES */
@@ -596,28 +608,26 @@
 
     .project-card:hover,
     .personal-card:hover,
+    .personal-feature:hover,
     .contact-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 24px 52px rgba(23, 50, 79, 0.14);
     }
 
-    .project-card h4,
-    .personal-card h4 {
+    .project-card h4 {
       color: var(--terracotta);
       font-size: 1.02rem;
       margin-bottom: 16px;
       line-height: 1.35;
     }
 
-    .project-card p,
-    .personal-card p {
+    .project-card p {
       font-size: 0.95rem;
       color: #4b5563;
       margin-bottom: 10px;
     }
 
-    .project-card strong,
-    .personal-card strong {
+    .project-card strong {
       color: var(--marine);
     }
 
@@ -650,47 +660,156 @@
       font-weight: 700;
     }
 
-    /* PROJETS PERSONNELS */
-    .personal-grid {
+    /* PROJETS PERSONNELS REDESIGN */
+    .personal-layout {
+      display: grid;
+      gap: 24px;
+    }
+
+    .personal-feature {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.68));
+      border: 1px solid rgba(23, 50, 79, 0.08);
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .personal-feature::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -80px;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(217,102,50,0.16), rgba(217,102,50,0));
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .personal-feature-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+      position: relative;
+      z-index: 3;
+    }
+
+    .personal-feature h3,
+    .personal-card h4 {
+      color: var(--terracotta);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .personal-feature p,
+    .personal-card p {
+      font-size: 0.95rem;
+      color: #4b5563;
+      margin-bottom: 10px;
+    }
+
+    .personal-feature strong,
+    .personal-card strong {
+      color: var(--marine);
+    }
+
+    .personal-icons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .personal-mini-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(23, 50, 79, 0.07);
+      color: var(--marine);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .personal-mini-badge.orange {
+      background: rgba(217, 102, 50, 0.12);
+      color: var(--terracotta);
+    }
+
+    .personal-grid-premium {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
 
     .personal-card {
-      padding: 26px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .personal-card.wide {
+    .personal-card::after {
+      content: "";
+      position: absolute;
+      right: -45px;
+      top: -45px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(23, 50, 79, 0.05);
+      pointer-events: none;
+    }
+
+    .personal-card.full {
       grid-column: span 2;
     }
 
-    .personal-header {
+    .personal-card-head {
       display: flex;
+      gap: 16px;
       align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .personal-card-body {
+      position: relative;
+      z-index: 2;
     }
 
     .personal-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 18px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 3;
     }
 
     .copro-gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      margin-top: 22px;
+      margin-top: 24px;
+      position: relative;
+      z-index: 3;
     }
 
     .copro-photo {
       position: relative;
       display: block;
       min-height: 170px;
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(23, 50, 79, 0.08);
       box-shadow: 0 12px 28px rgba(23, 50, 79, 0.12);
@@ -717,6 +836,31 @@
       font-weight: 700;
       padding: 8px 10px;
       border-radius: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    .icon-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .small-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--marine);
+      background: rgba(23, 50, 79, 0.07);
+    }
+
+    .small-chip.orange {
+      color: var(--terracotta);
+      background: rgba(217, 102, 50, 0.12);
     }
 
     /* CONTACT */
@@ -875,7 +1019,7 @@
 
       .home-cards,
       .projects-grid,
-      .personal-grid {
+      .personal-grid-premium {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -887,8 +1031,12 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .personal-card.wide {
+      .personal-card.full {
         grid-column: span 2;
+      }
+
+      .personal-feature-top {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -937,13 +1085,13 @@
       .home-cards,
       .projects-grid,
       .projects-grid.four,
-      .personal-grid,
+      .personal-grid-premium,
       .copro-gallery,
       .metrics {
         grid-template-columns: 1fr;
       }
 
-      .personal-card.wide {
+      .personal-card.full {
         grid-column: span 1;
       }
 
@@ -968,7 +1116,9 @@
       .poste-header,
       .poste-body,
       .contact-card,
-      .intro-panel {
+      .intro-panel,
+      .personal-feature,
+      .personal-card {
         padding: 24px;
       }
 
@@ -1001,7 +1151,7 @@
   </header>
 
   <main>
-    <!-- ACCUEIL REDESIGN -->
+    <!-- ACCUEIL -->
     <section class="page active-page" id="accueil">
       <div class="home-section">
         <div class="home-hero">
@@ -1315,24 +1465,31 @@
         </div>
       </div>
 
-      <div class="personal-grid reveal">
-        <article class="personal-card wide">
-          <div class="personal-header">
-            <div class="icon">▥</div>
+      <div class="personal-layout">
+        <article class="personal-feature reveal">
+          <div class="personal-feature-top">
             <div>
-              <h4>Implication dans la copropriété & guide des nouveaux arrivants</h4>
+              <span class="eyebrow">Projet collectif</span>
+              <h3>Implication dans la copropriété & guide des nouveaux arrivants</h3>
               <p class="justify">
                 Recherche d’entreprises, pilotage et suivi du syndic, participation au suivi des travaux et contribution à une gestion saine des finances de la copropriété. J’ai également travaillé à la rédaction d’un guide d’accueil destiné aux nouveaux arrivants, afin de faciliter leur intégration et de clarifier les repères utiles.
               </p>
               <p class="justify">
                 <strong>Compétences :</strong> responsabilité, suivi de prestataires, coordination, gestion budgétaire, communication, rédaction.
               </p>
-            </div>
-          </div>
 
-          <div class="personal-actions">
-            <a href="guide-nouveaux-arrivants.pdf" class="btn btn-primary btn-small" download>Télécharger le guide</a>
-            <a href="copro-1.jpg" class="btn btn-secondary btn-small" target="_blank">Visiter la copropriété</a>
+              <div class="personal-icons-row">
+                <span class="personal-mini-badge">🏢 Suivi collectif</span>
+                <span class="personal-mini-badge orange">📘 Guide d’accueil</span>
+                <span class="personal-mini-badge">💶 Finances saines</span>
+                <span class="personal-mini-badge orange">🔧 Travaux</span>
+              </div>
+
+              <div class="personal-actions">
+                <a href="guide-nouveaux-arrivants.pdf" class="btn btn-primary btn-small" download>Télécharger le guide</a>
+                <a href="copro-1.jpg" class="btn btn-secondary btn-small" target="_blank">Visiter la copropriété</a>
+              </div>
+            </div>
           </div>
 
           <div class="copro-gallery">
@@ -1351,42 +1508,74 @@
           </div>
         </article>
 
-        <article class="personal-card">
-          <div class="personal-header">
-            <div class="icon orange">▰</div>
-            <div>
-              <h4>Formation et montée en compétences à l’IRA</h4>
-              <p class="justify">Approfondissement des connaissances liées à l’administration publique, aux politiques publiques et à la conduite de projets.</p>
-              <p class="justify"><strong>Compétences :</strong> culture administrative, méthode, analyse, capacité d’apprentissage.</p>
+        <div class="personal-grid-premium reveal">
+          <article class="personal-card">
+            <div class="personal-card-head">
+              <div class="icon orange">◆</div>
+              <div>
+                <h4>Formation et montée en compétences à l’IRA</h4>
+              </div>
             </div>
-          </div>
-        </article>
-
-        <article class="personal-card">
-          <div class="personal-header">
-            <div class="icon gray">▤</div>
-            <div>
-              <h4>Conception de supports pédagogiques</h4>
-              <p class="justify">Structuration et formalisation de contenus clairs, utiles et accessibles, en veillant à l’organisation des informations et à leur lisibilité.</p>
-              <p class="justify"><strong>Compétences :</strong> pédagogie, synthèse, communication écrite, structuration.</p>
+            <div class="personal-card-body">
+              <p class="justify">
+                Approfondissement des connaissances liées à l’administration publique, aux politiques publiques et à la conduite de projets.
+              </p>
+              <p class="justify">
+                <strong>Compétences :</strong> culture administrative, méthode, analyse, capacité d’apprentissage.
+              </p>
+              <div class="icon-group">
+                <span class="small-chip">🎓 Formation</span>
+                <span class="small-chip orange">📌 Méthode</span>
+                <span class="small-chip">🧭 Action publique</span>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="personal-card wide">
-          <div class="personal-header">
-            <div class="icon orange">✦</div>
-            <div>
-              <h4>Bricolage, impression 3D, solutions pratiques & créations culinaires</h4>
+          <article class="personal-card">
+            <div class="personal-card-head">
+              <div class="icon gray">▤</div>
+              <div>
+                <h4>Conception de supports pédagogiques</h4>
+              </div>
+            </div>
+            <div class="personal-card-body">
+              <p class="justify">
+                Conception de supports pédagogiques pour les matières relatives à LibreOffice et pour l’animation de la transition écologique dans une filière.
+              </p>
+              <p class="justify">
+                <strong>Compétences :</strong> pédagogie, synthèse, communication écrite, structuration de contenus et adaptation au public.
+              </p>
+              <div class="icon-group">
+                <span class="small-chip">📄 LibreOffice</span>
+                <span class="small-chip orange">🌿 Transition écologique</span>
+                <span class="small-chip">🧩 Supports</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="personal-card full">
+            <div class="personal-card-head">
+              <div class="icon orange">✦</div>
+              <div>
+                <h4>Bricolage, impression 3D, solutions pratiques & créations culinaires</h4>
+              </div>
+            </div>
+            <div class="personal-card-body">
               <p class="justify">
                 Conception et réalisation de petits objets ou solutions utiles, avec une approche créative, technique et orientée usage. En parallèle, développement de recettes maison autour de la glace, avec un intérêt particulier pour les associations originales comme le yaourt glacé lavande miel.
               </p>
               <p class="justify">
                 <strong>Compétences :</strong> créativité, autonomie, expérimentation, logique de conception, résolution de problèmes, précision, sens du détail, curiosité et recherche d’équilibre.
               </p>
+              <div class="icon-group">
+                <span class="small-chip">🛠️ Bricolage</span>
+                <span class="small-chip orange">🧊 Glaces maison</span>
+                <span class="small-chip">🖨️ Impression 3D</span>
+                <span class="small-chip orange">🍯 Lavande miel</span>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </div>
     </section>
 
