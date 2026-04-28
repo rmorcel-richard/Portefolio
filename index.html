@@ -173,15 +173,17 @@
       position: relative;
     }
 
-    /* ACCUEIL UNIQUEMENT */
-    .hero {
-      min-height: calc(100vh - 78px);
+    /* ACCUEIL REDESIGN */
+    .home-section {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 70px 0 86px;
+    }
+
+    .home-hero {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
-      gap: 48px;
-      padding-top: 52px;
-      padding-bottom: 70px;
+      grid-template-columns: 1fr;
+      gap: 34px;
     }
 
     .eyebrow {
@@ -204,17 +206,21 @@
       display: inline-block;
     }
 
-    .hero h1 {
-      font-size: clamp(3.4rem, 8vw, 7rem);
-      margin-bottom: 24px;
-      letter-spacing: -0.06em;
+    .home-title-wrap {
+      max-width: 1080px;
     }
 
-    .hero .lead {
-      font-size: clamp(1.02rem, 2vw, 1.22rem);
-      max-width: 680px;
+    .home-title-wrap h1 {
+      font-size: clamp(4.2rem, 9vw, 8.2rem);
+      margin-bottom: 26px;
+      letter-spacing: -0.07em;
+    }
+
+    .home-lead {
+      max-width: 1040px;
+      font-size: clamp(1.08rem, 2vw, 1.32rem);
       color: #425166;
-      margin-bottom: 32px;
+      margin-bottom: 34px;
     }
 
     .hero-actions {
@@ -264,18 +270,19 @@
       font-size: 0.92rem;
     }
 
-    .hero-cards {
+    .home-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 780px;
+      gap: 18px;
+      margin-top: 12px;
     }
 
     .mini-card,
     .project-card,
     .personal-card,
     .contact-card,
-    .intro-panel {
+    .intro-panel,
+    .signature-card {
       background: rgba(255, 255, 255, 0.76);
       border: 1px solid rgba(23, 50, 79, 0.08);
       border-radius: var(--radius-lg);
@@ -284,7 +291,8 @@
     }
 
     .mini-card {
-      padding: 22px;
+      padding: 24px;
+      min-height: 178px;
     }
 
     .icon {
@@ -318,138 +326,160 @@
 
     .mini-card p {
       color: #4b5563;
-      font-size: 0.92rem;
+      font-size: 0.94rem;
     }
 
-    .hero-visual {
-      min-height: 610px;
-      position: relative;
-      border-radius: 38px;
-      overflow: hidden;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.72), rgba(255,255,255,0.25)),
-        var(--cream);
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(23, 50, 79, 0.08);
-    }
-
-    .profile-panel {
-      position: absolute;
-      inset: 34px;
+    .signature-card {
+      margin-top: 34px;
+      min-height: 360px;
+      border-radius: 34px;
       padding: 34px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.78);
-      border: 1px solid rgba(23, 50, 79, 0.08);
-      box-shadow: 0 20px 50px rgba(23, 50, 79, 0.1);
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-    }
-
-    .profile-panel h2 {
-      font-size: clamp(2.1rem, 4vw, 3.5rem);
-      margin-bottom: 18px;
-      max-width: 430px;
-    }
-
-    .profile-panel p {
-      color: #4b5563;
-      max-width: 460px;
       position: relative;
-      z-index: 2;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+      box-shadow: var(--shadow);
     }
 
-    .panel-bottom-wave {
+    .signature-content {
+      position: relative;
+      z-index: 4;
+      max-width: 620px;
+    }
+
+    .signature-content h2 {
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      margin-bottom: 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .signature-content p {
+      color: #4b5563;
+      max-width: 580px;
+      margin-bottom: 22px;
+    }
+
+    .signature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .signature-pill {
+      display: inline-flex;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(23, 50, 79, 0.08);
+      color: var(--marine);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .signature-visual {
+      position: relative;
+      min-height: 260px;
+      z-index: 3;
+    }
+
+    .signature-stat {
       position: absolute;
-      left: -30px;
-      right: -20px;
-      bottom: -20px;
-      height: 190px;
+      right: 18px;
+      top: 22px;
+      width: 150px;
+      padding: 18px;
+      border-radius: 24px;
+      background: var(--marine);
+      color: white;
+      box-shadow: 0 18px 38px rgba(23, 50, 79, 0.25);
+    }
+
+    .signature-stat strong {
+      display: block;
+      font-size: 2.2rem;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .signature-stat span {
+      font-size: 0.86rem;
+      opacity: 0.9;
+      font-weight: 700;
+    }
+
+    .signature-stat.orange {
+      right: 190px;
+      top: 120px;
+      background: var(--terracotta);
+    }
+
+    .signature-line {
+      position: absolute;
+      right: 110px;
+      top: 28px;
+      width: 120px;
+      height: 230px;
+      border-radius: 999px;
+      border: 2px solid rgba(23, 50, 79, 0.12);
+      transform: rotate(28deg);
+    }
+
+    .signature-leaf {
+      position: absolute;
+      right: 70px;
+      top: 20px;
+      width: 240px;
+      height: 270px;
+      opacity: 0.16;
+    }
+
+    .signature-leaf span {
+      position: absolute;
+      display: block;
+      width: 50px;
+      height: 100px;
+      border-radius: 50% 50% 50% 0;
+      background: #8f97a2;
+    }
+
+    .signature-leaf span:nth-child(1) { right: 95px; top: 0; transform: rotate(32deg); }
+    .signature-leaf span:nth-child(2) { right: 160px; top: 74px; transform: rotate(-38deg); }
+    .signature-leaf span:nth-child(3) { right: 62px; top: 118px; transform: rotate(38deg); }
+    .signature-leaf span:nth-child(4) { right: 150px; top: 174px; transform: rotate(-42deg); }
+
+    .signature-bg-marine {
+      position: absolute;
+      left: -110px;
+      bottom: -150px;
+      width: 430px;
+      height: 300px;
+      background: var(--marine);
+      border-radius: 60% 40% 0 0 / 100% 100% 0 0;
       z-index: 1;
     }
 
-    .panel-bottom-wave::before {
-      content: "";
-      position: absolute;
-      left: -65px;
-      bottom: 0;
-      width: 370px;
-      height: 185px;
-      background: var(--marine);
-      border-radius: 58% 42% 0 0 / 100% 100% 0 0;
-    }
-
-    .panel-bottom-wave::after {
-      content: "";
+    .signature-bg-orange {
       position: absolute;
       right: -70px;
-      bottom: 0;
-      width: 230px;
-      height: 120px;
+      bottom: -55px;
+      width: 320px;
+      height: 190px;
       background: var(--terracotta);
       border-radius: 70% 30% 0 0 / 100% 100% 0 0;
+      z-index: 1;
     }
 
-    .leaf {
+    .signature-bg-gray {
       position: absolute;
-      right: 84px;
-      top: 62px;
-      width: 210px;
-      height: 390px;
-      opacity: 0.18;
-    }
-
-    .leaf span {
-      position: absolute;
-      display: block;
-      width: 42px;
-      height: 92px;
-      border-radius: 50% 50% 50% 0;
-      background: #8f97a2;
-      transform-origin: bottom left;
-    }
-
-    .leaf span:nth-child(1) { left: 80px; top: 0; transform: rotate(25deg); }
-    .leaf span:nth-child(2) { left: 32px; top: 70px; transform: rotate(-35deg); }
-    .leaf span:nth-child(3) { left: 96px; top: 126px; transform: rotate(34deg); }
-    .leaf span:nth-child(4) { left: 20px; top: 195px; transform: rotate(-38deg); }
-    .leaf span:nth-child(5) { left: 106px; top: 250px; transform: rotate(36deg); }
-
-    .leaf::before {
-      content: "";
-      position: absolute;
-      left: 82px;
-      top: 22px;
-      width: 3px;
-      height: 340px;
-      background: #8f97a2;
-      transform: rotate(14deg);
-      border-radius: 10px;
-    }
-
-    .floating-number {
-      position: absolute;
-      z-index: 4;
-      right: 42px;
-      bottom: 34px;
-      width: 86px;
-      height: 86px;
-      border-radius: 24px;
-      display: grid;
-      place-items: center;
-      background: var(--marine);
-      color: white;
-      font-size: 1.9rem;
-      font-weight: 900;
-      box-shadow: 0 18px 45px rgba(23, 50, 79, 0.22);
-      animation: float 5s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      right: 240px;
+      bottom: 30px;
+      width: 260px;
+      height: 170px;
+      background: rgba(156, 163, 175, 0.15);
+      border-radius: 50%;
+      z-index: 1;
     }
 
     /* EN-TÊTES DES AUTRES PAGES */
@@ -824,24 +854,26 @@
       transform: translateY(0);
     }
 
-    /* RESPONSIVE */
     @media (max-width: 1100px) {
       .projects-grid.four {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .signature-card {
+        grid-template-columns: 1fr;
+      }
+
+      .signature-visual {
+        min-height: 220px;
+      }
     }
 
     @media (max-width: 980px) {
-      .hero,
       .contact-wrap {
         grid-template-columns: 1fr;
       }
 
-      .hero-visual {
-        min-height: 500px;
-      }
-
-      .hero-cards,
+      .home-cards,
       .projects-grid,
       .personal-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -893,16 +925,16 @@
         justify-content: flex-start;
       }
 
-      .section {
+      .section,
+      .home-section {
         padding: 58px 0;
       }
 
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 36px;
+      .home-title-wrap h1 {
+        font-size: clamp(3rem, 14vw, 4.6rem);
       }
 
-      .hero-cards,
+      .home-cards,
       .projects-grid,
       .projects-grid.four,
       .personal-grid,
@@ -915,17 +947,22 @@
         grid-column: span 1;
       }
 
-      .profile-panel {
-        inset: 22px;
+      .signature-card {
         padding: 24px;
+        min-height: auto;
       }
 
-      .hero h1 {
-        font-size: clamp(2.8rem, 14vw, 4.4rem);
+      .signature-visual {
+        min-height: 250px;
       }
 
-      .hero-visual {
-        min-height: 470px;
+      .signature-stat {
+        right: 0;
+      }
+
+      .signature-stat.orange {
+        right: auto;
+        left: 0;
       }
 
       .poste-header,
@@ -964,57 +1001,86 @@
   </header>
 
   <main>
-    <!-- ACCUEIL : SEULE PAGE AVEC LE GRAND VISUEL -->
-    <section class="section hero page active-page" id="accueil">
-      <div class="hero-content reveal">
-        <span class="eyebrow">Fonction publique · Transformation numérique</span>
+    <!-- ACCUEIL REDESIGN -->
+    <section class="page active-page" id="accueil">
+      <div class="home-section">
+        <div class="home-hero">
+          <div class="home-title-wrap reveal">
+            <span class="eyebrow">Fonction publique · Transformation numérique</span>
 
-        <h1>Portfolio professionnel</h1>
+            <h1>Portfolio professionnel</h1>
 
-        <p class="lead justify">
-          Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le sens du service public.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#projets-professionnels" class="btn btn-primary page-link" data-page="projets-professionnels">Découvrir mes projets</a>
-          <a href="#me-contacter" class="btn btn-secondary page-link" data-page="me-contacter">Me contacter</a>
-        </div>
-
-        <div class="hero-cards">
-          <article class="mini-card">
-            <div class="icon">●</div>
-            <h3>Mon profil</h3>
-            <p class="justify">Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et amélioration de processus.</p>
-          </article>
-
-          <article class="mini-card">
-            <div class="icon orange">▣</div>
-            <h3>Mes projets professionnels</h3>
-            <p class="justify">Des projets menés autour de la dématérialisation, du système d'information RH* et du pilotage fonctionnel.</p>
-          </article>
-
-          <article class="mini-card">
-            <div class="icon gray">♡</div>
-            <h3>Mes projets personnels</h3>
-            <p class="justify">Copropriété, pédagogie, transmission, bricolage, impression 3D et créations culinaires.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="hero-visual reveal">
-        <div class="profile-panel">
-          <div>
-            <h2>Sobre.<br>Moderne.<br>Professionnel.</h2>
-            <p class="justify">
-              Une présentation claire, synthétique et rassurante pour permettre à un recruteur d’identifier rapidement mon parcours, mes compétences et mes réalisations.
+            <p class="home-lead justify">
+              Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le sens du service public.
             </p>
+
+            <div class="hero-actions">
+              <a href="#projets-professionnels" class="btn btn-primary page-link" data-page="projets-professionnels">Découvrir mes projets</a>
+              <a href="#me-contacter" class="btn btn-secondary page-link" data-page="me-contacter">Me contacter</a>
+            </div>
           </div>
 
-          <div class="leaf"><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="panel-bottom-wave"></div>
-        </div>
+          <div class="home-cards reveal">
+            <article class="mini-card">
+              <div class="icon">●</div>
+              <h3>Mon profil</h3>
+              <p class="justify">Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et amélioration de processus.</p>
+            </article>
 
-        <div class="floating-number">4</div>
+            <article class="mini-card">
+              <div class="icon orange">▣</div>
+              <h3>Mes projets professionnels</h3>
+              <p class="justify">Des projets menés autour de la dématérialisation, du système d'information RH* et du pilotage fonctionnel.</p>
+            </article>
+
+            <article class="mini-card">
+              <div class="icon gray">♡</div>
+              <h3>Mes projets personnels</h3>
+              <p class="justify">Copropriété, pédagogie, transmission, bricolage, impression 3D et créations culinaires.</p>
+            </article>
+          </div>
+
+          <article class="signature-card reveal">
+            <div class="signature-bg-marine"></div>
+            <div class="signature-bg-orange"></div>
+            <div class="signature-bg-gray"></div>
+
+            <div class="signature-content">
+              <span class="eyebrow">Positionnement</span>
+              <h2>Sobre. Moderne. Professionnel.</h2>
+              <p class="justify">
+                Une présentation claire, synthétique et rassurante pour permettre à un recruteur d’identifier rapidement mon parcours, mes compétences et mes réalisations.
+              </p>
+
+              <div class="signature-pills">
+                <span class="signature-pill">Coordination</span>
+                <span class="signature-pill">Pilotage</span>
+                <span class="signature-pill">Transformation numérique</span>
+                <span class="signature-pill">Service public</span>
+              </div>
+            </div>
+
+            <div class="signature-visual">
+              <div class="signature-line"></div>
+              <div class="signature-leaf">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div class="signature-stat">
+                <strong>4</strong>
+                <span>pages structurées</span>
+              </div>
+
+              <div class="signature-stat orange">
+                <strong>4</strong>
+                <span>axes de présentation</span>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1378,13 +1444,6 @@
       navLinks.classList.toggle("open");
     });
 
-    function resetRevealInsidePage(page) {
-      const elements = page.querySelectorAll(".reveal");
-      elements.forEach(el => {
-        el.classList.add("visible");
-      });
-    }
-
     function updateGlossary(pageId) {
       if (pageId === "projets-professionnels") {
         glossary.classList.add("visible");
@@ -1400,10 +1459,10 @@
       });
 
       const selectedPage = document.getElementById(pageId);
+
       if (selectedPage) {
         selectedPage.classList.add("active-page");
         selectedPage.style.display = "block";
-        resetRevealInsidePage(selectedPage);
       }
 
       pageLinks.forEach(link => {
