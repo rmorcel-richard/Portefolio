@@ -14,16 +14,14 @@
       --beige: #f7efe5;
       --cream: #fffaf3;
       --gris: #e7e3dd;
-      --gris-soft: #f2f0ec;
       --texte: #263241;
       --muted: #6b7280;
       --white: #ffffff;
       --shadow: 0 22px 55px rgba(23, 50, 79, 0.14);
-      --shadow-soft: 0 12px 30px rgba(23, 50, 79, 0.08);
+      --shadow-soft: 0 14px 34px rgba(23, 50, 79, 0.09);
       --radius-xl: 30px;
       --radius-lg: 22px;
       --radius-md: 16px;
-      --radius-sm: 12px;
     }
 
     * {
@@ -40,7 +38,7 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--texte);
       background:
-        radial-gradient(circle at top left, rgba(217, 102, 50, 0.11), transparent 28%),
+        radial-gradient(circle at top left, rgba(217, 102, 50, 0.12), transparent 28%),
         linear-gradient(135deg, #fffaf3 0%, #f7efe5 100%);
       line-height: 1.65;
       overflow-x: hidden;
@@ -49,7 +47,7 @@
     h1, h2, h3, .serif {
       font-family: Georgia, "Times New Roman", serif;
       color: var(--marine);
-      line-height: 1.06;
+      line-height: 1.07;
     }
 
     a {
@@ -68,20 +66,20 @@
       hyphens: auto;
     }
 
-    /* HEADER */
+    /* MENU PREMIUM */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 250, 243, 0.92);
-      backdrop-filter: blur(16px);
+      background: rgba(255, 250, 243, 0.88);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(23, 50, 79, 0.08);
     }
 
     .nav {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      min-height: 78px;
+      height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -92,11 +90,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--marine);
       font-size: 1rem;
       white-space: nowrap;
-      flex-shrink: 0;
+      letter-spacing: 0.02em;
     }
 
     .logo-mark {
@@ -106,10 +104,10 @@
       background: linear-gradient(135deg, var(--marine), var(--terracotta));
       display: grid;
       place-items: center;
-      color: var(--white);
-      font-weight: 800;
-      box-shadow: 0 10px 22px rgba(217, 102, 50, 0.25);
-      font-size: 0.9rem;
+      color: white;
+      font-weight: 900;
+      font-size: 0.88rem;
+      box-shadow: 0 12px 25px rgba(217, 102, 50, 0.28);
     }
 
     .nav-links {
@@ -117,21 +115,35 @@
       align-items: center;
       gap: 8px;
       list-style: none;
+      padding: 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(23, 50, 79, 0.08);
+      box-shadow: 0 8px 22px rgba(23, 50, 79, 0.05);
     }
 
     .nav-links a {
-      padding: 10px 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 16px;
       border-radius: 999px;
-      font-size: 0.93rem;
-      font-weight: 700;
+      font-size: 0.92rem;
+      font-weight: 800;
       color: var(--marine);
       transition: 0.25s ease;
+      white-space: nowrap;
     }
 
-    .nav-links a:hover,
+    .nav-links a:hover {
+      background: rgba(23, 50, 79, 0.08);
+    }
+
     .nav-links a.active {
       background: var(--marine);
-      color: var(--white);
+      color: white;
+      box-shadow: 0 10px 24px rgba(23, 50, 79, 0.22);
     }
 
     .menu-toggle {
@@ -139,10 +151,10 @@
       border: 0;
       background: var(--marine);
       color: white;
-      border-radius: 12px;
-      padding: 10px 12px;
+      border-radius: 14px;
+      padding: 10px 14px;
       cursor: pointer;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     /* PAGES */
@@ -161,15 +173,15 @@
       position: relative;
     }
 
-    /* HERO ACCUEIL */
+    /* ACCUEIL UNIQUEMENT */
     .hero {
       min-height: calc(100vh - 78px);
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
-      align-items: start;
-      gap: 44px;
-      padding-top: 48px;
-      padding-bottom: 58px;
+      align-items: center;
+      gap: 48px;
+      padding-top: 52px;
+      padding-bottom: 70px;
     }
 
     .eyebrow {
@@ -177,7 +189,7 @@
       align-items: center;
       gap: 10px;
       color: var(--terracotta);
-      font-weight: 800;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.11em;
       font-size: 0.82rem;
@@ -199,8 +211,8 @@
     }
 
     .hero .lead {
-      font-size: clamp(1.02rem, 2vw, 1.25rem);
-      max-width: 670px;
+      font-size: clamp(1.02rem, 2vw, 1.22rem);
+      max-width: 680px;
       color: #425166;
       margin-bottom: 32px;
     }
@@ -219,14 +231,14 @@
       gap: 10px;
       padding: 14px 22px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 900;
       border: 1px solid transparent;
       cursor: pointer;
       transition: 0.25s ease;
     }
 
     .btn-primary {
-      color: var(--white);
+      color: white;
       background: linear-gradient(135deg, var(--terracotta), var(--terracotta-light));
       box-shadow: 0 16px 32px rgba(217, 102, 50, 0.25);
     }
@@ -238,12 +250,12 @@
 
     .btn-secondary {
       color: var(--marine);
-      background: rgba(255,255,255,0.72);
+      background: rgba(255,255,255,0.74);
       border-color: rgba(23, 50, 79, 0.12);
     }
 
     .btn-secondary:hover {
-      background: var(--white);
+      background: white;
       transform: translateY(-3px);
     }
 
@@ -286,7 +298,7 @@
       font-size: 1.15rem;
       margin-bottom: 15px;
       flex: 0 0 auto;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .icon.orange {
@@ -315,45 +327,69 @@
       border-radius: 38px;
       overflow: hidden;
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.65), rgba(255,255,255,0.18)),
+        linear-gradient(145deg, rgba(255,255,255,0.72), rgba(255,255,255,0.25)),
         var(--cream);
       box-shadow: var(--shadow);
       border: 1px solid rgba(23, 50, 79, 0.08);
     }
 
-    .shape-marine,
-    .shape-orange,
-    .shape-gray {
+    .profile-panel {
       position: absolute;
-      border-radius: 48% 52% 45% 55%;
-      opacity: 0.96;
+      inset: 34px;
+      padding: 34px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(23, 50, 79, 0.08);
+      box-shadow: 0 20px 50px rgba(23, 50, 79, 0.1);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
     }
 
-    .shape-marine {
-      width: 520px;
-      height: 520px;
-      background: var(--marine);
-      left: -150px;
-      bottom: -120px;
-      transform: rotate(18deg);
+    .profile-panel h2 {
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      margin-bottom: 18px;
+      max-width: 430px;
     }
 
-    .shape-orange {
-      width: 280px;
-      height: 280px;
-      background: var(--terracotta);
-      right: -70px;
-      bottom: 92px;
-      transform: rotate(-10deg);
+    .profile-panel p {
+      color: #4b5563;
+      max-width: 460px;
+      position: relative;
+      z-index: 2;
     }
 
-    .shape-gray {
-      width: 350px;
+    .panel-bottom-wave {
+      position: absolute;
+      left: -30px;
+      right: -20px;
+      bottom: -20px;
       height: 190px;
-      background: rgba(156, 163, 175, 0.16);
-      right: 64px;
-      top: 210px;
-      transform: rotate(-12deg);
+      z-index: 1;
+    }
+
+    .panel-bottom-wave::before {
+      content: "";
+      position: absolute;
+      left: -65px;
+      bottom: 0;
+      width: 370px;
+      height: 185px;
+      background: var(--marine);
+      border-radius: 58% 42% 0 0 / 100% 100% 0 0;
+    }
+
+    .panel-bottom-wave::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: 0;
+      width: 230px;
+      height: 120px;
+      background: var(--terracotta);
+      border-radius: 70% 30% 0 0 / 100% 100% 0 0;
     }
 
     .leaf {
@@ -393,91 +429,22 @@
       border-radius: 10px;
     }
 
-    .profile-panel {
-      position: absolute;
-      left: 34px;
-      right: 34px;
-      top: 42px;
-      bottom: 34px;
-      padding: 34px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.78);
-      border: 1px solid rgba(23, 50, 79, 0.08);
-      box-shadow: 0 20px 50px rgba(23, 50, 79, 0.1);
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-    }
-
-    .profile-panel h2 {
-      font-size: clamp(2.1rem, 4vw, 3.5rem);
-      margin-bottom: 18px;
-      max-width: 420px;
-    }
-
-    .profile-panel p {
-      color: #4b5563;
-      max-width: 460px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .panel-bottom-wave {
-      position: absolute;
-      left: -30px;
-      right: -20px;
-      bottom: -20px;
-      height: 180px;
-      z-index: 1;
-    }
-
-    .panel-bottom-wave::before {
-      content: "";
-      position: absolute;
-      left: -60px;
-      bottom: 0;
-      width: 360px;
-      height: 180px;
-      background: var(--marine);
-      border-radius: 58% 42% 0 0 / 100% 100% 0 0;
-    }
-
-    .panel-bottom-wave::after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      bottom: 0;
-      width: 220px;
-      height: 110px;
-      background: var(--terracotta);
-      border-radius: 70% 30% 0 0 / 100% 100% 0 0;
-    }
-
     .floating-number {
       position: absolute;
       z-index: 4;
+      right: 42px;
+      bottom: 34px;
       width: 86px;
       height: 86px;
       border-radius: 24px;
       display: grid;
       place-items: center;
       background: var(--marine);
-      color: var(--white);
+      color: white;
       font-size: 1.9rem;
       font-weight: 900;
       box-shadow: 0 18px 45px rgba(23, 50, 79, 0.22);
       animation: float 5s ease-in-out infinite;
-    }
-
-    .floating-number.one { right: 42px; bottom: 34px; }
-    .floating-number.two {
-      left: 52px;
-      bottom: 104px;
-      background: var(--terracotta);
-      animation-delay: 1.2s;
-      display: none;
     }
 
     @keyframes float {
@@ -485,13 +452,13 @@
       50% { transform: translateY(-12px); }
     }
 
-    /* PAGE INTRO (hors accueil) */
+    /* EN-TÊTES DES AUTRES PAGES */
     .page-head {
       margin-bottom: 34px;
     }
 
     .intro-panel {
-      padding: 34px 34px 28px;
+      padding: 34px 34px 30px;
       position: relative;
       overflow: hidden;
     }
@@ -500,7 +467,7 @@
       content: "";
       position: absolute;
       right: -40px;
-      bottom: -50px;
+      bottom: -55px;
       width: 220px;
       height: 220px;
       background: radial-gradient(circle, rgba(217,102,50,0.14), rgba(217,102,50,0));
@@ -508,22 +475,12 @@
       pointer-events: none;
     }
 
-    .section-title {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: end;
-      gap: 28px;
-      margin-bottom: 34px;
-    }
-
-    .section-title h2,
     .intro-panel h2 {
       font-size: clamp(2.2rem, 4vw, 3.8rem);
       letter-spacing: -0.04em;
       margin-bottom: 12px;
     }
 
-    .section-title p,
     .intro-panel p {
       color: #536173;
       max-width: 760px;
@@ -538,12 +495,12 @@
       color: var(--terracotta);
       padding: 10px 16px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 0.9rem;
       white-space: nowrap;
     }
 
-    /* TIMELINE */
+    /* PROJETS PROFESSIONNELS */
     .timeline {
       display: grid;
       gap: 34px;
@@ -663,7 +620,7 @@
       font-weight: 700;
     }
 
-    /* PERSONNEL */
+    /* PROJETS PERSONNELS */
     .personal-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -746,7 +703,6 @@
 
     .contact-list {
       list-style: none;
-      margin-top: 26px;
       display: grid;
       gap: 18px;
     }
@@ -767,12 +723,12 @@
       background: var(--marine);
       color: white;
       flex: 0 0 auto;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .contact-visual {
       position: relative;
-      min-height: 460px;
+      min-height: 440px;
       border-radius: var(--radius-xl);
       overflow: hidden;
       background:
@@ -782,7 +738,7 @@
       border: 1px solid rgba(23, 50, 79, 0.08);
     }
 
-    .contact-visual-card {
+    .contact-card-inner {
       position: absolute;
       inset: 34px;
       border-radius: 28px;
@@ -791,60 +747,46 @@
       overflow: hidden;
     }
 
-    .avatar {
-      position: absolute;
-      top: 54px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 35%, #9ca3af 0 26%, transparent 27%),
-        radial-gradient(circle at 50% 83%, #9ca3af 0 42%, transparent 43%),
-        #e5e7eb;
-      opacity: 0.95;
-      z-index: 4;
-      box-shadow: 0 12px 28px rgba(23, 50, 79, 0.12);
-    }
-
-    .contact-visual .shape-marine {
-      left: auto;
-      right: -110px;
-      bottom: -190px;
-      width: 500px;
-      height: 430px;
-    }
-
-    .contact-visual .shape-gray {
-      right: 135px;
-      top: 255px;
-      width: 420px;
-    }
-
-    .contact-visual .leaf {
-      top: 48px;
-      right: 28px;
-      transform: scale(0.72);
-    }
-
     .contact-label {
       position: absolute;
       left: 42px;
       bottom: 44px;
       z-index: 5;
-      background: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.9);
       padding: 16px 18px;
       border-radius: 18px;
       border: 1px solid rgba(23, 50, 79, 0.08);
       box-shadow: var(--shadow-soft);
-      max-width: 250px;
+      max-width: 270px;
+      color: #4b5563;
     }
 
     .contact-label strong {
       display: block;
       color: var(--marine);
       margin-bottom: 4px;
+    }
+
+    .contact-visual::before {
+      content: "";
+      position: absolute;
+      left: -80px;
+      bottom: -110px;
+      width: 390px;
+      height: 260px;
+      background: var(--marine);
+      border-radius: 60% 40% 0 0 / 100% 100% 0 0;
+    }
+
+    .contact-visual::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -40px;
+      width: 260px;
+      height: 150px;
+      background: var(--terracotta);
+      border-radius: 70% 30% 0 0 / 100% 100% 0 0;
     }
 
     .glossary {
@@ -896,9 +838,10 @@
       }
 
       .hero-visual {
-        min-height: 520px;
+        min-height: 500px;
       }
 
+      .hero-cards,
       .projects-grid,
       .personal-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -912,17 +855,8 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .section-title {
-        grid-template-columns: 1fr;
-      }
-
       .personal-card.wide {
         grid-column: span 2;
-      }
-
-      .hero-cards {
-        grid-template-columns: 1fr;
-        max-width: 100%;
       }
     }
 
@@ -931,17 +865,21 @@
         display: inline-flex;
       }
 
+      .nav {
+        height: 74px;
+      }
+
       .nav-links {
         position: absolute;
-        top: 76px;
+        top: 74px;
         left: 16px;
         right: 16px;
         display: none;
         flex-direction: column;
         align-items: stretch;
-        background: var(--cream);
+        background: rgba(255, 250, 243, 0.96);
         border: 1px solid rgba(23, 50, 79, 0.12);
-        border-radius: 20px;
+        border-radius: 22px;
         padding: 12px;
         box-shadow: var(--shadow);
       }
@@ -952,13 +890,15 @@
 
       .nav-links a {
         display: block;
+        justify-content: flex-start;
       }
 
       .section {
-        padding: 64px 0;
+        padding: 58px 0;
       }
 
       .hero {
+        grid-template-columns: 1fr;
         padding-top: 36px;
       }
 
@@ -975,37 +915,24 @@
         grid-column: span 1;
       }
 
-      .profile-panel,
-      .contact-visual-card {
+      .profile-panel {
         inset: 22px;
         padding: 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.8rem, 14vw, 4.4rem);
       }
 
       .hero-visual {
         min-height: 470px;
       }
 
-      .floating-number {
-        width: 70px;
-        height: 70px;
-        font-size: 1.35rem;
-      }
-
-      .floating-number.one { right: 24px; bottom: 22px; }
-
       .poste-header,
       .poste-body,
       .contact-card,
       .intro-panel {
         padding: 24px;
-      }
-
-      .intro-panel h2 {
-        font-size: clamp(1.9rem, 8vw, 2.7rem);
-      }
-
-      .hero h1 {
-        font-size: clamp(2.8rem, 14vw, 4.4rem);
       }
 
       .contact-label {
@@ -1016,15 +943,16 @@
     }
   </style>
 </head>
+
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a href="#accueil" class="logo page-link" data-page="accueil" aria-label="Retour à l'accueil">
+      <a href="#accueil" class="logo page-link" data-page="accueil">
         <span class="logo-mark">RM</span>
         Richard Morcel - Portfolio
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">Menu</button>
+      <button class="menu-toggle" id="menuToggle">Menu</button>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="#accueil" class="page-link active" data-page="accueil">Accueil</a></li>
@@ -1036,11 +964,11 @@
   </header>
 
   <main>
-
-    <!-- ACCUEIL -->
+    <!-- ACCUEIL : SEULE PAGE AVEC LE GRAND VISUEL -->
     <section class="section hero page active-page" id="accueil">
       <div class="hero-content reveal">
         <span class="eyebrow">Fonction publique · Transformation numérique</span>
+
         <h1>Portfolio professionnel</h1>
 
         <p class="lead justify">
@@ -1056,30 +984,24 @@
           <article class="mini-card">
             <div class="icon">●</div>
             <h3>Mon profil</h3>
-            <p class="justify">
-              Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et amélioration de processus.
-            </p>
+            <p class="justify">Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et amélioration de processus.</p>
           </article>
 
           <article class="mini-card">
             <div class="icon orange">▣</div>
             <h3>Mes projets professionnels</h3>
-            <p class="justify">
-              Des projets menés autour de la dématérialisation, du système d'information RH* et du pilotage fonctionnel.
-            </p>
+            <p class="justify">Des projets menés autour de la dématérialisation, du système d'information RH* et du pilotage fonctionnel.</p>
           </article>
 
           <article class="mini-card">
             <div class="icon gray">♡</div>
             <h3>Mes projets personnels</h3>
-            <p class="justify">
-              Copropriété, pédagogie, transmission, bricolage, impression 3D et créations culinaires.
-            </p>
+            <p class="justify">Copropriété, pédagogie, transmission, bricolage, impression 3D et créations culinaires.</p>
           </article>
         </div>
       </div>
 
-      <div class="hero-visual reveal" aria-hidden="true">
+      <div class="hero-visual reveal">
         <div class="profile-panel">
           <div>
             <h2>Sobre.<br>Moderne.<br>Professionnel.</h2>
@@ -1092,10 +1014,7 @@
           <div class="panel-bottom-wave"></div>
         </div>
 
-        <div class="shape-gray"></div>
-        <div class="shape-orange"></div>
-        <div class="shape-marine"></div>
-        <div class="floating-number one">4</div>
+        <div class="floating-number">4</div>
       </div>
     </section>
 
@@ -1112,7 +1031,6 @@
       </div>
 
       <div class="timeline">
-
         <article class="poste reveal">
           <div class="poste-header">
             <div>
@@ -1372,12 +1290,8 @@
             <div class="icon orange">▰</div>
             <div>
               <h4>Formation et montée en compétences à l’IRA</h4>
-              <p class="justify">
-                Approfondissement des connaissances liées à l’administration publique, aux politiques publiques et à la conduite de projets.
-              </p>
-              <p class="justify">
-                <strong>Compétences :</strong> culture administrative, méthode, analyse, capacité d’apprentissage.
-              </p>
+              <p class="justify">Approfondissement des connaissances liées à l’administration publique, aux politiques publiques et à la conduite de projets.</p>
+              <p class="justify"><strong>Compétences :</strong> culture administrative, méthode, analyse, capacité d’apprentissage.</p>
             </div>
           </div>
         </article>
@@ -1387,12 +1301,8 @@
             <div class="icon gray">▤</div>
             <div>
               <h4>Conception de supports pédagogiques</h4>
-              <p class="justify">
-                Structuration et formalisation de contenus clairs, utiles et accessibles, en veillant à l’organisation des informations et à leur lisibilité.
-              </p>
-              <p class="justify">
-                <strong>Compétences :</strong> pédagogie, synthèse, communication écrite, structuration.
-              </p>
+              <p class="justify">Structuration et formalisation de contenus clairs, utiles et accessibles, en veillant à l’organisation des informations et à leur lisibilité.</p>
+              <p class="justify"><strong>Compétences :</strong> pédagogie, synthèse, communication écrite, structuration.</p>
             </div>
           </div>
         </article>
@@ -1429,30 +1339,16 @@
       <div class="contact-wrap">
         <div class="contact-card reveal">
           <ul class="contact-list">
-            <li>
-              <span class="small-icon">✉</span>
-              <div><strong>Email</strong><br>rmorcel@gmail.com</div>
-            </li>
-            <li>
-              <span class="small-icon">in</span>
-              <div><strong>LinkedIn</strong><br>www.linkedin.com/in/richard-morcel/</div>
-            </li>
-            <li>
-              <span class="small-icon">⌖</span>
-              <div><strong>Localisation</strong><br>Région Île-de-France</div>
-            </li>
+            <li><span class="small-icon">✉</span><div><strong>Email</strong><br>rmorcel@gmail.com</div></li>
+            <li><span class="small-icon">in</span><div><strong>LinkedIn</strong><br>www.linkedin.com/in/richard-morcel/</div></li>
+            <li><span class="small-icon">⌖</span><div><strong>Localisation</strong><br>Région Île-de-France</div></li>
           </ul>
 
           <a href="Richard_Morcel_CV.pdf" class="btn btn-primary" style="margin-top: 28px;" download>Télécharger mon CV</a>
         </div>
 
-        <div class="contact-visual reveal" aria-hidden="true">
-          <div class="contact-visual-card"></div>
-          <div class="avatar"></div>
-          <div class="leaf"><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="shape-gray"></div>
-          <div class="shape-marine"></div>
-
+        <div class="contact-visual reveal">
+          <div class="contact-card-inner"></div>
           <div class="contact-label">
             <strong>Disponible pour échanger</strong>
             Parcours, projets, coordination, transformation numérique et service public.
@@ -1460,7 +1356,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <div class="glossary" id="glossary">
@@ -1483,6 +1378,13 @@
       navLinks.classList.toggle("open");
     });
 
+    function resetRevealInsidePage(page) {
+      const elements = page.querySelectorAll(".reveal");
+      elements.forEach(el => {
+        el.classList.add("visible");
+      });
+    }
+
     function updateGlossary(pageId) {
       if (pageId === "projets-professionnels") {
         glossary.classList.add("visible");
@@ -1493,8 +1395,16 @@
 
     function showPage(pageId) {
       pages.forEach(page => {
-        page.classList.toggle("active-page", page.id === pageId);
+        page.classList.remove("active-page");
+        page.style.display = "none";
       });
+
+      const selectedPage = document.getElementById(pageId);
+      if (selectedPage) {
+        selectedPage.classList.add("active-page");
+        selectedPage.style.display = "block";
+        resetRevealInsidePage(selectedPage);
+      }
 
       pageLinks.forEach(link => {
         const isMenuLink = link.closest(".nav-links");
@@ -1514,17 +1424,12 @@
       });
     });
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.12 });
-
-    revealEls.forEach(el => revealObserver.observe(el));
+    revealEls.forEach(el => {
+      el.classList.add("visible");
+    });
 
     const initialPage = window.location.hash ? window.location.hash.replace("#", "") : "accueil";
+
     if (pages.some(page => page.id === initialPage)) {
       showPage(initialPage);
     } else {
