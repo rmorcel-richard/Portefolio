@@ -43,7 +43,7 @@
     }
 
     h1, h2, h3, .serif {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Georgia, 'Times New Roman', serif;
       color: var(--marine);
       line-height: 1.08;
     }
@@ -78,6 +78,8 @@
       gap: 12px;
       font-weight: 800;
       color: var(--marine);
+      letter-spacing: 0.03em;
+      text-transform: none;
       font-size: 1rem;
       white-space: nowrap;
     }
@@ -165,7 +167,7 @@
     }
 
     .eyebrow::before {
-      content: "";
+      content: '';
       width: 34px;
       height: 2px;
       background: var(--terracotta);
@@ -183,9 +185,6 @@
       max-width: 670px;
       color: #425166;
       margin-bottom: 32px;
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
     }
 
     .hero-actions {
@@ -242,7 +241,7 @@
       max-width: 760px;
     }
 
-    .mini-card, .project-card, .personal-card, .contact-card {
+    .mini-card, .card, .project-card, .personal-card, .contact-card {
       background: rgba(255, 255, 255, 0.76);
       border: 1px solid rgba(23, 50, 79, 0.08);
       border-radius: var(--radius-lg);
@@ -280,14 +279,6 @@
       font-size: 1rem;
       margin-bottom: 8px;
       color: var(--marine);
-    }
-
-    .mini-card p {
-      color: #4b5563;
-      font-size: 0.92rem;
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
     }
 
     .hero-visual {
@@ -363,7 +354,7 @@
     .leaf span:nth-child(5) { left: 106px; top: 250px; transform: rotate(36deg); }
 
     .leaf::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 82px;
       top: 22px;
@@ -390,14 +381,6 @@
     .profile-panel h2 {
       font-size: clamp(2rem, 4vw, 3.4rem);
       margin-bottom: 16px;
-    }
-
-    .profile-panel p {
-      color: #4b5563;
-      max-width: 430px;
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
     }
 
     .floating-number {
@@ -436,15 +419,6 @@
       font-size: clamp(2.3rem, 5vw, 4.4rem);
       letter-spacing: -0.04em;
       margin-bottom: 12px;
-    }
-
-    .section-title p {
-      color: #536173;
-      max-width: 690px;
-      font-size: 1.05rem;
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
     }
 
     .tag {
@@ -499,15 +473,6 @@
       padding: 30px;
     }
 
-    .poste-intro {
-      color: #4b5563;
-      max-width: 100%;
-      margin-bottom: 24px;
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
-    }
-
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -537,16 +502,6 @@
       font-size: 1.05rem;
       margin-bottom: 16px;
       line-height: 1.35;
-    }
-
-    .project-card p,
-    .personal-card p {
-      font-size: 0.95rem;
-      color: #4b5563;
-      margin-bottom: 10px;
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
     }
 
     .project-card strong,
@@ -663,12 +618,6 @@
       padding: 34px;
     }
 
-    .contact-card p {
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
-    }
-
     .contact-list {
       list-style: none;
       margin-top: 26px;
@@ -742,8 +691,7 @@
     }
 
     .glossary {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto 10px;
+      margin-top: 26px;
       padding: 18px 20px;
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.68);
@@ -768,6 +716,40 @@
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .section-title p,
+    .poste-intro,
+    .project-card p,
+    .personal-card p,
+    .contact-card p,
+    .mini-card p,
+    .profile-panel p,
+    .hero .lead {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      color: #4b5563;
+    }
+
+    .section-title p {
+      max-width: 690px;
+      font-size: 1.05rem;
+    }
+
+    .project-card p,
+    .personal-card p {
+      font-size: 0.94rem;
+      margin-bottom: 10px;
+    }
+
+    .mini-card p {
+      font-size: 0.92rem;
+    }
+
+    .poste-intro {
+      max-width: 100%;
+      margin-bottom: 24px;
     }
 
     @media (max-width: 1100px) {
@@ -908,7 +890,7 @@
         <span class="eyebrow">Fonction publique · Transformation numérique</span>
         <h1>Portfolio professionnel</h1>
         <p class="lead">
-          Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le sens du service public.
+          Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le service public.
         </p>
         <div class="hero-actions">
           <a href="#projets-professionnels" class="btn btn-primary page-link" data-page="projets-professionnels">Découvrir mes projets</a>
@@ -953,19 +935,17 @@
         <div>
           <span class="eyebrow">Projets professionnels</span>
           <h2>Des réalisations sélectionnées</h2>
-          <p>Chaque poste est présenté avec quelques projets clés : le contexte, mon rôle, l’apport concret et les compétences développées.</p>
+          <p>Chaque expérience est présentée avec quelques projets clés : le contexte, mon rôle, l’apport concret et les compétences développées.</p>
         </div>
         <span class="tag">Du plus récent au plus ancien</span>
       </div>
 
       <div class="timeline">
-
-        <!-- Poste le plus récent -->
         <article class="poste reveal">
           <div class="poste-header">
             <div>
-              <h3>Poste 1 — Chef de projet dématérialisation</h3>
-              <p>Ministère de la Transition écologique · Janvier 2024 – Décembre 2025</p>
+              <h3>Chef de projet dématérialisation</h3>
+              <p>Ministère de la Transition écologique · Janvier 2024 – Aujourd'hui</p>
             </div>
             <span class="tag">Système d'information RH* · Dématérialisation · Déploiement</span>
           </div>
@@ -1009,7 +989,7 @@
             </div>
 
             <div class="metrics">
-              <div class="metric"><strong>2024–2025</strong><span>période du poste</span></div>
+              <div class="metric"><strong>2024</strong><span>prise de poste</span></div>
               <div class="metric"><strong>4</strong><span>projets structurants</span></div>
               <div class="metric"><strong>Niveau 3</strong><span>assistance utilisateurs</span></div>
               <div class="metric"><strong>RH</strong><span>transformation numérique</span></div>
@@ -1017,11 +997,10 @@
           </div>
         </article>
 
-        <!-- Poste plus ancien -->
         <article class="poste reveal">
           <div class="poste-header">
             <div>
-              <h3>Poste 2 — Chef de projet réseau financier</h3>
+              <h3>Chef de projet réseau financier</h3>
               <p>Ministère des Armées · Septembre 2021 – Décembre 2023</p>
             </div>
             <span class="tag">Paie · Référentiels · Pilotage</span>
@@ -1061,10 +1040,62 @@
               <div class="metric"><strong>2021–2023</strong><span>période du poste</span></div>
               <div class="metric"><strong>3</strong><span>projets structurants</span></div>
               <div class="metric"><strong>Paie</strong><span>coordination fonctionnelle</span></div>
-              <div class="metric"><strong>2024–2025</strong><span>trajectoire préparée</span></div>
+              <div class="metric"><strong>Transfert</strong><span>assignation comptable</span></div>
             </div>
           </div>
         </article>
+
+        <article class="poste reveal">
+          <div class="poste-header">
+            <div>
+              <h3>Contrôle interne, dialogue de gestion & formation IRA</h3>
+              <p>Ministère de la Transition écologique · Avril 2017 – Septembre 2021</p>
+            </div>
+            <span class="tag">Données · Pilotage · Formation</span>
+          </div>
+          <div class="poste-body">
+            <p class="poste-intro">
+              Avant ma réussite au concours interne des IRA et ma formation à l’IRA de Metz, j’ai occupé deux postes qui m’ont permis de consolider mes bases professionnelles : d’abord en contrôle interne et données de paie, puis en dialogue de gestion. Ces expériences m’ont apporté une méthode de travail solide, une culture de la donnée, le sens du suivi administratif et une capacité à produire des supports utiles à la décision.
+            </p>
+
+            <div class="projects-grid">
+              <article class="project-card">
+                <div class="icon">▤</div>
+                <h4>Projet 1 — Suivi d’activité, contrôle interne et données de paie</h4>
+                <p><strong>Contexte :</strong> production et fiabilisation de données destinées au pilotage de l’activité et au suivi des bureaux de gestion.</p>
+                <p><strong>Mon rôle :</strong> préparation de fiches et tableaux de bord, analyse de données, suivi de demandes, contribution au contrôle interne de la paie et appui aux outils métiers.</p>
+                <p><strong>Apport :</strong> meilleure lisibilité de l’activité, données plus structurées et appui régulier aux équipes dans le suivi administratif.</p>
+              </article>
+
+              <article class="project-card">
+                <div class="icon orange">◈</div>
+                <h4>Projet 2 — Dialogue de gestion et dispositifs de performance</h4>
+                <p><strong>Contexte :</strong> préparation du dialogue de gestion, mise à jour des supports, suivi des indicateurs et appui à l’organisation des réunions stratégiques.</p>
+                <p><strong>Mon rôle :</strong> contribution aux calendriers, documents d’engagement, supports intranet, analyses d’indicateurs et travaux graphiques ou cartographiques.</p>
+                <p><strong>Apport :</strong> appui à la préparation des échanges de gestion, amélioration de la capitalisation des données et soutien à la coordination du bureau.</p>
+              </article>
+
+              <article class="project-card">
+                <div class="icon gray">▰</div>
+                <h4>Projet 3 — Formation à l’IRA de Metz et montée en compétences</h4>
+                <p><strong>Contexte :</strong> réussite au concours interne des IRA, suivie d’une formation professionnalisante de six mois à l’IRA de Metz.</p>
+                <p><strong>Mon rôle :</strong> consolidation des connaissances administratives, juridiques et managériales, avec une montée en compétences sur la conduite de l’action publique.</p>
+                <p><strong>Apport :</strong> passage vers des fonctions de catégorie A, élargissement du positionnement professionnel et renforcement de la capacité à piloter des projets.</p>
+              </article>
+            </div>
+
+            <div class="metrics">
+              <div class="metric"><strong>2017–2021</strong><span>parcours consolidé</span></div>
+              <div class="metric"><strong>2</strong><span>postes fusionnés</span></div>
+              <div class="metric"><strong>6 mois</strong><span>formation IRA</span></div>
+              <div class="metric"><strong>Données</strong><span>analyse et pilotage</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="glossary reveal">
+        <strong>* Système d'information RH :</strong> outils numériques utilisés pour gérer les ressources humaines.
       </div>
     </section>
 
@@ -1080,19 +1111,13 @@
       </div>
 
       <div class="personal-grid reveal">
-
-        <!-- Bloc 1 fusionné -->
         <article class="personal-card wide">
           <div class="personal-header">
             <div class="icon">▥</div>
             <div>
               <h4>Implication dans la copropriété & guide des nouveaux arrivants</h4>
-              <p>
-                Recherche d’entreprises, pilotage et suivi du syndic, participation au suivi des travaux et contribution à une gestion saine des finances de la copropriété. J’ai également travaillé à la rédaction d’un guide d’accueil destiné aux nouveaux arrivants, afin de faciliter leur intégration et de clarifier les repères utiles.
-              </p>
-              <p>
-                <strong>Compétences :</strong> responsabilité, suivi de prestataires, coordination, gestion budgétaire, communication, rédaction.
-              </p>
+              <p>Recherche d’entreprises, pilotage et suivi du syndic, participation au suivi des travaux et contribution à une gestion saine des finances de la copropriété. J’ai également travaillé à la rédaction d’un guide d’accueil destiné aux nouveaux arrivants, afin de faciliter leur intégration et de clarifier les repères utiles.</p>
+              <p><strong>Compétences :</strong> responsabilité, suivi de prestataires, coordination, gestion budgétaire, communication, rédaction.</p>
             </div>
           </div>
 
@@ -1117,7 +1142,6 @@
           </div>
         </article>
 
-        <!-- Bloc 2 -->
         <article class="personal-card">
           <div class="personal-header">
             <div class="icon orange">▰</div>
@@ -1129,7 +1153,6 @@
           </div>
         </article>
 
-        <!-- Bloc 3 -->
         <article class="personal-card">
           <div class="personal-header">
             <div class="icon gray">▤</div>
@@ -1141,18 +1164,13 @@
           </div>
         </article>
 
-        <!-- Bloc 4 fusionné -->
         <article class="personal-card wide">
           <div class="personal-header">
             <div class="icon orange">✦</div>
             <div>
               <h4>Bricolage, impression 3D, solutions pratiques & créations culinaires</h4>
-              <p>
-                Conception et réalisation de petits objets ou solutions utiles, avec une approche créative, technique et orientée usage. En parallèle, développement de recettes maison autour de la glace, avec un intérêt particulier pour les associations originales comme le yaourt glacé lavande miel.
-              </p>
-              <p>
-                <strong>Compétences :</strong> créativité, autonomie, expérimentation, logique de conception, résolution de problèmes, précision, sens du détail, curiosité et recherche d’équilibre.
-              </p>
+              <p>Conception et réalisation de petits objets ou solutions utiles, avec une approche créative, technique et orientée usage. En parallèle, développement de recettes maison autour de la glace, avec un intérêt particulier pour les associations originales comme le yaourt glacé lavande miel.</p>
+              <p><strong>Compétences :</strong> créativité, autonomie, expérimentation, logique de conception, résolution de problèmes, précision, sens du détail, curiosité et recherche d’équilibre.</p>
             </div>
           </div>
         </article>
@@ -1184,42 +1202,38 @@
     </section>
   </main>
 
-  <div class="glossary">
-    <strong>* Système d'information RH :</strong> ensemble des outils numériques utilisés pour gérer les ressources humaines.
-  </div>
-
   <footer class="footer">
     © 2026 — Richard Morcel. Portfolio professionnel.
   </footer>
 
   <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-    const pageLinks = [...document.querySelectorAll(".page-link")];
-    const pages = [...document.querySelectorAll(".page")];
-    const revealEls = [...document.querySelectorAll(".reveal")];
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const pageLinks = [...document.querySelectorAll('.page-link')];
+    const pages = [...document.querySelectorAll('.page')];
+    const revealEls = [...document.querySelectorAll('.reveal')];
 
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
     });
 
     function showPage(pageId) {
       pages.forEach(page => {
-        page.classList.toggle("active-page", page.id === pageId);
+        page.classList.toggle('active-page', page.id === pageId);
       });
 
       pageLinks.forEach(link => {
-        const isMenuLink = link.closest(".nav-links");
-        link.classList.toggle("active", isMenuLink && link.dataset.page === pageId);
+        const isMenuLink = link.closest('.nav-links');
+        link.classList.toggle('active', isMenuLink && link.dataset.page === pageId);
       });
 
-      navLinks.classList.remove("open");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      history.replaceState(null, "", "#" + pageId);
+      navLinks.classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.replaceState(null, '', '#' + pageId);
     }
 
     pageLinks.forEach(link => {
-      link.addEventListener("click", event => {
+      link.addEventListener('click', event => {
         event.preventDefault();
         showPage(link.dataset.page);
       });
@@ -1228,7 +1242,7 @@
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
+          entry.target.classList.add('visible');
           revealObserver.unobserve(entry.target);
         }
       });
@@ -1236,7 +1250,7 @@
 
     revealEls.forEach(el => revealObserver.observe(el));
 
-    const initialPage = window.location.hash ? window.location.hash.replace("#", "") : "accueil";
+    const initialPage = window.location.hash ? window.location.hash.replace('#', '') : 'accueil';
     if (pages.some(page => page.id === initialPage)) {
       showPage(initialPage);
     }
