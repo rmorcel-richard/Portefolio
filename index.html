@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Richard Morcel - Portfolio</title>
+
   <style>
     :root {
       --marine: #17324f;
@@ -13,13 +14,16 @@
       --beige: #f7efe5;
       --cream: #fffaf3;
       --gris: #e7e3dd;
+      --gris-soft: #f2f0ec;
       --texte: #263241;
       --muted: #6b7280;
       --white: #ffffff;
       --shadow: 0 22px 55px rgba(23, 50, 79, 0.14);
+      --shadow-soft: 0 12px 30px rgba(23, 50, 79, 0.08);
       --radius-xl: 30px;
       --radius-lg: 22px;
       --radius-md: 16px;
+      --radius-sm: 12px;
     }
 
     * {
@@ -36,16 +40,16 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--texte);
       background:
-        radial-gradient(circle at top left, rgba(217, 102, 50, 0.13), transparent 32%),
+        radial-gradient(circle at top left, rgba(217, 102, 50, 0.11), transparent 28%),
         linear-gradient(135deg, #fffaf3 0%, #f7efe5 100%);
       line-height: 1.65;
       overflow-x: hidden;
     }
 
     h1, h2, h3, .serif {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: Georgia, "Times New Roman", serif;
       color: var(--marine);
-      line-height: 1.08;
+      line-height: 1.06;
     }
 
     a {
@@ -53,11 +57,23 @@
       text-decoration: none;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .justify {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    /* HEADER */
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(255, 250, 243, 0.9);
+      z-index: 100;
+      background: rgba(255, 250, 243, 0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(23, 50, 79, 0.08);
     }
@@ -65,7 +81,7 @@
     .nav {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      height: 76px;
+      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -78,10 +94,9 @@
       gap: 12px;
       font-weight: 800;
       color: var(--marine);
-      letter-spacing: 0.03em;
-      text-transform: none;
       font-size: 1rem;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .logo-mark {
@@ -94,6 +109,7 @@
       color: var(--white);
       font-weight: 800;
       box-shadow: 0 10px 22px rgba(217, 102, 50, 0.25);
+      font-size: 0.9rem;
     }
 
     .nav-links {
@@ -129,6 +145,7 @@
       font-weight: 800;
     }
 
+    /* PAGES */
     .page {
       display: none;
     }
@@ -140,18 +157,19 @@
     .section {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 86px 0;
+      padding: 82px 0;
       position: relative;
     }
 
+    /* HERO ACCUEIL */
     .hero {
-      min-height: calc(100vh - 76px);
+      min-height: calc(100vh - 78px);
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
-      gap: 46px;
-      padding-top: 64px;
-      padding-bottom: 64px;
+      align-items: start;
+      gap: 44px;
+      padding-top: 48px;
+      padding-bottom: 58px;
     }
 
     .eyebrow {
@@ -167,7 +185,7 @@
     }
 
     .eyebrow::before {
-      content: '';
+      content: "";
       width: 34px;
       height: 2px;
       background: var(--terracotta);
@@ -175,13 +193,13 @@
     }
 
     .hero h1 {
-      font-size: clamp(3.2rem, 8vw, 7.2rem);
+      font-size: clamp(3.4rem, 8vw, 7rem);
       margin-bottom: 24px;
       letter-spacing: -0.06em;
     }
 
     .hero .lead {
-      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      font-size: clamp(1.02rem, 2vw, 1.25rem);
       max-width: 670px;
       color: #425166;
       margin-bottom: 32px;
@@ -231,21 +249,25 @@
 
     .btn-small {
       padding: 10px 16px;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .hero-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      max-width: 760px;
+      max-width: 780px;
     }
 
-    .mini-card, .card, .project-card, .personal-card, .contact-card {
+    .mini-card,
+    .project-card,
+    .personal-card,
+    .contact-card,
+    .intro-panel {
       background: rgba(255, 255, 255, 0.76);
       border: 1px solid rgba(23, 50, 79, 0.08);
       border-radius: var(--radius-lg);
-      box-shadow: 0 15px 40px rgba(23, 50, 79, 0.08);
+      box-shadow: var(--shadow-soft);
       backdrop-filter: blur(14px);
     }
 
@@ -261,9 +283,10 @@
       place-items: center;
       color: white;
       background: var(--marine);
-      font-size: 1.35rem;
+      font-size: 1.15rem;
       margin-bottom: 15px;
       flex: 0 0 auto;
+      font-weight: 800;
     }
 
     .icon.orange {
@@ -281,13 +304,18 @@
       color: var(--marine);
     }
 
+    .mini-card p {
+      color: #4b5563;
+      font-size: 0.92rem;
+    }
+
     .hero-visual {
-      min-height: 620px;
+      min-height: 610px;
       position: relative;
-      border-radius: 42px;
+      border-radius: 38px;
       overflow: hidden;
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.65), rgba(255,255,255,0.15)),
+        linear-gradient(145deg, rgba(255,255,255,0.65), rgba(255,255,255,0.18)),
         var(--cream);
       box-shadow: var(--shadow);
       border: 1px solid rgba(23, 50, 79, 0.08);
@@ -311,30 +339,30 @@
     }
 
     .shape-orange {
-      width: 300px;
-      height: 300px;
+      width: 280px;
+      height: 280px;
       background: var(--terracotta);
-      right: -72px;
-      bottom: 96px;
+      right: -70px;
+      bottom: 92px;
       transform: rotate(-10deg);
     }
 
     .shape-gray {
-      width: 360px;
+      width: 350px;
       height: 190px;
-      background: rgba(156, 163, 175, 0.22);
-      right: 70px;
+      background: rgba(156, 163, 175, 0.16);
+      right: 64px;
       top: 210px;
       transform: rotate(-12deg);
     }
 
     .leaf {
       position: absolute;
-      right: 88px;
-      top: 66px;
+      right: 84px;
+      top: 62px;
       width: 210px;
       height: 390px;
-      opacity: 0.28;
+      opacity: 0.18;
     }
 
     .leaf span {
@@ -343,7 +371,7 @@
       width: 42px;
       height: 92px;
       border-radius: 50% 50% 50% 0;
-      background: #6b7280;
+      background: #8f97a2;
       transform-origin: bottom left;
     }
 
@@ -354,57 +382,130 @@
     .leaf span:nth-child(5) { left: 106px; top: 250px; transform: rotate(36deg); }
 
     .leaf::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 82px;
       top: 22px;
       width: 3px;
       height: 340px;
-      background: #6b7280;
+      background: #8f97a2;
       transform: rotate(14deg);
       border-radius: 10px;
     }
 
     .profile-panel {
       position: absolute;
-      left: 52px;
-      right: 52px;
-      top: 64px;
+      left: 34px;
+      right: 34px;
+      top: 42px;
+      bottom: 34px;
       padding: 34px;
       border-radius: 28px;
       background: rgba(255,255,255,0.78);
       border: 1px solid rgba(23, 50, 79, 0.08);
       box-shadow: 0 20px 50px rgba(23, 50, 79, 0.1);
       z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
     }
 
     .profile-panel h2 {
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      margin-bottom: 16px;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      margin-bottom: 18px;
+      max-width: 420px;
+    }
+
+    .profile-panel p {
+      color: #4b5563;
+      max-width: 460px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .panel-bottom-wave {
+      position: absolute;
+      left: -30px;
+      right: -20px;
+      bottom: -20px;
+      height: 180px;
+      z-index: 1;
+    }
+
+    .panel-bottom-wave::before {
+      content: "";
+      position: absolute;
+      left: -60px;
+      bottom: 0;
+      width: 360px;
+      height: 180px;
+      background: var(--marine);
+      border-radius: 58% 42% 0 0 / 100% 100% 0 0;
+    }
+
+    .panel-bottom-wave::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: 0;
+      width: 220px;
+      height: 110px;
+      background: var(--terracotta);
+      border-radius: 70% 30% 0 0 / 100% 100% 0 0;
     }
 
     .floating-number {
       position: absolute;
       z-index: 4;
-      width: 92px;
-      height: 92px;
-      border-radius: 26px;
+      width: 86px;
+      height: 86px;
+      border-radius: 24px;
       display: grid;
       place-items: center;
       background: var(--marine);
       color: var(--white);
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: 900;
       box-shadow: 0 18px 45px rgba(23, 50, 79, 0.22);
       animation: float 5s ease-in-out infinite;
     }
 
-    .floating-number.one { right: 70px; top: 285px; }
-    .floating-number.two { left: 68px; bottom: 80px; background: var(--terracotta); animation-delay: 1.2s; }
+    .floating-number.one { right: 42px; bottom: 34px; }
+    .floating-number.two {
+      left: 52px;
+      bottom: 104px;
+      background: var(--terracotta);
+      animation-delay: 1.2s;
+      display: none;
+    }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-18px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* PAGE INTRO (hors accueil) */
+    .page-head {
+      margin-bottom: 34px;
+    }
+
+    .intro-panel {
+      padding: 34px 34px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-panel::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      bottom: -50px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(217,102,50,0.14), rgba(217,102,50,0));
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .section-title {
@@ -415,10 +516,18 @@
       margin-bottom: 34px;
     }
 
-    .section-title h2 {
-      font-size: clamp(2.3rem, 5vw, 4.4rem);
+    .section-title h2,
+    .intro-panel h2 {
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
       letter-spacing: -0.04em;
       margin-bottom: 12px;
+    }
+
+    .section-title p,
+    .intro-panel p {
+      color: #536173;
+      max-width: 760px;
+      font-size: 1.03rem;
     }
 
     .tag {
@@ -431,8 +540,10 @@
       border-radius: 999px;
       font-weight: 800;
       font-size: 0.9rem;
+      white-space: nowrap;
     }
 
+    /* TIMELINE */
     .timeline {
       display: grid;
       gap: 34px;
@@ -440,7 +551,7 @@
 
     .poste {
       border-radius: var(--radius-xl);
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(23, 50, 79, 0.08);
       box-shadow: var(--shadow);
       overflow: hidden;
@@ -460,17 +571,24 @@
     .poste-header h3 {
       font-family: Arial, Helvetica, sans-serif;
       color: white;
-      font-size: 1.35rem;
+      font-size: 1.28rem;
       margin-bottom: 4px;
+      line-height: 1.35;
     }
 
     .poste-header p {
-      opacity: 0.9;
+      opacity: 0.92;
       font-weight: 700;
     }
 
     .poste-body {
       padding: 30px;
+    }
+
+    .poste-intro {
+      color: #4b5563;
+      max-width: 100%;
+      margin-bottom: 24px;
     }
 
     .projects-grid {
@@ -499,9 +617,16 @@
     .project-card h4,
     .personal-card h4 {
       color: var(--terracotta);
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       margin-bottom: 16px;
       line-height: 1.35;
+    }
+
+    .project-card p,
+    .personal-card p {
+      font-size: 0.95rem;
+      color: #4b5563;
+      margin-bottom: 10px;
     }
 
     .project-card strong,
@@ -527,7 +652,7 @@
     .metric strong {
       display: block;
       color: var(--marine);
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       line-height: 1.1;
       margin-bottom: 6px;
     }
@@ -538,6 +663,7 @@
       font-weight: 700;
     }
 
+    /* PERSONNEL */
     .personal-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -587,7 +713,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
       transition: transform 0.35s ease;
     }
 
@@ -607,9 +732,10 @@
       border-radius: 12px;
     }
 
+    /* CONTACT */
     .contact-wrap {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 28px;
       align-items: stretch;
     }
@@ -649,62 +775,100 @@
       min-height: 460px;
       border-radius: var(--radius-xl);
       overflow: hidden;
-      background: rgba(255,255,255,0.62);
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.9), rgba(255,255,255,0.55)),
+        var(--cream);
       box-shadow: var(--shadow);
       border: 1px solid rgba(23, 50, 79, 0.08);
     }
 
+    .contact-visual-card {
+      position: absolute;
+      inset: 34px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(23, 50, 79, 0.08);
+      overflow: hidden;
+    }
+
     .avatar {
       position: absolute;
-      top: 58px;
+      top: 54px;
       left: 50%;
       transform: translateX(-50%);
-      width: 190px;
-      height: 190px;
+      width: 170px;
+      height: 170px;
       border-radius: 50%;
       background:
         radial-gradient(circle at 50% 35%, #9ca3af 0 26%, transparent 27%),
         radial-gradient(circle at 50% 83%, #9ca3af 0 42%, transparent 43%),
         #e5e7eb;
-      opacity: 0.9;
+      opacity: 0.95;
       z-index: 4;
+      box-shadow: 0 12px 28px rgba(23, 50, 79, 0.12);
     }
 
     .contact-visual .shape-marine {
       left: auto;
-      right: -115px;
-      bottom: -180px;
+      right: -110px;
+      bottom: -190px;
       width: 500px;
       height: 430px;
     }
 
     .contact-visual .shape-gray {
-      right: 155px;
+      right: 135px;
       top: 255px;
       width: 420px;
     }
 
     .contact-visual .leaf {
-      top: 60px;
-      right: 38px;
+      top: 48px;
+      right: 28px;
       transform: scale(0.72);
     }
 
+    .contact-label {
+      position: absolute;
+      left: 42px;
+      bottom: 44px;
+      z-index: 5;
+      background: rgba(255,255,255,0.88);
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(23, 50, 79, 0.08);
+      box-shadow: var(--shadow-soft);
+      max-width: 250px;
+    }
+
+    .contact-label strong {
+      display: block;
+      color: var(--marine);
+      margin-bottom: 4px;
+    }
+
     .glossary {
-      margin-top: 26px;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto 8px;
       padding: 18px 20px;
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.68);
+      background: rgba(255, 255, 255, 0.72);
       border: 1px solid rgba(23, 50, 79, 0.08);
       color: #536173;
       font-size: 0.92rem;
+      display: none;
+    }
+
+    .glossary.visible {
+      display: block;
     }
 
     .footer {
-      padding: 26px 16px 34px;
+      padding: 24px 16px 34px;
       text-align: center;
       color: #617083;
       border-top: 1px solid rgba(23, 50, 79, 0.08);
+      margin-top: 28px;
     }
 
     .reveal {
@@ -718,40 +882,7 @@
       transform: translateY(0);
     }
 
-    .section-title p,
-    .poste-intro,
-    .project-card p,
-    .personal-card p,
-    .contact-card p,
-    .mini-card p,
-    .profile-panel p,
-    .hero .lead {
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
-      color: #4b5563;
-    }
-
-    .section-title p {
-      max-width: 690px;
-      font-size: 1.05rem;
-    }
-
-    .project-card p,
-    .personal-card p {
-      font-size: 0.94rem;
-      margin-bottom: 10px;
-    }
-
-    .mini-card p {
-      font-size: 0.92rem;
-    }
-
-    .poste-intro {
-      max-width: 100%;
-      margin-bottom: 24px;
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 1100px) {
       .projects-grid.four {
         grid-template-columns: repeat(2, 1fr);
@@ -788,6 +919,11 @@
       .personal-card.wide {
         grid-column: span 2;
       }
+
+      .hero-cards {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
     }
 
     @media (max-width: 760px) {
@@ -823,7 +959,7 @@
       }
 
       .hero {
-        padding-top: 44px;
+        padding-top: 36px;
       }
 
       .hero-cards,
@@ -839,29 +975,43 @@
         grid-column: span 1;
       }
 
-      .profile-panel {
-        left: 24px;
-        right: 24px;
+      .profile-panel,
+      .contact-visual-card {
+        inset: 22px;
         padding: 24px;
       }
 
       .hero-visual {
-        min-height: 480px;
+        min-height: 470px;
       }
 
       .floating-number {
-        width: 72px;
-        height: 72px;
-        font-size: 1.45rem;
+        width: 70px;
+        height: 70px;
+        font-size: 1.35rem;
       }
 
-      .floating-number.one { right: 34px; top: 285px; }
-      .floating-number.two { left: 34px; bottom: 58px; }
+      .floating-number.one { right: 24px; bottom: 22px; }
 
       .poste-header,
       .poste-body,
-      .contact-card {
+      .contact-card,
+      .intro-panel {
         padding: 24px;
+      }
+
+      .intro-panel h2 {
+        font-size: clamp(1.9rem, 8vw, 2.7rem);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.8rem, 14vw, 4.4rem);
+      }
+
+      .contact-label {
+        left: 22px;
+        right: 22px;
+        max-width: none;
       }
     }
   </style>
@@ -873,7 +1023,9 @@
         <span class="logo-mark">RM</span>
         Richard Morcel - Portfolio
       </a>
+
       <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">Menu</button>
+
       <ul class="nav-links" id="navLinks">
         <li><a href="#accueil" class="page-link active" data-page="accueil">Accueil</a></li>
         <li><a href="#projets-professionnels" class="page-link" data-page="projets-professionnels">Projets Professionnels</a></li>
@@ -884,63 +1036,83 @@
   </header>
 
   <main>
+
     <!-- ACCUEIL -->
     <section class="section hero page active-page" id="accueil">
       <div class="hero-content reveal">
         <span class="eyebrow">Fonction publique · Transformation numérique</span>
         <h1>Portfolio professionnel</h1>
-        <p class="lead">
-          Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le service public.
+
+        <p class="lead justify">
+          Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le sens du service public.
         </p>
+
         <div class="hero-actions">
           <a href="#projets-professionnels" class="btn btn-primary page-link" data-page="projets-professionnels">Découvrir mes projets</a>
           <a href="#me-contacter" class="btn btn-secondary page-link" data-page="me-contacter">Me contacter</a>
         </div>
+
         <div class="hero-cards">
           <article class="mini-card">
             <div class="icon">●</div>
             <h3>Mon profil</h3>
-            <p>Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et amélioration de processus.</p>
+            <p class="justify">
+              Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et amélioration de processus.
+            </p>
           </article>
+
           <article class="mini-card">
             <div class="icon orange">▣</div>
             <h3>Mes projets professionnels</h3>
-            <p>Des projets menés sur des sujets de dématérialisation, de système d'information RH* et de pilotage fonctionnel.</p>
+            <p class="justify">
+              Des projets menés autour de la dématérialisation, du système d'information RH* et du pilotage fonctionnel.
+            </p>
           </article>
+
           <article class="mini-card">
             <div class="icon gray">♡</div>
             <h3>Mes projets personnels</h3>
-            <p>Copropriété, transmission, pédagogie, bricolage, impression 3D et créations culinaires.</p>
+            <p class="justify">
+              Copropriété, pédagogie, transmission, bricolage, impression 3D et créations culinaires.
+            </p>
           </article>
         </div>
       </div>
 
       <div class="hero-visual reveal" aria-hidden="true">
         <div class="profile-panel">
-          <h2>Sobre.<br />Moderne.<br />Professionnel.</h2>
-          <p>Une présentation claire, synthétique et rassurante pour permettre à un recruteur d’identifier rapidement mon parcours, mes compétences et mes réalisations.</p>
+          <div>
+            <h2>Sobre.<br>Moderne.<br>Professionnel.</h2>
+            <p class="justify">
+              Une présentation claire, synthétique et rassurante pour permettre à un recruteur d’identifier rapidement mon parcours, mes compétences et mes réalisations.
+            </p>
+          </div>
+
+          <div class="leaf"><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="panel-bottom-wave"></div>
         </div>
-        <div class="leaf"><span></span><span></span><span></span><span></span><span></span></div>
+
         <div class="shape-gray"></div>
         <div class="shape-orange"></div>
         <div class="shape-marine"></div>
         <div class="floating-number one">4</div>
-        <div class="floating-number two">4</div>
       </div>
     </section>
 
     <!-- PROJETS PROFESSIONNELS -->
     <section class="section page" id="projets-professionnels">
-      <div class="section-title reveal">
-        <div>
+      <div class="page-head reveal">
+        <div class="intro-panel">
           <span class="eyebrow">Projets professionnels</span>
           <h2>Des réalisations sélectionnées</h2>
-          <p>Chaque expérience est présentée avec quelques projets clés : le contexte, mon rôle, l’apport concret et les compétences développées.</p>
+          <p class="justify">
+            Chaque expérience est présentée avec quelques projets clés : le contexte, mon rôle, l’apport concret et les compétences développées.
+          </p>
         </div>
-        <span class="tag">Du plus récent au plus ancien</span>
       </div>
 
       <div class="timeline">
+
         <article class="poste reveal">
           <div class="poste-header">
             <div>
@@ -949,47 +1121,48 @@
             </div>
             <span class="tag">Système d'information RH* · Dématérialisation · Déploiement</span>
           </div>
+
           <div class="poste-body">
-            <p class="poste-intro">
+            <p class="poste-intro justify">
               Sur ce poste, j’ai participé à plusieurs projets de transformation numérique RH, avec une forte composante de dématérialisation, d’accompagnement des utilisateurs, de paramétrage fonctionnel et de déploiement. Mon activité porte à la fois sur le maintien en condition opérationnelle des outils, la préparation des évolutions et l’accompagnement des établissements et services.
             </p>
 
             <div class="projects-grid four">
               <article class="project-card">
                 <div class="icon">✓</div>
-                <h4>Projet 1 — Pilotage fonctionnel et évolutions de l’outil Gauddi</h4>
-                <p><strong>Contexte :</strong> outil central de dématérialisation du dossier de l’agent nécessitant suivi, évolutions et assistance.</p>
-                <p><strong>Mon rôle :</strong> maintien en condition opérationnelle, rédaction d’expressions de besoin, recette des évolutions, suivi des incidents, tests de non-régression et assistance de niveau 3.</p>
-                <p><strong>Apport :</strong> continuité de service, meilleure fiabilité des évolutions et accompagnement des gestionnaires.</p>
+                <h4>Projet 1 — Pilotage fonctionnel et évolutions de l’outil GAUDDI</h4>
+                <p class="justify"><strong>Contexte :</strong> outil central de dématérialisation du dossier de l’agent nécessitant suivi, évolutions et assistance.</p>
+                <p class="justify"><strong>Mon rôle :</strong> maintien en condition opérationnelle, rédaction d’expressions de besoin, recette des évolutions, suivi des incidents, tests de non-régression et assistance de niveau 3.</p>
+                <p class="justify"><strong>Apport :</strong> continuité de service, meilleure fiabilité des évolutions et accompagnement des gestionnaires.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon orange">✉</div>
                 <h4>Projet 2 — Ouverture du dossier agent et préparation du déploiement</h4>
-                <p><strong>Contexte :</strong> ouverture du dossier individuel agent à la consultation et préparation d’une diffusion plus large des usages dématérialisés.</p>
-                <p><strong>Mon rôle :</strong> suivi des incidents, recette, rédaction de modes opératoires, défense des besoins fonctionnels et accompagnement du métier.</p>
-                <p><strong>Apport :</strong> sécurisation du déploiement et meilleure appropriation des outils par les utilisateurs.</p>
+                <p class="justify"><strong>Contexte :</strong> ouverture du dossier individuel agent à la consultation et préparation d’une diffusion plus large des usages dématérialisés.</p>
+                <p class="justify"><strong>Mon rôle :</strong> suivi des incidents, recette, rédaction de modes opératoires, défense des besoins fonctionnels et accompagnement du métier.</p>
+                <p class="justify"><strong>Apport :</strong> sécurisation du déploiement et meilleure appropriation des outils par les utilisateurs.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon gray">☑</div>
                 <h4>Projet 3 — Mise en œuvre de la Protection Sociale Complémentaire</h4>
-                <p><strong>Contexte :</strong> chantier majeur à forts enjeux métiers, techniques et organisationnels.</p>
-                <p><strong>Mon rôle :</strong> suivi des évolutions du système d'information RH*, recette, paramétrage, accompagnement des pré-affiliations, appui aux utilisateurs et maintien en condition opérationnelle du dispositif.</p>
-                <p><strong>Apport :</strong> contribution à la sécurisation du dispositif et à l’accompagnement des équipes.</p>
+                <p class="justify"><strong>Contexte :</strong> chantier majeur à forts enjeux métiers, techniques et organisationnels.</p>
+                <p class="justify"><strong>Mon rôle :</strong> suivi des évolutions du système d'information RH*, recette, paramétrage, accompagnement des pré-affiliations, appui aux utilisateurs et maintien en condition opérationnelle du dispositif.</p>
+                <p class="justify"><strong>Apport :</strong> contribution à la sécurisation du dispositif et à l’accompagnement des équipes.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon">◇</div>
                 <h4>Projet 4 — Évaluation des risques projets et actions de maîtrise</h4>
-                <p><strong>Contexte :</strong> plusieurs projets structurants nécessitant une attention particulière sur les risques, les délais et la qualité de service.</p>
-                <p><strong>Mon rôle :</strong> identification des risques, analyse des impacts et proposition d’actions de maîtrise adaptées.</p>
-                <p><strong>Apport :</strong> meilleure anticipation des difficultés et sécurisation de l’avancement des projets.</p>
+                <p class="justify"><strong>Contexte :</strong> plusieurs projets structurants nécessitant une attention particulière sur les risques, les délais et la qualité de service.</p>
+                <p class="justify"><strong>Mon rôle :</strong> identification des risques, analyse des impacts et proposition d’actions de maîtrise adaptées.</p>
+                <p class="justify"><strong>Apport :</strong> meilleure anticipation des difficultés et sécurisation de l’avancement des projets.</p>
               </article>
             </div>
 
             <div class="metrics">
-              <div class="metric"><strong>2024</strong><span>prise de poste</span></div>
+              <div class="metric"><strong>2024</strong><span>démarrage du poste</span></div>
               <div class="metric"><strong>4</strong><span>projets structurants</span></div>
               <div class="metric"><strong>Niveau 3</strong><span>assistance utilisateurs</span></div>
               <div class="metric"><strong>RH</strong><span>transformation numérique</span></div>
@@ -1000,13 +1173,14 @@
         <article class="poste reveal">
           <div class="poste-header">
             <div>
-              <h3>Chef de projet réseau financier</h3>
+              <h3>Chargé du réseau financier</h3>
               <p>Ministère des Armées · Septembre 2021 – Décembre 2023</p>
             </div>
             <span class="tag">Paie · Référentiels · Pilotage</span>
           </div>
+
           <div class="poste-body">
-            <p class="poste-intro">
+            <p class="poste-intro justify">
               Sur ce poste, j’ai contribué à la fiabilisation des référentiels de paie, au pilotage d’opérations de transfert comptable et à la coordination fonctionnelle de plusieurs acteurs de la chaîne paie. Mes missions m’ont amené à intervenir sur des enjeux d’organisation, de sécurisation des processus et d’accompagnement au changement.
             </p>
 
@@ -1014,25 +1188,25 @@
               <article class="project-card">
                 <div class="icon">▤</div>
                 <h4>Projet 1 — Fiabilisation des référentiels financiers de la paie en PSOP</h4>
-                <p><strong>Contexte :</strong> préparation du transfert d’assignation sur un comptable unique et nécessité de fiabiliser la cartographie financière de la paie.</p>
-                <p><strong>Mon rôle :</strong> actualisation des outils et référentiels concourant à la paie en PSOP, en veillant à la cohérence des données et à leur exploitation.</p>
-                <p><strong>Apport :</strong> consolidation des bases de travail et sécurisation des opérations préparatoires.</p>
+                <p class="justify"><strong>Contexte :</strong> préparation du transfert d’assignation sur un comptable unique et nécessité de fiabiliser la cartographie financière de la paie.</p>
+                <p class="justify"><strong>Mon rôle :</strong> actualisation des outils et référentiels concourant à la paie en PSOP, en veillant à la cohérence des données et à leur exploitation.</p>
+                <p class="justify"><strong>Apport :</strong> consolidation des bases de travail et sécurisation des opérations préparatoires.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon orange">☷</div>
                 <h4>Projet 2 — Pilotage du transfert d’assignation comptable</h4>
-                <p><strong>Contexte :</strong> chantier structurant nécessitant une vision globale des étapes, des risques et des actions à conduire jusqu’aux échéances 2024–2025.</p>
-                <p><strong>Mon rôle :</strong> construction et actualisation d’un calendrier de pilotage de type GANTT, avec identification des sous-chantiers et des risques.</p>
-                <p><strong>Apport :</strong> mise à disposition d’un fonds de dossier complet, utile à la gouvernance et à la poursuite du projet.</p>
+                <p class="justify"><strong>Contexte :</strong> chantier structurant nécessitant une vision globale des étapes, des risques et des actions à conduire.</p>
+                <p class="justify"><strong>Mon rôle :</strong> construction et actualisation d’un calendrier de pilotage de type GANTT, avec identification des sous-chantiers et des risques.</p>
+                <p class="justify"><strong>Apport :</strong> mise à disposition d’un fonds de dossier complet, utile à la gouvernance et à la poursuite du projet.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon gray">⚙</div>
                 <h4>Projet 3 — Refonte du calendrier de paie</h4>
-                <p><strong>Contexte :</strong> besoin d’alléger certaines opérations de traitement de la paie et d’améliorer la performance technique des nuits applicatives.</p>
-                <p><strong>Mon rôle :</strong> contribution à la concertation avec le ministère des Armées, le Service liaison rémunération de la Marne et la direction générale des finances publiques, administration centrale du ministère des Finances.</p>
-                <p><strong>Apport :</strong> finalisation d’une évolution de processus permettant un fonctionnement plus fluide et mieux structuré.</p>
+                <p class="justify"><strong>Contexte :</strong> besoin d’alléger certaines opérations de traitement de la paie et d’améliorer la performance technique des nuits applicatives.</p>
+                <p class="justify"><strong>Mon rôle :</strong> contribution à la concertation avec le ministère des Armées, le Service liaison rémunération de la Marne et la direction générale des finances publiques, administration centrale du ministère des Finances.</p>
+                <p class="justify"><strong>Apport :</strong> finalisation d’une évolution de processus permettant un fonctionnement plus fluide et mieux structuré.</p>
               </article>
             </div>
 
@@ -1040,7 +1214,7 @@
               <div class="metric"><strong>2021–2023</strong><span>période du poste</span></div>
               <div class="metric"><strong>3</strong><span>projets structurants</span></div>
               <div class="metric"><strong>Paie</strong><span>coordination fonctionnelle</span></div>
-              <div class="metric"><strong>Transfert</strong><span>assignation comptable</span></div>
+              <div class="metric"><strong>Réseau</strong><span>travail partenarial</span></div>
             </div>
           </div>
         </article>
@@ -1053,8 +1227,9 @@
             </div>
             <span class="tag">Formation · Administration · Catégorie A</span>
           </div>
+
           <div class="poste-body">
-            <p class="poste-intro">
+            <p class="poste-intro justify">
               À la suite de ma réussite au concours interne des IRA, j’ai suivi une formation professionnalisante à l’IRA de Metz. Cette étape a marqué un tournant dans mon parcours en consolidant mon positionnement de cadre administratif et en renforçant mes compétences en conduite de l’action publique, analyse administrative et pilotage de projets.
             </p>
 
@@ -1062,25 +1237,25 @@
               <article class="project-card">
                 <div class="icon">▰</div>
                 <h4>Projet 1 — Consolidation de la culture administrative</h4>
-                <p><strong>Contexte :</strong> passage vers des fonctions d’attaché d’administration de l’État avec une approche plus stratégique des politiques publiques.</p>
-                <p><strong>Mon rôle :</strong> approfondissement des fondamentaux administratifs, juridiques, budgétaires et organisationnels nécessaires à l’exercice de responsabilités de catégorie A.</p>
-                <p><strong>Apport :</strong> meilleure compréhension des enjeux de l’action publique et renforcement du positionnement professionnel.</p>
+                <p class="justify"><strong>Contexte :</strong> passage vers des fonctions d’attaché d’administration de l’État avec une approche plus stratégique des politiques publiques.</p>
+                <p class="justify"><strong>Mon rôle :</strong> approfondissement des fondamentaux administratifs, juridiques, budgétaires et organisationnels nécessaires à l’exercice de responsabilités de catégorie A.</p>
+                <p class="justify"><strong>Apport :</strong> meilleure compréhension des enjeux de l’action publique et renforcement du positionnement professionnel.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon orange">◇</div>
                 <h4>Projet 2 — Développement de la posture de cadre</h4>
-                <p><strong>Contexte :</strong> préparation à des fonctions nécessitant davantage d’autonomie, d’analyse, de coordination et d’aide à la décision.</p>
-                <p><strong>Mon rôle :</strong> travail sur la prise de recul, la structuration des idées, la communication professionnelle et la conduite de travaux collectifs.</p>
-                <p><strong>Apport :</strong> montée en compétences sur la conduite de projet, la synthèse et l’accompagnement des équipes.</p>
+                <p class="justify"><strong>Contexte :</strong> préparation à des fonctions nécessitant davantage d’autonomie, d’analyse, de coordination et d’aide à la décision.</p>
+                <p class="justify"><strong>Mon rôle :</strong> travail sur la prise de recul, la structuration des idées, la communication professionnelle et la conduite de travaux collectifs.</p>
+                <p class="justify"><strong>Apport :</strong> montée en compétences sur la conduite de projet, la synthèse et l’accompagnement des équipes.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon gray">✓</div>
                 <h4>Projet 3 — Préparation à la conduite de projets publics</h4>
-                <p><strong>Contexte :</strong> formation orientée vers la mise en œuvre concrète de politiques publiques et la coordination d’acteurs.</p>
-                <p><strong>Mon rôle :</strong> appropriation de méthodes de diagnostic, de pilotage, de priorisation et de restitution adaptées aux environnements administratifs.</p>
-                <p><strong>Apport :</strong> capacité renforcée à structurer une démarche, à formaliser des propositions et à accompagner le changement.</p>
+                <p class="justify"><strong>Contexte :</strong> formation orientée vers la mise en œuvre concrète de politiques publiques et la coordination d’acteurs.</p>
+                <p class="justify"><strong>Mon rôle :</strong> appropriation de méthodes de diagnostic, de pilotage, de priorisation et de restitution adaptées aux environnements administratifs.</p>
+                <p class="justify"><strong>Apport :</strong> capacité renforcée à structurer une démarche, à formaliser des propositions et à accompagner le changement.</p>
               </article>
             </div>
 
@@ -1101,8 +1276,9 @@
             </div>
             <span class="tag">Données · Paie · Pilotage</span>
           </div>
+
           <div class="poste-body">
-            <p class="poste-intro">
+            <p class="poste-intro justify">
               Avant ma formation à l’IRA, j’ai occupé deux postes qui m’ont permis de consolider mes bases professionnelles : d’abord en contrôle interne et données de paie, puis en dialogue de gestion. Ces expériences m’ont apporté une méthode de travail solide, une culture de la donnée, le sens du suivi administratif et une capacité à produire des supports utiles à la décision.
             </p>
 
@@ -1110,25 +1286,25 @@
               <article class="project-card">
                 <div class="icon">▤</div>
                 <h4>Projet 1 — Suivi d’activité, contrôle interne et données de paie</h4>
-                <p><strong>Contexte :</strong> production et fiabilisation de données destinées au pilotage de l’activité et au suivi des bureaux de gestion.</p>
-                <p><strong>Mon rôle :</strong> préparation de fiches et tableaux de bord, analyse de données, suivi de demandes, contribution au contrôle interne de la paie et appui aux outils métiers.</p>
-                <p><strong>Apport :</strong> meilleure lisibilité de l’activité, données plus structurées et appui régulier aux équipes dans le suivi administratif.</p>
+                <p class="justify"><strong>Contexte :</strong> production et fiabilisation de données destinées au pilotage de l’activité et au suivi des bureaux de gestion.</p>
+                <p class="justify"><strong>Mon rôle :</strong> préparation de fiches et tableaux de bord, analyse de données, suivi de demandes, contribution au contrôle interne de la paie et appui aux outils métiers.</p>
+                <p class="justify"><strong>Apport :</strong> meilleure lisibilité de l’activité, données plus structurées et appui régulier aux équipes dans le suivi administratif.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon orange">◈</div>
                 <h4>Projet 2 — Dialogue de gestion et dispositifs de performance</h4>
-                <p><strong>Contexte :</strong> préparation du dialogue de gestion, mise à jour des supports, suivi des indicateurs et appui à l’organisation des réunions stratégiques.</p>
-                <p><strong>Mon rôle :</strong> contribution aux calendriers, documents d’engagement, supports intranet, analyses d’indicateurs et travaux graphiques ou cartographiques.</p>
-                <p><strong>Apport :</strong> appui à la préparation des échanges de gestion, amélioration de la capitalisation des données et soutien à la coordination du bureau.</p>
+                <p class="justify"><strong>Contexte :</strong> préparation du dialogue de gestion, mise à jour des supports, suivi des indicateurs et appui à l’organisation des réunions stratégiques.</p>
+                <p class="justify"><strong>Mon rôle :</strong> contribution aux calendriers, documents d’engagement, supports intranet, analyses d’indicateurs et travaux graphiques ou cartographiques.</p>
+                <p class="justify"><strong>Apport :</strong> appui à la préparation des échanges de gestion, amélioration de la capitalisation des données et soutien à la coordination du bureau.</p>
               </article>
 
               <article class="project-card">
                 <div class="icon gray">☑</div>
                 <h4>Projet 3 — Capitalisation et structuration des connaissances</h4>
-                <p><strong>Contexte :</strong> besoin de centraliser, actualiser et rendre exploitables des informations utiles au pilotage des activités.</p>
-                <p><strong>Mon rôle :</strong> alimentation de supports partagés, mise à jour d’informations, appui à la production de synthèses et contribution aux travaux de capitalisation.</p>
-                <p><strong>Apport :</strong> amélioration de la traçabilité, meilleure disponibilité de l’information et appui à la continuité du service.</p>
+                <p class="justify"><strong>Contexte :</strong> besoin de centraliser, actualiser et rendre exploitables des informations utiles au pilotage des activités.</p>
+                <p class="justify"><strong>Mon rôle :</strong> alimentation de supports partagés, mise à jour d’informations, appui à la production de synthèses et contribution aux travaux de capitalisation.</p>
+                <p class="justify"><strong>Apport :</strong> amélioration de la traçabilité, meilleure disponibilité de l’information et appui à la continuité du service.</p>
               </article>
             </div>
 
@@ -1141,21 +1317,18 @@
           </div>
         </article>
       </div>
-
-      <div class="glossary reveal">
-        <strong>* Système d'information RH :</strong> outils numériques utilisés pour gérer les ressources humaines.
-      </div>
     </section>
 
     <!-- PROJETS PERSONNELS -->
     <section class="section page" id="projets-personnels">
-      <div class="section-title reveal">
-        <div>
+      <div class="page-head reveal">
+        <div class="intro-panel">
           <span class="eyebrow">Projets personnels</span>
           <h2>Des engagements utiles au parcours</h2>
-          <p>Des projets choisis pour montrer mon sens des responsabilités, ma capacité à apprendre, à structurer et à transmettre, sans entrer dans ma vie privée.</p>
+          <p class="justify">
+            Des projets choisis pour montrer mon sens des responsabilités, ma capacité à apprendre, à structurer et à transmettre, sans entrer dans ma vie privée.
+          </p>
         </div>
-        <span class="tag">4 blocs</span>
       </div>
 
       <div class="personal-grid reveal">
@@ -1164,8 +1337,12 @@
             <div class="icon">▥</div>
             <div>
               <h4>Implication dans la copropriété & guide des nouveaux arrivants</h4>
-              <p>Recherche d’entreprises, pilotage et suivi du syndic, participation au suivi des travaux et contribution à une gestion saine des finances de la copropriété. J’ai également travaillé à la rédaction d’un guide d’accueil destiné aux nouveaux arrivants, afin de faciliter leur intégration et de clarifier les repères utiles.</p>
-              <p><strong>Compétences :</strong> responsabilité, suivi de prestataires, coordination, gestion budgétaire, communication, rédaction.</p>
+              <p class="justify">
+                Recherche d’entreprises, pilotage et suivi du syndic, participation au suivi des travaux et contribution à une gestion saine des finances de la copropriété. J’ai également travaillé à la rédaction d’un guide d’accueil destiné aux nouveaux arrivants, afin de faciliter leur intégration et de clarifier les repères utiles.
+              </p>
+              <p class="justify">
+                <strong>Compétences :</strong> responsabilité, suivi de prestataires, coordination, gestion budgétaire, communication, rédaction.
+              </p>
             </div>
           </div>
 
@@ -1195,8 +1372,12 @@
             <div class="icon orange">▰</div>
             <div>
               <h4>Formation et montée en compétences à l’IRA</h4>
-              <p>Approfondissement des connaissances liées à l’administration publique, aux politiques publiques et à la conduite de projets.</p>
-              <p><strong>Compétences :</strong> culture administrative, méthode, analyse, capacité d’apprentissage.</p>
+              <p class="justify">
+                Approfondissement des connaissances liées à l’administration publique, aux politiques publiques et à la conduite de projets.
+              </p>
+              <p class="justify">
+                <strong>Compétences :</strong> culture administrative, méthode, analyse, capacité d’apprentissage.
+              </p>
             </div>
           </div>
         </article>
@@ -1206,8 +1387,12 @@
             <div class="icon gray">▤</div>
             <div>
               <h4>Conception de supports pédagogiques</h4>
-              <p>Structuration et formalisation de contenus clairs, utiles et accessibles, en veillant à l’organisation des informations et à leur lisibilité.</p>
-              <p><strong>Compétences :</strong> pédagogie, synthèse, communication écrite, structuration.</p>
+              <p class="justify">
+                Structuration et formalisation de contenus clairs, utiles et accessibles, en veillant à l’organisation des informations et à leur lisibilité.
+              </p>
+              <p class="justify">
+                <strong>Compétences :</strong> pédagogie, synthèse, communication écrite, structuration.
+              </p>
             </div>
           </div>
         </article>
@@ -1217,8 +1402,12 @@
             <div class="icon orange">✦</div>
             <div>
               <h4>Bricolage, impression 3D, solutions pratiques & créations culinaires</h4>
-              <p>Conception et réalisation de petits objets ou solutions utiles, avec une approche créative, technique et orientée usage. En parallèle, développement de recettes maison autour de la glace, avec un intérêt particulier pour les associations originales comme le yaourt glacé lavande miel.</p>
-              <p><strong>Compétences :</strong> créativité, autonomie, expérimentation, logique de conception, résolution de problèmes, précision, sens du détail, curiosité et recherche d’équilibre.</p>
+              <p class="justify">
+                Conception et réalisation de petits objets ou solutions utiles, avec une approche créative, technique et orientée usage. En parallèle, développement de recettes maison autour de la glace, avec un intérêt particulier pour les associations originales comme le yaourt glacé lavande miel.
+              </p>
+              <p class="justify">
+                <strong>Compétences :</strong> créativité, autonomie, expérimentation, logique de conception, résolution de problèmes, précision, sens du détail, curiosité et recherche d’équilibre.
+              </p>
             </div>
           </div>
         </article>
@@ -1227,61 +1416,99 @@
 
     <!-- CONTACT -->
     <section class="section page" id="me-contacter">
-      <div class="contact-wrap">
-        <div class="contact-card reveal">
+      <div class="page-head reveal">
+        <div class="intro-panel">
           <span class="eyebrow">Me contacter</span>
           <h2>Échanger autour de mon parcours</h2>
-          <p>Pour échanger sur mon parcours, mes projets ou une opportunité professionnelle, vous pouvez me contacter via les informations ci-dessous.</p>
+          <p class="justify">
+            Pour échanger sur mon parcours, mes projets ou une opportunité professionnelle, vous pouvez me contacter via les informations ci-dessous.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="contact-card reveal">
           <ul class="contact-list">
-            <li><span class="small-icon">✉</span><div><strong>Email</strong><br />rmorcel@gmail.com</div></li>
-            <li><span class="small-icon">in</span><div><strong>LinkedIn</strong><br />www.linkedin.com/in/richard-morcel/</div></li>
-            <li><span class="small-icon">⌖</span><div><strong>Localisation</strong><br />Région Île-de-France</div></li>
+            <li>
+              <span class="small-icon">✉</span>
+              <div><strong>Email</strong><br>rmorcel@gmail.com</div>
+            </li>
+            <li>
+              <span class="small-icon">in</span>
+              <div><strong>LinkedIn</strong><br>www.linkedin.com/in/richard-morcel/</div>
+            </li>
+            <li>
+              <span class="small-icon">⌖</span>
+              <div><strong>Localisation</strong><br>Région Île-de-France</div>
+            </li>
           </ul>
+
           <a href="Richard_Morcel_CV.pdf" class="btn btn-primary" style="margin-top: 28px;" download>Télécharger mon CV</a>
         </div>
 
         <div class="contact-visual reveal" aria-hidden="true">
+          <div class="contact-visual-card"></div>
           <div class="avatar"></div>
           <div class="leaf"><span></span><span></span><span></span><span></span><span></span></div>
           <div class="shape-gray"></div>
           <div class="shape-marine"></div>
+
+          <div class="contact-label">
+            <strong>Disponible pour échanger</strong>
+            Parcours, projets, coordination, transformation numérique et service public.
+          </div>
         </div>
       </div>
     </section>
+
   </main>
+
+  <div class="glossary" id="glossary">
+    <strong>* Système d'information RH :</strong> ensemble des outils numériques utilisés pour gérer les ressources humaines.
+  </div>
 
   <footer class="footer">
     © 2026 — Richard Morcel. Portfolio professionnel.
   </footer>
 
   <script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    const pageLinks = [...document.querySelectorAll('.page-link')];
-    const pages = [...document.querySelectorAll('.page')];
-    const revealEls = [...document.querySelectorAll('.reveal')];
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const pageLinks = [...document.querySelectorAll(".page-link")];
+    const pages = [...document.querySelectorAll(".page")];
+    const revealEls = [...document.querySelectorAll(".reveal")];
+    const glossary = document.getElementById("glossary");
 
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
     });
+
+    function updateGlossary(pageId) {
+      if (pageId === "projets-professionnels") {
+        glossary.classList.add("visible");
+      } else {
+        glossary.classList.remove("visible");
+      }
+    }
 
     function showPage(pageId) {
       pages.forEach(page => {
-        page.classList.toggle('active-page', page.id === pageId);
+        page.classList.toggle("active-page", page.id === pageId);
       });
 
       pageLinks.forEach(link => {
-        const isMenuLink = link.closest('.nav-links');
-        link.classList.toggle('active', isMenuLink && link.dataset.page === pageId);
+        const isMenuLink = link.closest(".nav-links");
+        link.classList.toggle("active", isMenuLink && link.dataset.page === pageId);
       });
 
-      navLinks.classList.remove('open');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      history.replaceState(null, '', '#' + pageId);
+      updateGlossary(pageId);
+      navLinks.classList.remove("open");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      history.replaceState(null, "", "#" + pageId);
     }
 
     pageLinks.forEach(link => {
-      link.addEventListener('click', event => {
+      link.addEventListener("click", event => {
         event.preventDefault();
         showPage(link.dataset.page);
       });
@@ -1290,17 +1517,18 @@
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+          entry.target.classList.add("visible");
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
     revealEls.forEach(el => revealObserver.observe(el));
 
-    const initialPage = window.location.hash ? window.location.hash.replace('#', '') : 'accueil';
+    const initialPage = window.location.hash ? window.location.hash.replace("#", "") : "accueil";
     if (pages.some(page => page.id === initialPage)) {
       showPage(initialPage);
+    } else {
+      showPage("accueil");
     }
   </script>
 </body>
