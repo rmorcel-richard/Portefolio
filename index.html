@@ -331,6 +331,7 @@
       font-size: 0.94rem;
     }
 
+    /* NOUVEAU BLOC ACCUEIL UTILE */
     .signature-card {
       margin-top: 34px;
       min-height: 360px;
@@ -339,20 +340,20 @@
       position: relative;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 34px;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
       align-items: center;
       box-shadow: var(--shadow);
     }
 
     .signature-content {
       position: relative;
-      z-index: 10;
-      max-width: 620px;
+      z-index: 5;
+      max-width: 600px;
     }
 
     .signature-content h2 {
-      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      font-size: clamp(2.3rem, 5vw, 4.2rem);
       margin-bottom: 18px;
       letter-spacing: -0.04em;
     }
@@ -361,17 +362,13 @@
       color: #4b5563;
       max-width: 580px;
       margin-bottom: 22px;
-      position: relative;
-      z-index: 10;
     }
 
     .signature-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 22px;
-      position: relative;
-      z-index: 12;
+      margin-top: 20px;
     }
 
     .signature-pill {
@@ -382,118 +379,85 @@
       color: var(--marine);
       font-size: 0.9rem;
       font-weight: 800;
-      position: relative;
-      z-index: 12;
     }
 
-    .signature-visual {
+    .signature-visual.useful-grid {
       position: relative;
-      min-height: 260px;
-      z-index: 3;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .signature-stat {
-      position: absolute;
-      right: 18px;
-      top: 22px;
-      width: 150px;
-      padding: 18px;
-      border-radius: 24px;
+    .value-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(23, 50, 79, 0.08);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 14px 32px rgba(23, 50, 79, 0.08);
+      min-height: 180px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(23, 50, 79, 0.12);
+    }
+
+    .value-card h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+      color: var(--marine);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .value-card p {
+      font-size: 0.93rem;
+      color: #4b5563;
+      line-height: 1.6;
+    }
+
+    .value-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
       background: var(--marine);
       color: white;
-      box-shadow: 0 18px 38px rgba(23, 50, 79, 0.25);
-      z-index: 8;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
     }
 
-    .signature-stat strong {
-      display: block;
-      font-size: 2.2rem;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .signature-stat span {
-      font-size: 0.86rem;
-      opacity: 0.9;
-      font-weight: 700;
-    }
-
-    .signature-stat.orange {
-      right: 190px;
-      top: 120px;
+    .value-icon.orange {
       background: var(--terracotta);
     }
 
-    .signature-line {
-      position: absolute;
-      right: 110px;
-      top: 28px;
-      width: 120px;
-      height: 230px;
-      border-radius: 999px;
-      border: 2px solid rgba(23, 50, 79, 0.12);
-      transform: rotate(28deg);
-      z-index: 3;
+    .value-icon.gray {
+      background: #9ca3af;
     }
 
-    .signature-leaf {
+    .signature-bg-soft {
       position: absolute;
-      right: 70px;
-      top: 20px;
-      width: 240px;
-      height: 270px;
-      opacity: 0.16;
-      z-index: 2;
-    }
-
-    .signature-leaf span {
-      position: absolute;
-      display: block;
-      width: 50px;
-      height: 100px;
-      border-radius: 50% 50% 50% 0;
-      background: #8f97a2;
-    }
-
-    .signature-leaf span:nth-child(1) { right: 95px; top: 0; transform: rotate(32deg); }
-    .signature-leaf span:nth-child(2) { right: 160px; top: 74px; transform: rotate(-38deg); }
-    .signature-leaf span:nth-child(3) { right: 62px; top: 118px; transform: rotate(38deg); }
-    .signature-leaf span:nth-child(4) { right: 150px; top: 174px; transform: rotate(-42deg); }
-
-    .signature-bg-marine {
-      position: absolute;
-      left: -130px;
-      bottom: -205px;
-      width: 440px;
-      height: 270px;
-      background: var(--marine);
-      border-radius: 60% 40% 0 0 / 100% 100% 0 0;
+      right: 90px;
+      top: 60px;
+      width: 260px;
+      height: 140px;
+      background: rgba(156, 163, 175, 0.12);
+      border-radius: 50%;
       z-index: 1;
-      pointer-events: none;
     }
 
     .signature-bg-orange {
       position: absolute;
       right: -70px;
       bottom: -55px;
-      width: 320px;
-      height: 190px;
-      background: var(--terracotta);
-      border-radius: 70% 30% 0 0 / 100% 100% 0 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .signature-bg-gray {
-      position: absolute;
-      right: 240px;
-      bottom: 30px;
       width: 260px;
       height: 170px;
-      background: rgba(156, 163, 175, 0.15);
-      border-radius: 50%;
+      background: rgba(217, 102, 50, 0.92);
+      border-radius: 70% 30% 0 0 / 100% 100% 0 0;
       z-index: 1;
-      pointer-events: none;
     }
 
     /* EN-TÊTES DES AUTRES PAGES */
@@ -1332,10 +1296,6 @@
       .signature-card {
         grid-template-columns: 1fr;
       }
-
-      .signature-visual {
-        min-height: 220px;
-      }
     }
 
     @media (max-width: 980px) {
@@ -1435,7 +1395,8 @@
       .projects-grid.four,
       .copro-gallery,
       .metrics,
-      .training-highlight {
+      .training-highlight,
+      .signature-visual.useful-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1444,17 +1405,8 @@
         min-height: auto;
       }
 
-      .signature-visual {
-        min-height: 250px;
-      }
-
-      .signature-stat {
-        right: 0;
-      }
-
-      .signature-stat.orange {
-        right: auto;
-        left: 0;
+      .value-card {
+        min-height: auto;
       }
 
       .poste-header,
@@ -1556,43 +1508,50 @@
           </div>
 
           <article class="signature-card reveal">
-            <div class="signature-bg-marine"></div>
+            <div class="signature-bg-soft"></div>
             <div class="signature-bg-orange"></div>
-            <div class="signature-bg-gray"></div>
 
             <div class="signature-content">
               <span class="eyebrow">Positionnement</span>
-              <h2>Sobre. Moderne. Professionnel.</h2>
+              <h2>Ce que je peux apporter</h2>
               <p class="justify">
-                Une présentation claire, synthétique et rassurante pour permettre à un recruteur d’identifier rapidement mon parcours, mes compétences et mes réalisations.
+                Une approche structurée, fiable et opérationnelle au service des projets, des utilisateurs
+                et de l’action publique. Mon parcours combine coordination, accompagnement, outils numériques
+                et sens du collectif.
               </p>
 
               <div class="signature-pills">
-                <span class="signature-pill">Coordination</span>
                 <span class="signature-pill">Pilotage</span>
-                <span class="signature-pill">Formation</span>
+                <span class="signature-pill">Coordination</span>
+                <span class="signature-pill">Accompagnement</span>
                 <span class="signature-pill">Service public</span>
               </div>
             </div>
 
-            <div class="signature-visual">
-              <div class="signature-line"></div>
-              <div class="signature-leaf">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+            <div class="signature-visual useful-grid">
+              <article class="value-card">
+                <div class="value-icon">📁</div>
+                <h3>Pilotage de projets</h3>
+                <p>Organisation, coordination, suivi d’avancement et structuration des actions.</p>
+              </article>
 
-              <div class="signature-stat">
-                <strong>4</strong>
-                <span>pages structurées</span>
-              </div>
+              <article class="value-card">
+                <div class="value-icon orange">💻</div>
+                <h3>Transformation numérique</h3>
+                <p>Dématérialisation, appui fonctionnel, outils RH et amélioration des processus.</p>
+              </article>
 
-              <div class="signature-stat orange">
-                <strong>4</strong>
-                <span>axes de présentation</span>
-              </div>
+              <article class="value-card">
+                <div class="value-icon gray">🎓</div>
+                <h3>Formation & accompagnement</h3>
+                <p>Transmission, supports pédagogiques, accompagnement des utilisateurs et montée en compétences.</p>
+              </article>
+
+              <article class="value-card">
+                <div class="value-icon">🏛️</div>
+                <h3>Culture du service public</h3>
+                <p>Rigueur, sens de l’intérêt général, adaptation aux environnements ministériels et travail collectif.</p>
+              </article>
             </div>
           </article>
         </div>
