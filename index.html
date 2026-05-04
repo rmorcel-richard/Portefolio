@@ -66,7 +66,6 @@
       hyphens: auto;
     }
 
-    /* MENU PREMIUM */
     .site-header {
       position: sticky;
       top: 0;
@@ -157,7 +156,6 @@
       font-weight: 900;
     }
 
-    /* PAGES */
     .page {
       display: none;
     }
@@ -173,7 +171,6 @@
       position: relative;
     }
 
-    /* ACCUEIL */
     .home-section {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
@@ -223,10 +220,16 @@
       margin-bottom: 34px;
     }
 
-    .hero-actions {
+    .hero-actions,
+    .contact-actions,
+    .personal-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
+      margin-top: 20px;
+    }
+
+    .hero-actions {
       margin-bottom: 34px;
     }
 
@@ -280,7 +283,6 @@
     .mini-card,
     .project-card,
     .personal-card,
-    .contact-card,
     .intro-panel,
     .signature-card,
     .contact-info-card,
@@ -331,7 +333,6 @@
       font-size: 0.94rem;
     }
 
-    /* NOUVEAU BLOC ACCUEIL UTILE */
     .signature-card {
       margin-top: 34px;
       min-height: 360px;
@@ -460,7 +461,6 @@
       z-index: 1;
     }
 
-    /* EN-TÊTES DES AUTRES PAGES */
     .page-head {
       margin-bottom: 34px;
     }
@@ -508,7 +508,6 @@
       white-space: nowrap;
     }
 
-    /* PROJETS PROFESSIONNELS */
     .pro-section-wrap {
       position: relative;
     }
@@ -668,14 +667,12 @@
       font-weight: 700;
     }
 
-    /* RUBRIQUE FORMATION EN BAS DE PAGE PRO */
     .training-section {
       margin-top: 46px;
       position: relative;
       overflow: hidden;
       border-radius: 36px;
-      background:
-        linear-gradient(135deg, rgba(23, 50, 79, 0.98), rgba(36, 68, 99, 0.96));
+      background: linear-gradient(135deg, rgba(23, 50, 79, 0.98), rgba(36, 68, 99, 0.96));
       color: white;
       box-shadow: var(--shadow);
       border: 1px solid rgba(23, 50, 79, 0.12);
@@ -828,29 +825,36 @@
       color: var(--marine);
     }
 
-    .training-tags {
+    .training-tags,
+    .personal-icons-row,
+    .icon-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
+      gap: 10px;
+      margin-top: 18px;
     }
 
-    .training-tag {
+    .training-tag,
+    .personal-mini-badge,
+    .small-chip {
       display: inline-flex;
-      padding: 7px 10px;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
       border-radius: 999px;
-      background: rgba(23, 50, 79, 0.08);
+      background: rgba(23, 50, 79, 0.07);
       color: var(--marine);
-      font-size: 0.78rem;
+      font-size: 0.86rem;
       font-weight: 800;
     }
 
-    .training-tag.orange {
+    .training-tag.orange,
+    .personal-mini-badge.orange,
+    .small-chip.orange {
       background: rgba(217, 102, 50, 0.12);
       color: var(--terracotta);
     }
 
-    /* PROJETS PERSONNELS */
     .personal-layout {
       display: grid;
       gap: 24px;
@@ -861,8 +865,7 @@
       overflow: hidden;
       padding: 30px;
       border-radius: var(--radius-xl);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.68));
+      background: linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.68));
       border: 1px solid rgba(23, 50, 79, 0.08);
       box-shadow: var(--shadow);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -901,33 +904,6 @@
       color: var(--marine);
     }
 
-    .personal-icons-row,
-    .icon-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .personal-mini-badge,
-    .small-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(23, 50, 79, 0.07);
-      color: var(--marine);
-      font-size: 0.86rem;
-      font-weight: 800;
-    }
-
-    .personal-mini-badge.orange,
-    .small-chip.orange {
-      background: rgba(217, 102, 50, 0.12);
-      color: var(--terracotta);
-    }
-
     .personal-grid-premium {
       display: grid;
       grid-template-columns: 1fr;
@@ -962,18 +938,10 @@
       z-index: 2;
     }
 
-    .personal-card-body {
+    .personal-card-body,
+    .personal-actions {
       position: relative;
       z-index: 2;
-    }
-
-    .personal-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-      position: relative;
-      z-index: 3;
     }
 
     .copro-gallery {
@@ -1019,7 +987,6 @@
       backdrop-filter: blur(8px);
     }
 
-    /* CONTACT PREMIUM */
     .contact-premium {
       display: grid;
       gap: 32px;
@@ -1030,8 +997,7 @@
       overflow: hidden;
       padding: 38px 42px;
       border-radius: var(--radius-xl);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.72));
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.72));
       border: 1px solid rgba(23, 50, 79, 0.08);
       box-shadow: var(--shadow);
     }
@@ -1165,13 +1131,6 @@
       color: #4b5563;
       font-size: 0.96rem;
       word-break: break-word;
-    }
-
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
     }
 
     .contact-photo-card {
@@ -1310,7 +1269,8 @@
         transform: none;
       }
 
-      .training-header {
+      .training-header,
+      .contact-premium-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1318,12 +1278,12 @@
         grid-template-columns: 1fr;
       }
 
-      .training-highlight {
+      .training-highlight,
+      .home-cards,
+      .projects-grid,
+      .copro-gallery,
+      .metrics {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-premium-grid {
-        grid-template-columns: 1fr;
       }
 
       .contact-photo-card {
@@ -1332,19 +1292,6 @@
 
       .photo-frame {
         min-height: 460px;
-      }
-
-      .home-cards,
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .copro-gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .metrics {
-        grid-template-columns: repeat(2, 1fr);
       }
     }
 
@@ -1468,15 +1415,12 @@
   </header>
 
   <main>
-    <!-- ACCUEIL -->
     <section class="page active-page" id="accueil">
       <div class="home-section">
         <div class="home-hero">
           <div class="home-title-wrap reveal">
             <span class="eyebrow">Fonction publique · Transformation numérique</span>
-
             <h1>Portfolio professionnel</h1>
-
             <p class="home-lead justify">
               Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le sens du service public.
             </p>
@@ -1515,9 +1459,7 @@
               <span class="eyebrow">Positionnement</span>
               <h2>Ce que je peux apporter</h2>
               <p class="justify">
-                Une approche structurée, fiable et opérationnelle au service des projets, des utilisateurs
-                et de l’action publique. Mon parcours combine coordination, accompagnement, outils numériques
-                et sens du collectif.
+                Une approche structurée, fiable et opérationnelle au service des projets, des utilisateurs et de l’action publique. Mon parcours combine coordination, accompagnement, outils numériques et sens du collectif.
               </p>
 
               <div class="signature-pills">
@@ -1558,10 +1500,8 @@
       </div>
     </section>
 
-    <!-- PROJETS PROFESSIONNELS -->
     <section class="section page" id="projets-professionnels">
       <div class="pro-section-wrap">
-
         <a href="#formation-transmission" class="pro-side-callout">
           <span>Voir la rubrique formation</span>
         </a>
@@ -1588,7 +1528,7 @@
 
             <div class="poste-body">
               <p class="poste-intro justify">
-                Sur ce poste, j’ai participé à plusieurs projets de transformation numérique RH, avec une forte composante de dématérialisation, d’accompagnement des utilisateurs, de paramétrage fonctionnel et de déploiement. Mon activité porte à la fois sur le maintien en condition opérationnelle des outils, la préparation des évolutions et l’accompagnement des établissements et services.
+                Sur ce poste, j’ai participé à plusieurs projets de transformation numérique RH, avec une forte composante de dématérialisation, d’accompagnement des utilisateurs, de paramétrage fonctionnel et de déploiement.
               </p>
 
               <div class="projects-grid four">
@@ -1645,7 +1585,7 @@
 
             <div class="poste-body">
               <p class="poste-intro justify">
-                Sur ce poste, j’ai contribué à la fiabilisation des référentiels de paie, au pilotage d’opérations de transfert comptable et à la coordination fonctionnelle de plusieurs acteurs de la chaîne paie. Mes missions m’ont amené à intervenir sur des enjeux d’organisation, de sécurisation des processus et d’accompagnement au changement.
+                Sur ce poste, j’ai contribué à la fiabilisation des référentiels de paie, au pilotage d’opérations de transfert comptable et à la coordination fonctionnelle de plusieurs acteurs de la chaîne paie.
               </p>
 
               <div class="projects-grid">
@@ -1669,7 +1609,7 @@
                   <div class="icon gray">⚙</div>
                   <h4>Projet 3 — Refonte du calendrier de paie</h4>
                   <p class="justify"><strong>Contexte :</strong> besoin d’alléger certaines opérations de traitement de la paie et d’améliorer la performance technique des nuits applicatives.</p>
-                  <p class="justify"><strong>Mon rôle :</strong> contribution à la concertation avec le ministère des Armées, le Service liaison rémunération de la Marne et la direction générale des finances publiques, administration centrale du ministère des Finances.</p>
+                  <p class="justify"><strong>Mon rôle :</strong> contribution à la concertation avec le ministère des Armées, le Service liaison rémunération de la Marne et la direction générale des finances publiques.</p>
                   <p class="justify"><strong>Apport :</strong> finalisation d’une évolution de processus permettant un fonctionnement plus fluide et mieux structuré.</p>
                 </article>
               </div>
@@ -1694,7 +1634,7 @@
 
             <div class="poste-body">
               <p class="poste-intro justify">
-                À la suite de ma réussite au concours interne des IRA, j’ai suivi une formation professionnalisante à l’IRA de Metz. Cette étape a marqué un tournant dans mon parcours en consolidant mon positionnement de cadre administratif et en renforçant mes compétences en conduite de l’action publique, analyse administrative et pilotage de projets.
+                À la suite de ma réussite au concours interne des IRA, j’ai suivi une formation professionnalisante à l’IRA de Metz. Cette étape a marqué un tournant dans mon parcours en consolidant mon positionnement de cadre administratif.
               </p>
 
               <div class="projects-grid">
@@ -1702,7 +1642,7 @@
                   <div class="icon">▰</div>
                   <h4>Projet 1 — Consolidation de la culture administrative</h4>
                   <p class="justify"><strong>Contexte :</strong> passage vers des fonctions d’attaché d’administration de l’État avec une approche plus stratégique des politiques publiques.</p>
-                  <p class="justify"><strong>Mon rôle :</strong> approfondissement des fondamentaux administratifs, juridiques, budgétaires et organisationnels nécessaires à l’exercice de responsabilités de catégorie A.</p>
+                  <p class="justify"><strong>Mon rôle :</strong> approfondissement des fondamentaux administratifs, juridiques, budgétaires et organisationnels.</p>
                   <p class="justify"><strong>Apport :</strong> meilleure compréhension des enjeux de l’action publique et renforcement du positionnement professionnel.</p>
                 </article>
 
@@ -1718,8 +1658,8 @@
                   <div class="icon gray">✓</div>
                   <h4>Projet 3 — Préparation à la conduite de projets publics</h4>
                   <p class="justify"><strong>Contexte :</strong> formation orientée vers la mise en œuvre concrète de politiques publiques et la coordination d’acteurs.</p>
-                  <p class="justify"><strong>Mon rôle :</strong> appropriation de méthodes de diagnostic, de pilotage, de priorisation et de restitution adaptées aux environnements administratifs.</p>
-                  <p class="justify"><strong>Apport :</strong> capacité renforcée à structurer une démarche, à formaliser des propositions et à accompagner le changement.</p>
+                  <p class="justify"><strong>Mon rôle :</strong> appropriation de méthodes de diagnostic, de pilotage, de priorisation et de restitution.</p>
+                  <p class="justify"><strong>Apport :</strong> capacité renforcée à structurer une démarche, formaliser des propositions et accompagner le changement.</p>
                 </article>
               </div>
 
@@ -1743,7 +1683,7 @@
 
             <div class="poste-body">
               <p class="poste-intro justify">
-                Avant ma formation à l’IRA, j’ai occupé deux postes qui m’ont permis de consolider mes bases professionnelles : d’abord en contrôle interne et données de paie, puis en dialogue de gestion. Ces expériences m’ont apporté une méthode de travail solide, une culture de la donnée, le sens du suivi administratif et une capacité à produire des supports utiles à la décision.
+                Avant ma formation à l’IRA, j’ai occupé deux postes qui m’ont permis de consolider mes bases professionnelles : contrôle interne, données de paie et dialogue de gestion.
               </p>
 
               <div class="projects-grid">
@@ -1752,7 +1692,7 @@
                   <h4>Projet 1 — Suivi d’activité, contrôle interne et données de paie</h4>
                   <p class="justify"><strong>Contexte :</strong> production et fiabilisation de données destinées au pilotage de l’activité et au suivi des bureaux de gestion.</p>
                   <p class="justify"><strong>Mon rôle :</strong> préparation de fiches et tableaux de bord, analyse de données, suivi de demandes, contribution au contrôle interne de la paie et appui aux outils métiers.</p>
-                  <p class="justify"><strong>Apport :</strong> meilleure lisibilité de l’activité, données plus structurées et appui régulier aux équipes dans le suivi administratif.</p>
+                  <p class="justify"><strong>Apport :</strong> meilleure lisibilité de l’activité, données plus structurées et appui régulier aux équipes.</p>
                 </article>
 
                 <article class="project-card">
@@ -1760,7 +1700,7 @@
                   <h4>Projet 2 — Dialogue de gestion et dispositifs de performance</h4>
                   <p class="justify"><strong>Contexte :</strong> préparation du dialogue de gestion, mise à jour des supports, suivi des indicateurs et appui à l’organisation des réunions stratégiques.</p>
                   <p class="justify"><strong>Mon rôle :</strong> contribution aux calendriers, documents d’engagement, supports intranet, analyses d’indicateurs et travaux graphiques ou cartographiques.</p>
-                  <p class="justify"><strong>Apport :</strong> appui à la préparation des échanges de gestion, amélioration de la capitalisation des données et soutien à la coordination du bureau.</p>
+                  <p class="justify"><strong>Apport :</strong> appui à la préparation des échanges de gestion et amélioration de la capitalisation des données.</p>
                 </article>
 
                 <article class="project-card">
@@ -1768,7 +1708,7 @@
                   <h4>Projet 3 — Capitalisation et structuration des connaissances</h4>
                   <p class="justify"><strong>Contexte :</strong> besoin de centraliser, actualiser et rendre exploitables des informations utiles au pilotage des activités.</p>
                   <p class="justify"><strong>Mon rôle :</strong> alimentation de supports partagés, mise à jour d’informations, appui à la production de synthèses et contribution aux travaux de capitalisation.</p>
-                  <p class="justify"><strong>Apport :</strong> amélioration de la traçabilité, meilleure disponibilité de l’information et appui à la continuité du service.</p>
+                  <p class="justify"><strong>Apport :</strong> amélioration de la traçabilité, meilleure disponibilité de l’information et continuité du service.</p>
                 </article>
               </div>
 
@@ -1794,22 +1734,10 @@
               </div>
 
               <div class="training-highlight">
-                <div class="training-mini-stat">
-                  <strong>IRA</strong>
-                  <span>Lille & Nanterre</span>
-                </div>
-                <div class="training-mini-stat">
-                  <strong>RenoiRH</strong>
-                  <span>Formation métier</span>
-                </div>
-                <div class="training-mini-stat">
-                  <strong>GA/GF</strong>
-                  <span>Modules RH</span>
-                </div>
-                <div class="training-mini-stat">
-                  <strong>Requête</strong>
-                  <span>Exploitation des données</span>
-                </div>
+                <div class="training-mini-stat"><strong>IRA</strong><span>Lille & Nanterre</span></div>
+                <div class="training-mini-stat"><strong>RenoiRH</strong><span>Formation métier</span></div>
+                <div class="training-mini-stat"><strong>GA/GF</strong><span>Modules RH</span></div>
+                <div class="training-mini-stat"><strong>Requête</strong><span>Exploitation des données</span></div>
               </div>
             </div>
 
@@ -1817,12 +1745,8 @@
               <article class="training-card">
                 <div class="training-icon">🎓</div>
                 <h4>Interventions à l’IRA de Lille et à l’IRA de Nanterre</h4>
-                <p class="justify">
-                  <strong>Modules animés :</strong> LibreOffice et animation de la transition écologique dans une filière.
-                </p>
-                <p class="justify">
-                  <strong>Apport :</strong> transmission de méthodes concrètes, vulgarisation de contenus et adaptation aux besoins des apprenants.
-                </p>
+                <p class="justify"><strong>Modules animés :</strong> LibreOffice et animation de la transition écologique dans une filière.</p>
+                <p class="justify"><strong>Apport :</strong> transmission de méthodes concrètes, vulgarisation de contenus et adaptation aux besoins des apprenants.</p>
                 <div class="training-tags">
                   <span class="training-tag">LibreOffice</span>
                   <span class="training-tag orange">Transition écologique</span>
@@ -1833,12 +1757,8 @@
               <article class="training-card">
                 <div class="training-icon">🧩</div>
                 <h4>Formation métier sur RenoiRH</h4>
-                <p class="justify">
-                  <strong>Contexte :</strong> accompagnement des utilisateurs sur le système d'information RH* RenoiRH au ministère de la Transition écologique.
-                </p>
-                <p class="justify">
-                  <strong>Modules :</strong> GA/GF et modules Requête, avec une approche opérationnelle orientée usage.
-                </p>
+                <p class="justify"><strong>Contexte :</strong> accompagnement des utilisateurs sur le système d'information RH* RenoiRH au ministère de la Transition écologique.</p>
+                <p class="justify"><strong>Modules :</strong> GA/GF et modules Requête, avec une approche opérationnelle orientée usage.</p>
                 <div class="training-tags">
                   <span class="training-tag">RenoiRH</span>
                   <span class="training-tag orange">GA/GF</span>
@@ -1849,12 +1769,8 @@
               <article class="training-card">
                 <div class="training-icon">📄</div>
                 <h4>Supports pédagogiques & accompagnement</h4>
-                <p class="justify">
-                  <strong>Objectif :</strong> rendre des contenus techniques ou administratifs plus accessibles à des publics aux niveaux variés.
-                </p>
-                <p class="justify">
-                  <strong>Apport :</strong> supports plus lisibles, meilleure compréhension des notions et continuité possible après la formation.
-                </p>
+                <p class="justify"><strong>Objectif :</strong> rendre des contenus techniques ou administratifs plus accessibles à des publics aux niveaux variés.</p>
+                <p class="justify"><strong>Apport :</strong> supports plus lisibles, meilleure compréhension des notions et continuité possible après la formation.</p>
                 <div class="training-tags">
                   <span class="training-tag">Supports</span>
                   <span class="training-tag orange">Vulgarisation</span>
@@ -1864,11 +1780,9 @@
             </div>
           </div>
         </section>
-
       </div>
     </section>
 
-    <!-- PROJETS PERSONNELS -->
     <section class="section page" id="projets-personnels">
       <div class="page-head reveal">
         <div class="intro-panel">
@@ -1946,17 +1860,14 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section class="section page" id="me-contacter">
       <div class="contact-premium">
-
         <div class="contact-hero reveal">
           <div class="contact-hero-text">
             <span class="eyebrow">Me contacter</span>
             <h2>Échanger autour de mon parcours</h2>
             <p class="justify">
-              Pour échanger sur mon parcours, mes projets ou une opportunité professionnelle,
-              vous pouvez me contacter via les informations ci-dessous.
+              Pour échanger sur mon parcours, mes projets ou une opportunité professionnelle, vous pouvez me contacter via les informations ci-dessous.
             </p>
           </div>
 
@@ -1966,14 +1877,11 @@
         </div>
 
         <div class="contact-premium-grid">
-
           <article class="contact-info-card reveal">
             <span class="contact-label-small">Coordonnées</span>
-
             <h3>Richard Morcel</h3>
             <p class="contact-intro justify">
-              Attaché d’administration de l’État, orienté conduite de projet,
-              coordination, structuration et transformation numérique.
+              Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et transformation numérique.
             </p>
 
             <ul class="premium-list">
@@ -2005,7 +1913,7 @@
             </ul>
 
             <div class="contact-actions">
-              <a href="Richard_Morcel_CV.pdf" class="btn btn-primary" download>
+              <a href="CV/CV_Richard_Morcel.pdf" class="btn btn-primary" download>
                 Télécharger mon CV
               </a>
               <a href="mailto:rmorcel@gmail.com" class="btn btn-secondary">
@@ -2027,7 +1935,6 @@
             <div class="contact-shape-marine"></div>
             <div class="contact-shape-orange"></div>
           </article>
-
         </div>
       </div>
     </section>
