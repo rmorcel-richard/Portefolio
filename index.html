@@ -11,12 +11,8 @@
       --marine-soft: #244463;
       --terracotta: #d96632;
       --terracotta-light: #ef8a5a;
-      --beige: #f7efe5;
       --cream: #fffaf3;
-      --gris: #e7e3dd;
       --texte: #263241;
-      --muted: #6b7280;
-      --white: #ffffff;
       --shadow: 0 22px 55px rgba(23, 50, 79, 0.14);
       --shadow-soft: 0 14px 34px rgba(23, 50, 79, 0.09);
       --radius-xl: 30px;
@@ -43,7 +39,7 @@
       overflow-x: hidden;
     }
 
-    h1, h2, h3, .serif {
+    h1, h2, h3 {
       font-family: Georgia, "Times New Roman", serif;
       color: var(--marine);
       line-height: 1.07;
@@ -65,7 +61,7 @@
       hyphens: auto;
     }
 
-    /* MENU PREMIUM */
+    /* MENU */
     .site-header {
       position: sticky;
       top: 0;
@@ -153,24 +149,12 @@
       font-weight: 900;
     }
 
-    /* SYSTEME DE PAGES STABLE */
+    /* SYSTEME DE PAGES FIABLE */
     .page {
       display: none;
     }
 
-    #accueil {
-      display: block;
-    }
-
-    .page:target {
-      display: block;
-    }
-
-    body:has(.page:target) #accueil {
-      display: none;
-    }
-
-    body:has(#accueil:target) #accueil {
+    .page.active-page {
       display: block;
     }
 
@@ -466,7 +450,7 @@
       z-index: 1;
     }
 
-    /* EN-TÊTES DES AUTRES PAGES */
+    /* EN-TÊTES */
     .page-head {
       margin-bottom: 34px;
     }
@@ -1026,7 +1010,7 @@
       backdrop-filter: blur(8px);
     }
 
-    /* CONTACT PREMIUM */
+    /* CONTACT */
     .contact-premium {
       display: grid;
       gap: 32px;
@@ -1266,7 +1250,7 @@
       display: none;
     }
 
-    body:has(#projets-professionnels:target) .glossary {
+    .glossary.visible {
       display: block;
     }
 
@@ -1311,7 +1295,8 @@
         transform: none;
       }
 
-      .training-header {
+      .training-header,
+      .contact-premium-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1319,23 +1304,10 @@
         grid-template-columns: 1fr;
       }
 
-      .training-highlight {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-premium-grid {
-        grid-template-columns: 1fr;
-      }
-
+      .training-highlight,
       .home-cards,
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .copro-gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
+      .projects-grid,
+      .copro-gallery,
       .metrics {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1393,15 +1365,7 @@
         grid-template-columns: 1fr;
       }
 
-      .signature-card {
-        padding: 24px;
-        min-height: auto;
-      }
-
-      .value-card {
-        min-height: auto;
-      }
-
+      .signature-card,
       .poste-header,
       .poste-body,
       .contact-hero,
@@ -1412,6 +1376,14 @@
       .personal-card,
       .training-inner {
         padding: 24px;
+      }
+
+      .signature-card {
+        min-height: auto;
+      }
+
+      .value-card {
+        min-height: auto;
       }
 
       .contact-hero-badge {
@@ -1440,7 +1412,7 @@
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a href="#accueil" class="logo nav-item">
+      <a href="#accueil" class="logo page-link" data-page="accueil">
         <span class="logo-mark">RM</span>
         Richard Morcel - Portfolio
       </a>
@@ -1448,17 +1420,17 @@
       <button class="menu-toggle" id="menuToggle">Menu</button>
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="#accueil" class="nav-item active">Accueil</a></li>
-        <li><a href="#projets-professionnels" class="nav-item">Projets Professionnels</a></li>
-        <li><a href="#projets-personnels" class="nav-item">Projets Personnels</a></li>
-        <li><a href="#me-contacter" class="nav-item">Me contacter</a></li>
+        <li><a href="#accueil" class="page-link active" data-page="accueil">Accueil</a></li>
+        <li><a href="#projets-professionnels" class="page-link" data-page="projets-professionnels">Projets Professionnels</a></li>
+        <li><a href="#projets-personnels" class="page-link" data-page="projets-personnels">Projets Personnels</a></li>
+        <li><a href="#me-contacter" class="page-link" data-page="me-contacter">Me contacter</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <!-- ACCUEIL -->
-    <section class="page" id="accueil">
+    <section class="page active-page" id="accueil">
       <div class="home-section">
         <div class="home-hero">
           <div class="home-title-wrap reveal">
@@ -1471,8 +1443,8 @@
             </p>
 
             <div class="hero-actions">
-              <a href="#projets-professionnels" class="btn btn-primary">Découvrir mes projets</a>
-              <a href="#me-contacter" class="btn btn-secondary">Me contacter</a>
+              <a href="#projets-professionnels" class="btn btn-primary page-link" data-page="projets-professionnels">Découvrir mes projets</a>
+              <a href="#me-contacter" class="btn btn-secondary page-link" data-page="me-contacter">Me contacter</a>
             </div>
           </div>
 
@@ -2030,20 +2002,54 @@
     document.addEventListener("DOMContentLoaded", function () {
       const menuToggle = document.getElementById("menuToggle");
       const navLinks = document.getElementById("navLinks");
-      const navItems = Array.from(document.querySelectorAll(".nav-links a"));
+      const pageLinks = Array.from(document.querySelectorAll(".page-link"));
+      const menuItems = Array.from(document.querySelectorAll(".nav-links .page-link"));
+      const pages = Array.from(document.querySelectorAll(".page"));
       const scrollFormation = document.getElementById("scrollFormation");
+      const glossary = document.getElementById("glossary");
 
-      function updateActiveMenu() {
-        const currentHash = window.location.hash || "#accueil";
-
-        navItems.forEach(function (link) {
-          link.classList.toggle("active", link.getAttribute("href") === currentHash);
+      function showPage(pageId, updateHash = true) {
+        pages.forEach(function (page) {
+          if (page.id === pageId) {
+            page.classList.add("active-page");
+          } else {
+            page.classList.remove("active-page");
+          }
         });
+
+        menuItems.forEach(function (link) {
+          link.classList.toggle("active", link.dataset.page === pageId);
+        });
+
+        if (glossary) {
+          glossary.classList.toggle("visible", pageId === "projets-professionnels");
+        }
 
         if (navLinks) {
           navLinks.classList.remove("open");
         }
+
+        if (updateHash) {
+          history.replaceState(null, "", "#" + pageId);
+        }
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
       }
+
+      pageLinks.forEach(function (link) {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          const pageId = link.dataset.page;
+
+          if (pageId && document.getElementById(pageId)) {
+            showPage(pageId);
+          }
+        });
+      });
 
       if (menuToggle && navLinks) {
         menuToggle.addEventListener("click", function () {
@@ -2053,22 +2059,29 @@
 
       if (scrollFormation) {
         scrollFormation.addEventListener("click", function () {
-          const target = document.getElementById("formation-transmission");
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+          showPage("projets-professionnels");
+
+          setTimeout(function () {
+            const target = document.getElementById("formation-transmission");
+
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+              });
+            }
+          }, 250);
         });
       }
 
-      window.addEventListener("hashchange", updateActiveMenu);
+      const initialHash = window.location.hash.replace("#", "");
+      const initialPage =
+        document.getElementById(initialHash) &&
+        document.getElementById(initialHash).classList.contains("page")
+          ? initialHash
+          : "accueil";
 
-      navItems.forEach(function (link) {
-        link.addEventListener("click", function () {
-          setTimeout(updateActiveMenu, 50);
-        });
-      });
-
-      updateActiveMenu();
+      showPage(initialPage, false);
     });
   </script>
 </body>
