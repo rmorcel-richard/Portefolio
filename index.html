@@ -1361,9 +1361,6 @@
         <li><a href="#projets-professionnels" class="page-link" data-page="projets-professionnels">Projets Professionnels</a></li>
         <li><a href="#projets-personnels" class="page-link" data-page="projets-personnels">Projets Personnels</a></li>
         <li><a href="#me-contacter" class="page-link" data-page="me-contacter">Me contacter</a></li>
-<li>
-  <button id="darkModeToggle" class="dark-mode-btn">🌙</button>
-</li>
 
 
         
@@ -1696,7 +1693,7 @@
   const pages = [...document.querySelectorAll(".page")];
   const revealEls = [...document.querySelectorAll(".reveal")];
   const glossary = document.getElementById("glossary");
-const darkModeToggle = document.getElementById("darkModeToggle");
+
   
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("open");
@@ -1753,29 +1750,6 @@ const darkModeToggle = document.getElementById("darkModeToggle");
     showPage("accueil");
   }
 
-function enableDarkMode() {
-  document.body.classList.add("dark-mode");
-  localStorage.setItem("darkMode", "enabled");
-  darkModeToggle.textContent = "☀️";
-}
-
-function disableDarkMode() {
-  document.body.classList.remove("dark-mode");
-  localStorage.setItem("darkMode", "disabled");
-  darkModeToggle.textContent = "🌙";
-}
-
-if (localStorage.getItem("darkMode") === "enabled") {
-  enableDarkMode();
-}
-
-darkModeToggle.addEventListener("click", () => {
-  if (document.body.classList.contains("dark-mode")) {
-    disableDarkMode();
-  } else {
-    enableDarkMode();
-  }
-});
   
 </script>
 </body>
