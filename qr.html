@@ -7,39 +7,38 @@
 
 <body>
 <script>
-  // 🔥 Heure de Paris
   const nowParis = new Date().toLocaleString("fr-FR", {
     timeZone: "Europe/Paris"
   });
 
-  // 📱 Infos device
-  const device = navigator.userAgent;
+  const payload = {
+    time: nowParis,
+    device: navigator.userAgent,
+    page: "qr.html"
+  };
 
-  // 📡 Envoi du log (optionnel mais recommandé)
-  fetch("/api/log-scan", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      time: nowParis,
-      device: device,
-      page: "qr.html"
-    })
-  }).catch(err => {
-    console.log("Erreur tracking QR :", err);
-  });
+  // 📡 Tracking NON bloquant (important)
+  try {
+    fetch("/api/log-scan", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true
+    });
+  } catch (e) {
+    console.log("Tracking failed (non bloquant)", e);
+  }
 
-  // 🚀 Redirection vers ton portfolio
-  window.location.replace("https://portefolio-beta-ten.vercel.app/qr#accueil");
+  // 🚀 Redirection (sans attendre fetch)
+  setTimeout(() => {
+    window.location.replace("https://portefolio-beta-ten.vercel.app/qr#accueil");
+  }, 200);
 </script>
 
 <noscript>
-  <p>Redirection en cours... Si rien ne se passe, cliquez ici :</p>
   <a href="https://portefolio-beta-ten.vercel.app/qr#accueil">
     Accéder au portfolio
   </a>
 </noscript>
-
 </body>
 </html>
