@@ -2,9 +2,12 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="robots" content="noindex" />
   <title>Redirection vers Portfolio Richard MORCEL</title>
 </head>
 <body>
+  <p>Redirection vers le portfolio...</p>
+
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <script>
@@ -15,10 +18,10 @@
       const now = new Date().toLocaleString("fr-FR");
 
       let device = "Ordinateur";
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        device = "Mobile";
-      } else if (/iPad|Tablet/i.test(navigator.userAgent)) {
+      if (/iPad|Tablet/i.test(navigator.userAgent)) {
         device = "Tablette";
+      } else if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        device = "Mobile";
       }
 
       try {
@@ -35,7 +38,7 @@ Portfolio consulté : ${portfolioUrl}`
         console.log("Erreur EmailJS :", error);
       }
 
-      window.location.replace(portfolioUrl);
+      window.location.href = portfolioUrl;
     }
 
     sendNotification();
