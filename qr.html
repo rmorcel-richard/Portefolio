@@ -5,8 +5,39 @@
   <title>Portfolio Richard MORCEL</title>
 </head>
 <body>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <script>
-    window.location.replace("https://portefolio-beta-ten.vercel.app/qr#accueil");
+    emailjs.init("_MEC0s1SvOkyQota0");
+
+    async function sendNotification() {
+      const now = new Date().toLocaleString("fr-FR");
+
+      let device = "Ordinateur";
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        device = "Mobile";
+      } else if (/iPad|Tablet/i.test(navigator.userAgent)) {
+        device = "Tablette";
+      }
+
+      try {
+        await emailjs.send("service_9176hvz", "template_xvr8xcp", {
+          message: `Bonjour Richard,
+
+Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${now}.
+L’accès a été réalisé depuis un appareil : ${device}.
+Informations navigateur : ${navigator.userAgent}
+
+Portfolio consulté : https://portefolio-beta-ten.vercel.app/#accueil`
+        });
+      } catch (error) {
+        console.log("Erreur :", error);
+      }
+
+      window.location.replace("https://portefolio-beta-ten.vercel.app/#accueil");
+    }
+
+    sendNotification();
   </script>
 </body>
 </html>
