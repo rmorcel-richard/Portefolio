@@ -1727,40 +1727,6 @@
     showPage("accueil");
   }
 
-  async function trackQRVisit() {
-    const isQRPage =
-      window.location.pathname.includes("qr") ||
-      window.location.pathname.includes("qr.html");
-
-    if (!isQRPage) return;
-
-    const now = new Date().toLocaleString("fr-FR");
-
-    let device = "Ordinateur";
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      device = "Mobile";
-    } else if (/iPad|Tablet/i.test(navigator.userAgent)) {
-      device = "Tablette";
-    }
-
-    try {
-      await emailjs.send("service_9176hvz", "template_xvr8xcp", {
-        message: `Bonjour Richard,
-
-Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${now}.
-L’accès a été réalisé depuis un appareil : ${device}.
-Informations navigateur : ${navigator.userAgent}
-
-Portfolio consulté : https://portefolio-beta-ten.vercel.app/#accueil`
-      });
-    } catch (error) {
-      console.log("Erreur EmailJS :", error);
-    }
-
-    window.location.replace("https://portefolio-beta-ten.vercel.app/#accueil");
-  }
-
-  trackQRVisit();
 </script>
 </body>
 </html>
