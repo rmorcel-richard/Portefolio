@@ -3,204 +3,305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Dashboard Portfolio - Richard Morcel</title>
+<link rel="icon" type="image/png" href="Image/favicon.png">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-  body{
-    margin:0;
-    padding:30px;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f4f6f9;
-    color:#17324f;
-  }
+body {
+  margin: 0;
+  padding: 32px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #efe6da, #f7efe5, #e6edf3);
+  color: #17324f;
+}
 
-  h1{
-    margin-bottom:30px;
-    font-size:2rem;
-  }
+h1 {
+  margin-bottom: 8px;
+}
 
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    margin-bottom:40px;
-  }
+.subtitle {
+  color: #536173;
+  margin-bottom: 32px;
+}
 
-  .card{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-  }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
 
-  .card h2{
-    margin:0;
-    font-size:2rem;
-    color:#d96632;
-  }
+.card {
+  background: white;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 16px 36px rgba(23, 50, 79, 0.12);
+}
 
-  .card p{
-    margin-top:10px;
-    color:#555;
-    font-weight:bold;
-  }
+.card h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #d96632;
+}
 
-  table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
-  }
+.card p {
+  margin: 8px 0 0;
+  color: #536173;
+  font-weight: bold;
+}
 
-  th{
-    background:#17324f;
-    color:white;
-    padding:15px;
-    text-align:left;
-  }
+.section {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 28px;
+  box-shadow: 0 16px 36px rgba(23, 50, 79, 0.12);
+}
 
-  td{
-    padding:12px 15px;
-    border-bottom:1px solid #eee;
-    font-size:0.95rem;
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-  tr:hover{
-    background:#f9f9f9;
-  }
+th {
+  background: #17324f;
+  color: white;
+  padding: 13px;
+  text-align: left;
+}
 
-  .loading{
-    font-size:1.2rem;
-  }
+td {
+  padding: 12px 13px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.92rem;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+.small-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.loading {
+  font-size: 1.1rem;
+  color: #536173;
+}
 </style>
 </head>
 
 <body>
 
 <h1>Dashboard Portfolio — Richard Morcel</h1>
+<p class="subtitle">Suivi des visites, clics, appareils, pages consultées et téléchargements CV.</p>
 
 <div class="grid">
-
-  <div class="card">
-    <h2 id="visites">0</h2>
-    <p>Visites portfolio</p>
-  </div>
-
-  <div class="card">
-    <h2 id="navigations">0</h2>
-    <p>Navigations</p>
-  </div>
-
-  <div class="card">
-    <h2 id="projets">0</h2>
-    <p>Clics projets personnels</p>
-  </div>
-
-  <div class="card">
-    <h2 id="contacts">0</h2>
-    <p>Clics contact</p>
-  </div>
-
-  <div class="card">
-    <h2 id="mobiles">0</h2>
-    <p>Visites mobile</p>
-  </div>
-
-  <div class="card">
-    <h2 id="ordinateurs">0</h2>
-    <p>Visites ordinateur</p>
-  </div>
-
+  <div class="card"><h2 id="total">0</h2><p>Total événements</p></div>
+  <div class="card"><h2 id="visites">0</h2><p>Visites portfolio</p></div>
+  <div class="card"><h2 id="today">0</h2><p>Visites aujourd’hui</p></div>
+  <div class="card"><h2 id="week">0</h2><p>Visites cette semaine</p></div>
+  <div class="card"><h2 id="temps">0 sec</h2><p>Temps moyen passé</p></div>
+  <div class="card"><h2 id="cv">0</h2><p>Téléchargements CV</p></div>
+  <div class="card"><h2 id="contact">0</h2><p>Clics contact</p></div>
+  <div class="card"><h2 id="mobile">0</h2><p>Visites mobile</p></div>
 </div>
 
-<h2>Dernières activités</h2>
-
-<div class="loading" id="loading">
-Chargement des données...
+<div class="section">
+  <h2>Visites par jour</h2>
+  <canvas id="visitesChart" height="90"></canvas>
 </div>
 
-<table id="table" style="display:none;">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Événement</th>
-      <th>Page</th>
-      <th>Appareil</th>
-      <th>Ville</th>
-      <th>Pays</th>
-    </tr>
-  </thead>
+<div class="small-grid">
+  <div class="section">
+    <h2>Pages les plus consultées</h2>
+    <table>
+      <thead><tr><th>Page</th><th>Nombre</th></tr></thead>
+      <tbody id="pagesTable"></tbody>
+    </table>
+  </div>
 
-  <tbody id="tbody"></tbody>
-</table>
+  <div class="section">
+    <h2>Appareils</h2>
+    <table>
+      <thead><tr><th>Appareil</th><th>Nombre</th></tr></thead>
+      <tbody id="devicesTable"></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Villes / Pays</h2>
+    <table>
+      <thead><tr><th>Lieu</th><th>Nombre</th></tr></thead>
+      <tbody id="locationsTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Dernières activités</h2>
+  <div class="loading" id="loading">Chargement des données...</div>
+
+  <table id="activityTable" style="display:none;">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Événement</th>
+        <th>Page</th>
+        <th>Appareil</th>
+        <th>Ville</th>
+        <th>Pays</th>
+        <th>Temps</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
 
 <script>
-
 const API_URL = "https://script.google.com/macros/s/AKfycbzJ_6fyBv-V6QisbpJBQOPZDrixr9BgJSx1Dh49lTaq4SL2qGx5JNZ2O6QuahkrgWJuig/exec";
 
-async function chargerDashboard(){
+function countBy(rows, key) {
+  const result = {};
+  rows.forEach(row => {
+    const value = row[key] || "Non renseigné";
+    result[value] = (result[value] || 0) + 1;
+  });
+  return result;
+}
 
-  try{
+function renderTable(id, data) {
+  const tbody = document.getElementById(id);
+  tbody.innerHTML = "";
 
+  Object.entries(data)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .forEach(([label, count]) => {
+      tbody.innerHTML += `<tr><td>${label}</td><td>${count}</td></tr>`;
+    });
+}
+
+function parseDate(value) {
+  const d = new Date(value);
+  return isNaN(d) ? null : d;
+}
+
+function formatDay(date) {
+  return date.toLocaleDateString("fr-FR");
+}
+
+async function chargerDashboard() {
+  try {
     const response = await fetch(API_URL);
     const data = await response.json();
+    const rows = data.rows || [];
 
-    document.getElementById("visites").textContent =
-      data.stats.visites_portfolio;
+    const visites = rows.filter(r => r.type_evenement === "Visite portfolio");
+    const today = new Date();
+    const weekAgo = new Date();
+    weekAgo.setDate(today.getDate() - 7);
 
-    document.getElementById("navigations").textContent =
-      data.stats.navigations;
+    const visitesToday = visites.filter(r => {
+      const d = parseDate(r.date);
+      return d && d.toDateString() === today.toDateString();
+    });
 
-    document.getElementById("projets").textContent =
-      data.stats.clics_projets_personnels;
+    const visitesWeek = visites.filter(r => {
+      const d = parseDate(r.date);
+      return d && d >= weekAgo;
+    });
 
-    document.getElementById("contacts").textContent =
-      data.stats.clics_contact;
+    const tempsRows = rows.filter(r => r.type_evenement === "Temps passé" && r.temps_reste);
+    const seconds = tempsRows
+      .map(r => parseInt(String(r.temps_reste).replace(/\D/g, "")))
+      .filter(n => !isNaN(n));
 
-    document.getElementById("mobiles").textContent =
-      data.stats.mobiles;
+    const avgSeconds = seconds.length
+      ? Math.round(seconds.reduce((a, b) => a + b, 0) / seconds.length)
+      : 0;
 
-    document.getElementById("ordinateurs").textContent =
-      data.stats.ordinateurs;
+    document.getElementById("total").textContent = rows.length;
+    document.getElementById("visites").textContent = visites.length;
+    document.getElementById("today").textContent = visitesToday.length;
+    document.getElementById("week").textContent = visitesWeek.length;
+    document.getElementById("temps").textContent = avgSeconds + " sec";
+    document.getElementById("cv").textContent = rows.filter(r => r.type_evenement === "Téléchargement CV").length;
+    document.getElementById("contact").textContent = rows.filter(r => r.type_evenement === "Clic contact").length;
+    document.getElementById("mobile").textContent = rows.filter(r => String(r.appareil).includes("mobile") || String(r.appareil).includes("Téléphone")).length;
+
+    renderTable("pagesTable", countBy(rows.filter(r => r.page), "page"));
+    renderTable("devicesTable", countBy(rows.filter(r => r.appareil), "appareil"));
+
+    const locations = {};
+    rows.forEach(r => {
+      const lieu = `${r.ville || "Ville inconnue"} / ${r.pays || "Pays inconnu"}`;
+      locations[lieu] = (locations[lieu] || 0) + 1;
+    });
+    renderTable("locationsTable", locations);
+
+    const byDay = {};
+    visites.forEach(r => {
+      const d = parseDate(r.date);
+      if (d) {
+        const day = formatDay(d);
+        byDay[day] = (byDay[day] || 0) + 1;
+      }
+    });
+
+    new Chart(document.getElementById("visitesChart"), {
+      type: "bar",
+      data: {
+        labels: Object.keys(byDay).reverse(),
+        datasets: [{
+          label: "Visites",
+          data: Object.values(byDay).reverse(),
+          backgroundColor: "#d96632"
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { precision: 0 }
+          }
+        }
+      }
+    });
 
     const tbody = document.getElementById("tbody");
-
-    data.rows.forEach(row => {
-
-      const tr = document.createElement("tr");
-
-      tr.innerHTML = `
-        <td>${row.date || ""}</td>
-        <td>${row.type_evenement || ""}</td>
-        <td>${row.page || ""}</td>
-        <td>${row.appareil || ""}</td>
-        <td>${row.ville || ""}</td>
-        <td>${row.pays || ""}</td>
+    rows.slice(0, 50).forEach(row => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${row.date || ""}</td>
+          <td>${row.type_evenement || ""}</td>
+          <td>${row.page || ""}</td>
+          <td>${row.appareil || ""}</td>
+          <td>${row.ville || ""}</td>
+          <td>${row.pays || ""}</td>
+          <td>${row.temps_reste || ""}</td>
+        </tr>
       `;
-
-      tbody.appendChild(tr);
-
     });
 
     document.getElementById("loading").style.display = "none";
-    document.getElementById("table").style.display = "table";
+    document.getElementById("activityTable").style.display = "table";
 
-  }catch(error){
-
-    document.getElementById("loading").innerHTML =
-      "Erreur de chargement du dashboard";
-
+  } catch (error) {
+    document.getElementById("loading").textContent = "Erreur de chargement du dashboard.";
     console.log(error);
-
   }
-
 }
 
 chargerDashboard();
-
 </script>
 
 </body>
