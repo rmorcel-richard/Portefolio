@@ -28,13 +28,13 @@ Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${no
 L’accès a été réalisé depuis un appareil : ${device}.
 Informations navigateur : ${navigator.userAgent}
 
-Portfolio consulté : https://portefolio-beta-ten.vercel.app/#accueil`
+Portfolio consulté : https://portefolio-beta-ten.vercel.app/index.html#accueil`
         });
       } catch (error) {
-        console.log("Erreur :", error);
+        console.log("Erreur EmailJS :", error);
       }
 
-      window.location.replace("https://portefolio-beta-ten.vercel.app/#accueil");
+      window.location.replace("https://portefolio-beta-ten.vercel.app/index.html#accueil");
     }
 
     sendNotification();
