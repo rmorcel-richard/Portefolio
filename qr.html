@@ -1,9 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Portfolio Richard MORCEL</title>
+  <title>Redirection vers Portfolio Richard MORCEL</title>
 </head>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -12,6 +11,7 @@
     emailjs.init("_MEC0s1SvOkyQota0");
 
     async function sendNotification() {
+      const portfolioUrl = "https://portefolio-beta-ten.vercel.app/";
       const now = new Date().toLocaleString("fr-FR");
 
       let device = "Ordinateur";
@@ -29,17 +29,16 @@ Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${no
 L’accès a été réalisé depuis un appareil : ${device}.
 Informations navigateur : ${navigator.userAgent}
 
-Portfolio consulté : https://portefolio-beta-ten.vercel.app/index.html`
+Portfolio consulté : ${portfolioUrl}`
         });
       } catch (error) {
-        console.log("Erreur :", error);
+        console.log("Erreur EmailJS :", error);
       }
 
-      window.location.replace("https://portefolio-beta-ten.vercel.app/index.html");
+      window.location.replace(portfolioUrl);
     }
 
     sendNotification();
   </script>
 </body>
 </html>
-```
