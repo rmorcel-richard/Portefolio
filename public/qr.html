@@ -2,43 +2,42 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>QR Redirect</title>
+  <title>Portfolio Richard MORCEL</title>
 </head>
-
 <body>
-<script>
-  const nowParis = new Date().toLocaleString("fr-FR", {
-    timeZone: "Europe/Paris"
-  });
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  const payload = {
-    time: nowParis,
-    device: navigator.userAgent,
-    page: "qr.html"
-  };
+  <script>
+    emailjs.init("_MEC0s1SvOkyQota0");
 
-  // 📡 Tracking NON bloquant (important)
-  try {
-    fetch("/api/log-scan", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true
-    });
-  } catch (e) {
-    console.log("Tracking failed (non bloquant)", e);
-  }
+    async function sendNotification() {
+      const now = new Date().toLocaleString("fr-FR");
 
-  // 🚀 Redirection (sans attendre fetch)
-  setTimeout(() => {
-    window.location.replace("https://portefolio-beta-ten.vercel.app/qr#accueil");
-  }, 200);
-</script>
+      let device = "Ordinateur";
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        device = "Mobile";
+      } else if (/iPad|Tablet/i.test(navigator.userAgent)) {
+        device = "Tablette";
+      }
 
-<noscript>
-  <a href="https://portefolio-beta-ten.vercel.app/qr#accueil">
-    Accéder au portfolio
-  </a>
-</noscript>
+      try {
+        await emailjs.send("service_9176hvz", "template_xvr8xcp", {
+          message: `Bonjour Richard,
+
+Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${now}.
+L’accès a été réalisé depuis un appareil : ${device}.
+Informations navigateur : ${navigator.userAgent}
+
+Portfolio consulté : https://portefolio-beta-ten.vercel.app/#accueil`
+        });
+      } catch (error) {
+        console.log("Erreur :", error);
+      }
+
+      window.location.replace("https://portefolio-beta-ten.vercel.app/#accueil");
+    }
+
+    sendNotification();
+  </script>
 </body>
 </html>
