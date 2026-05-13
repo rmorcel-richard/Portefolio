@@ -1659,11 +1659,10 @@
             </ul>
 
             <div class="contact-actions">
-            <a 
+<a 
   href="CV/CV_Richard_Morcel.pdf"
   class="btn btn-primary"
-  download
-  onclick="sendTracking('Téléchargement CV', 'me-contacter')"
+  onclick="trackCVDownload(event)"
 >
   Télécharger mon CV
 </a>
@@ -1850,6 +1849,17 @@
 
   sendTracking("Visite portfolio", currentPage);
 
+function trackCVDownload(event) {
+  event.preventDefault();
+
+  sendTracking("Téléchargement CV", "me-contacter");
+
+  setTimeout(() => {
+    window.location.href = "CV/CV_Richard_Morcel.pdf";
+  }, 400);
+}
+
+  
   window.addEventListener("beforeunload", () => {
     const seconds = Math.round((Date.now() - startTime) / 1000);
 
