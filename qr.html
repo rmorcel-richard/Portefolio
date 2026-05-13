@@ -2,43 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>QR Redirect</title>
+  <title>Portfolio Richard MORCEL</title>
 </head>
-
 <body>
-<script>
-  const nowParis = new Date().toLocaleString("fr-FR", {
-    timeZone: "Europe/Paris"
-  });
-
-  const payload = {
-    time: nowParis,
-    device: navigator.userAgent,
-    page: "qr.html"
-  };
-
-  // 📡 Tracking NON bloquant (important)
-  try {
-    fetch("/api/log-scan", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true
-    });
-  } catch (e) {
-    console.log("Tracking failed (non bloquant)", e);
-  }
-
-  // 🚀 Redirection (sans attendre fetch)
-  setTimeout(() => {
+  <script>
     window.location.replace("https://portefolio-beta-ten.vercel.app/qr#accueil");
-  }, 200);
-</script>
-
-<noscript>
-  <a href="https://portefolio-beta-ten.vercel.app/qr#accueil">
-    Accéder au portfolio
-  </a>
-</noscript>
+  </script>
 </body>
 </html>
