@@ -2,44 +2,137 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Redirection vers Portfolio Richard MORCEL</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #efe6da, #f7efe5, #e6edf3);
+      color: #17324f;
+      text-align: center;
+    }
+
+    .box {
+      background: white;
+      padding: 32px;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(23, 50, 79, 0.16);
+      max-width: 420px;
+      margin: 20px;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #17324f, #d96632);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin: 0 auto 18px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #536173;
+      margin-bottom: 0;
+    }
+  </style>
 </head>
+
 <body>
-  <p>Redirection vers le portfolio...</p>
+  <div class="box">
+    <div class="logo">RM</div>
+    <h1>Redirection vers le portfolio</h1>
+    <p>Merci de patienter quelques instants...</p>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <script>
     emailjs.init("_MEC0s1SvOkyQota0");
 
-    async function sendNotification() {
-      const portfolioUrl = "https://portefolio-beta-ten.vercel.app/";
-      const now = new Date().toLocaleString("fr-FR");
+    const portfolioUrl = "https://portefolio-beta-ten.vercel.app/";
+    const antiDoublonKey = "qr_scan_richard_morcel";
+    const antiDoublonDelay = 60 * 1000;
 
-      let device = "Ordinateur";
-      if (/iPad|Tablet/i.test(navigator.userAgent)) {
-        device = "Tablette";
-      } else if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-        device = "Mobile";
+    function detectDevice() {
+      const ua = navigator.userAgent;
+
+      if (/iPad|Tablet/i.test(ua)) {
+        return "Tablette";
       }
+
+      if (/Mobi|Android|iPhone/i.test(ua)) {
+        return "Téléphone mobile";
+      }
+
+      return "Ordinateur / PC";
+    }
+
+    function redirectToPortfolio() {
+      window.location.href = portfolioUrl;
+    }
+
+    async function sendNotification() {
+      const now = new Date().toLocaleString("fr-FR", {
+        timeZone: "Europe/Paris"
+      });
+
+      const device = detectDevice();
+      const screenSize = `${screen.width} x ${screen.height}`;
+      const language = navigator.language || "Non détectée";
+      const referrer = document.referrer || "Accès direct / QR code";
+
+      const lastScan = localStorage.getItem(antiDoublonKey);
+      const currentTime = Date.now();
+
+      if (lastScan && currentTime - Number(lastScan) < antiDoublonDelay) {
+        redirectToPortfolio();
+        return;
+      }
+
+      localStorage.setItem(antiDoublonKey, currentTime.toString());
 
       try {
         await emailjs.send("service_9176hvz", "template_xvr8xcp", {
           message: `Bonjour Richard,
 
-Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${now}.
-L’accès a été réalisé depuis un appareil : ${device}.
-Informations navigateur : ${navigator.userAgent}
+Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL.
 
-Portfolio consulté : ${portfolioUrl}`
+Date et heure du scan : ${now}
+Appareil utilisé : ${device}
+Langue du navigateur : ${language}
+Taille écran : ${screenSize}
+Source : ${referrer}
+
+Informations navigateur :
+${navigator.userAgent}
+
+Portfolio consulté :
+${portfolioUrl}`
         });
       } catch (error) {
         console.log("Erreur EmailJS :", error);
       }
 
-      window.location.href = portfolioUrl;
+      redirectToPortfolio();
     }
+
+    setTimeout(redirectToPortfolio, 3000);
 
     sendNotification();
   </script>
