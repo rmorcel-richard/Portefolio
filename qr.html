@@ -2,42 +2,44 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Portfolio Richard MORCEL</title>
+  <title>QR Redirect</title>
 </head>
+
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // 🔥 Heure de Paris
+  const nowParis = new Date().toLocaleString("fr-FR", {
+    timeZone: "Europe/Paris"
+  });
 
-  <script>
-    emailjs.init("_MEC0s1SvOkyQota0");
+  // 📱 Infos device
+  const device = navigator.userAgent;
 
-    async function sendNotification() {
-      const now = new Date().toLocaleString("fr-FR");
+  // 📡 Envoi du log (optionnel mais recommandé)
+  fetch("/api/log-scan", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      time: nowParis,
+      device: device,
+      page: "qr.html"
+    })
+  }).catch(err => {
+    console.log("Erreur tracking QR :", err);
+  });
 
-      let device = "Ordinateur";
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        device = "Mobile";
-      } else if (/iPad|Tablet/i.test(navigator.userAgent)) {
-        device = "Tablette";
-      }
+  // 🚀 Redirection vers ton portfolio
+  window.location.replace("https://portefolio-beta-ten.vercel.app/qr#accueil");
+</script>
 
-      try {
-        await emailjs.send("service_9176hvz", "template_xvr8xcp", {
-          message: `Bonjour Richard,
+<noscript>
+  <p>Redirection en cours... Si rien ne se passe, cliquez ici :</p>
+  <a href="https://portefolio-beta-ten.vercel.app/qr#accueil">
+    Accéder au portfolio
+  </a>
+</noscript>
 
-Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${now}.
-L’accès a été réalisé depuis un appareil : ${device}.
-Informations navigateur : ${navigator.userAgent}
-
-Portfolio consulté : https://portefolio-beta-ten.vercel.app/#accueil`
-        });
-      } catch (error) {
-        console.log("Erreur :", error);
-      }
-
-      window.location.replace("https://portefolio-beta-ten.vercel.app/#accueil");
-    }
-
-    sendNotification();
-  </script>
 </body>
 </html>
