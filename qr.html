@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-<title>Redirection vers Portfolio Richard MORCEL</title>
-<link rel="icon" type="image/png" href="Image/favicon.png">
-  
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Redirection vers Portfolio Richard MORCEL</title>
+  <link rel="icon" type="image/png" href="Image/favicon.png">
+
   <style>
     body {
       margin: 0;
@@ -73,30 +73,41 @@
     function detectDevice() {
       const ua = navigator.userAgent;
 
-      if (/iPad|Tablet/i.test(ua)) {
-        return "Tablette";
-      }
+      if (/iPad|Tablet/i.test(ua)) return "Tablette";
+      if (/Mobi|Android|iPhone/i.test(ua)) return "Téléphone mobile";
 
-      if (/Mobi|Android|iPhone/i.test(ua)) {
-        return "Téléphone mobile";
-      }
-
-      return "Ordinateur / PC";
+      return "Ordinateur / PC portable";
     }
 
     function redirectToPortfolio() {
       window.location.href = portfolioUrl;
     }
 
+    async function getLocation() {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+
+        return {
+          city: data.city || "Ville non détectée",
+          country: data.country_name || "Pays non détecté",
+          region: data.region || "Région non détectée",
+          timezone: data.timezone || "Fuseau non détecté"
+        };
+      } catch (error) {
+        return {
+          city: "Ville non détectée",
+          country: "Pays non détecté",
+          region: "Région non détectée",
+          timezone: "Fuseau non détecté"
+        };
+      }
+    }
+
     async function sendNotification() {
       const now = new Date().toLocaleString("fr-FR", {
         timeZone: "Europe/Paris"
       });
-
-      const device = detectDevice();
-      const screenSize = `${screen.width} x ${screen.height}`;
-      const language = navigator.language || "Non détectée";
-      const referrer = document.referrer || "Accès direct / QR code";
 
       const lastScan = localStorage.getItem(antiDoublonKey);
       const currentTime = Date.now();
@@ -108,6 +119,14 @@
 
       localStorage.setItem(antiDoublonKey, currentTime.toString());
 
+      const location = await getLocation();
+
+      const device = detectDevice();
+      const screenSize = `${screen.width} x ${screen.height}`;
+      const viewportSize = `${window.innerWidth} x ${window.innerHeight}`;
+      const language = navigator.language || "Non détectée";
+      const referrer = document.referrer || "Accès direct / QR code";
+
       try {
         await emailjs.send("service_9176hvz", "template_xvr8xcp", {
           message: `Bonjour Richard,
@@ -116,8 +135,15 @@ Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL.
 
 Date et heure du scan : ${now}
 Appareil utilisé : ${device}
-Langue du navigateur : ${language}
 Taille écran : ${screenSize}
+Taille fenêtre navigateur : ${viewportSize}
+Langue du navigateur : ${language}
+
+Ville approximative : ${location.city}
+Région approximative : ${location.region}
+Pays approximatif : ${location.country}
+Fuseau horaire détecté : ${location.timezone}
+
 Source : ${referrer}
 
 Informations navigateur :
@@ -133,7 +159,7 @@ ${portfolioUrl}`
       redirectToPortfolio();
     }
 
-    setTimeout(redirectToPortfolio, 3000);
+    setTimeout(redirectToPortfolio, 3500);
 
     sendNotification();
   </script>
