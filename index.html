@@ -1660,66 +1660,107 @@
 
   <footer class="footer">© 2026 — Richard Morcel. Portfolio professionnel.</footer>
 
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-    const pageLinks = [...document.querySelectorAll(".page-link")];
-    const pages = [...document.querySelectorAll(".page")];
-    const revealEls = [...document.querySelectorAll(".reveal")];
-    const glossary = document.getElementById("glossary");
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
+<script>
+  emailjs.init("_MEC0s1SvOkyQota0");
+
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+  const pageLinks = [...document.querySelectorAll(".page-link")];
+  const pages = [...document.querySelectorAll(".page")];
+  const revealEls = [...document.querySelectorAll(".reveal")];
+  const glossary = document.getElementById("glossary");
+
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+  });
+
+  function updateGlossary(pageId) {
+    if (pageId === "projets-professionnels") {
+      glossary.classList.add("visible");
+    } else {
+      glossary.classList.remove("visible");
+    }
+  }
+
+  function showPage(pageId) {
+    pages.forEach(page => {
+      page.classList.remove("active-page");
+      page.style.display = "none";
     });
 
-    function updateGlossary(pageId) {
-      if (pageId === "projets-professionnels") {
-        glossary.classList.add("visible");
-      } else {
-        glossary.classList.remove("visible");
-      }
-    }
+    const selectedPage = document.getElementById(pageId);
 
-    function showPage(pageId) {
-      pages.forEach(page => {
-        page.classList.remove("active-page");
-        page.style.display = "none";
-      });
-
-      const selectedPage = document.getElementById(pageId);
-
-      if (selectedPage) {
-        selectedPage.classList.add("active-page");
-        selectedPage.style.display = "block";
-      }
-
-      pageLinks.forEach(link => {
-        const isMenuLink = link.closest(".nav-links");
-        link.classList.toggle("active", isMenuLink && link.dataset.page === pageId);
-      });
-
-      updateGlossary(pageId);
-      navLinks.classList.remove("open");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      history.replaceState(null, "", "#" + pageId);
+    if (selectedPage) {
+      selectedPage.classList.add("active-page");
+      selectedPage.style.display = "block";
     }
 
     pageLinks.forEach(link => {
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        showPage(link.dataset.page);
-      });
+      const isMenuLink = link.closest(".nav-links");
+      link.classList.toggle("active", isMenuLink && link.dataset.page === pageId);
     });
 
-    revealEls.forEach(el => el.classList.add("visible"));
+    updateGlossary(pageId);
+    navLinks.classList.remove("open");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    history.replaceState(null, "", "#" + pageId);
+  }
 
-    const initialPage = window.location.hash ? window.location.hash.replace("#", "") : "accueil";
+  pageLinks.forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      showPage(link.dataset.page);
+    });
+  });
 
-    if (pages.some(page => page.id === initialPage)) {
-      showPage(initialPage);
-    } else {
-      showPage("accueil");
+  revealEls.forEach(el => el.classList.add("visible"));
+
+  const initialPage = window.location.hash
+    ? window.location.hash.replace("#", "")
+    : "accueil";
+
+  if (pages.some(page => page.id === initialPage)) {
+    showPage(initialPage);
+  } else {
+    showPage("accueil");
+  }
+
+  async function trackQRVisit() {
+    const isQRPage =
+      window.location.pathname.includes("qr") ||
+      window.location.pathname.includes("qr.html");
+
+    if (!isQRPage) return;
+
+    const now = new Date().toLocaleString("fr-FR");
+
+    let device = "Ordinateur";
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      device = "Mobile";
+    } else if (/iPad|Tablet/i.test(navigator.userAgent)) {
+      device = "Tablette";
     }
-  </script>
+
+    try {
+      await emailjs.send("service_9176hvz", "template_xvr8xcp", {
+        message: `Bonjour Richard,
+
+Quelqu’un a scanné votre QR code menant vers Portfolio Richard MORCEL le ${now}.
+L’accès a été réalisé depuis un appareil : ${device}.
+Informations navigateur : ${navigator.userAgent}
+
+Portfolio consulté : https://portefolio-beta-ten.vercel.app/#accueil`
+      });
+    } catch (error) {
+      console.log("Erreur EmailJS :", error);
+    }
+
+    window.location.replace("https://portefolio-beta-ten.vercel.app/#accueil");
+  }
+
+  trackQRVisit();
+</script>
 </body>
 </html>
