@@ -1,3 +1,4 @@
+tu peux me dire si c'est bon ? 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1687,6 +1688,8 @@
 <script>
   emailjs.init("_MEC0s1SvOkyQota0");
 
+  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzJ_6fyBv-V6QisbpJBQOPZDrixr9BgJSx1Dh49lTaq4SL2qGx5JNZ2O6QuahkrgWJuig/exec";
+
   const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
   const pageLinks = [...document.querySelectorAll(".page-link")];
@@ -1694,7 +1697,9 @@
   const revealEls = [...document.querySelectorAll(".reveal")];
   const glossary = document.getElementById("glossary");
 
-  
+  const startTime = Date.now();
+  let currentPage = "accueil";
+
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("open");
   });
@@ -1707,7 +1712,64 @@
     }
   }
 
+  function detectDevice() {
+    const ua = navigator.userAgent;
+
+    if (/Tablet|iPad/i.test(ua)) {
+      return "Tablette";
+    }
+
+    if (/Mobi|Android|iPhone/i.test(ua)) {
+      return "Téléphone mobile";
+    }
+
+    return "Ordinateur";
+  }
+
+  async function getLocation() {
+    try {
+      const response = await fetch("https://ipapi.co/json/");
+      const data = await response.json();
+
+      return {
+        ville: data.city || "Inconnue",
+        pays: data.country_name || "Inconnu"
+      };
+    } catch (error) {
+      return {
+        ville: "Inconnue",
+        pays: "Inconnu"
+      };
+    }
+  }
+
+  async function sendTracking(typeEvenement, page = "", tempsReste = "") {
+    try {
+      const location = await getLocation();
+
+      await fetch(TRACKING_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          type_evenement: typeEvenement,
+          page: page,
+          appareil: detectDevice(),
+          taille_ecran: window.innerWidth + "x" + window.innerHeight,
+          ville: location.ville,
+          pays: location.pays,
+          navigateur: navigator.userAgent,
+          source: window.location.href,
+          temps_reste: tempsReste,
+          date_visite: new Date().toLocaleString("fr-FR")
+        })
+      });
+    } catch (error) {
+      console.log("Erreur tracking :", error);
+    }
+  }
+
   function showPage(pageId) {
+    currentPage = pageId;
+
     pages.forEach(page => {
       page.classList.remove("active-page");
       page.style.display = "none";
@@ -1722,23 +1784,52 @@
 
     pageLinks.forEach(link => {
       const isMenuLink = link.closest(".nav-links");
-      link.classList.toggle("active", isMenuLink && link.dataset.page === pageId);
+
+      link.classList.toggle(
+        "active",
+        isMenuLink && link.dataset.page === pageId
+      );
     });
 
     updateGlossary(pageId);
+
     navLinks.classList.remove("open");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
     history.replaceState(null, "", "#" + pageId);
+
+    sendTracking("Navigation", pageId);
   }
 
   pageLinks.forEach(link => {
     link.addEventListener("click", event => {
       event.preventDefault();
-      showPage(link.dataset.page);
+
+      const pageId = link.dataset.page;
+
+      if (pageId === "projets-personnels") {
+        sendTracking("Clic projets personnels", pageId);
+      }
+
+      if (pageId === "projets-professionnels") {
+        sendTracking("Clic projets professionnels", pageId);
+      }
+
+      if (pageId === "me-contacter") {
+        sendTracking("Clic contact", pageId);
+      }
+
+      showPage(pageId);
     });
   });
 
-  revealEls.forEach(el => el.classList.add("visible"));
+  revealEls.forEach(el => {
+    el.classList.add("visible");
+  });
 
   const initialPage = window.location.hash
     ? window.location.hash.replace("#", "")
@@ -1750,7 +1841,27 @@
     showPage("accueil");
   }
 
-  
+  sendTracking("Visite portfolio", currentPage);
+
+  window.addEventListener("beforeunload", () => {
+    const seconds = Math.round((Date.now() - startTime) / 1000);
+
+    navigator.sendBeacon(
+      TRACKING_URL,
+      JSON.stringify({
+        type_evenement: "Temps passé",
+        page: currentPage,
+        appareil: detectDevice(),
+        taille_ecran: window.innerWidth + "x" + window.innerHeight,
+        ville: "",
+        pays: "",
+        navigateur: navigator.userAgent,
+        source: window.location.href,
+        temps_reste: seconds + " secondes",
+        date_visite: new Date().toLocaleString("fr-FR")
+      })
+    );
+  });
 </script>
 </body>
 </html>
