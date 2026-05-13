@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard Portfolio - Richard Morcel</title>
 <link rel="icon" type="image/png" href="Image/favicon.png">
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -13,18 +12,14 @@ body {
   margin: 0;
   padding: 32px;
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg, #efe6da, #f7efe5, #e6edf3);
+  background:
+    radial-gradient(circle at 8% 5%, rgba(217,102,50,0.18), transparent 30%),
+    linear-gradient(135deg, #efe6da, #f7efe5, #e6edf3);
   color: #17324f;
 }
 
-h1 {
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  color: #536173;
-  margin-bottom: 32px;
-}
+h1 { margin-bottom: 8px; }
+.subtitle { color: #536173; margin-bottom: 32px; }
 
 .grid {
   display: grid;
@@ -33,9 +28,9 @@ h1 {
   margin-bottom: 32px;
 }
 
-.card {
-  background: white;
-  border-radius: 22px;
+.card, .section {
+  background: rgba(255,255,255,0.92);
+  border-radius: 24px;
   padding: 24px;
   box-shadow: 0 16px 36px rgba(23, 50, 79, 0.12);
 }
@@ -52,12 +47,18 @@ h1 {
   font-weight: bold;
 }
 
-.section {
-  background: white;
-  border-radius: 24px;
-  padding: 24px;
-  margin-bottom: 28px;
-  box-shadow: 0 16px 36px rgba(23, 50, 79, 0.12);
+.section { margin-bottom: 28px; }
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 22px;
+}
+
+.small-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 table {
@@ -78,19 +79,16 @@ td {
   font-size: 0.92rem;
 }
 
-tr:hover {
-  background: #fafafa;
-}
-
-.small-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
+tr:hover { background: #fafafa; }
 
 .loading {
   font-size: 1.1rem;
   color: #536173;
+}
+
+@media (max-width: 700px) {
+  body { padding: 18px; }
+  .chart-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -98,7 +96,7 @@ tr:hover {
 <body>
 
 <h1>Dashboard Portfolio — Richard Morcel</h1>
-<p class="subtitle">Suivi des visites, clics, appareils, pages consultées et téléchargements CV.</p>
+<p class="subtitle">Suivi des visites, clics, appareils, pages consultées, temps passé et téléchargements CV.</p>
 
 <div class="grid">
   <div class="card"><h2 id="total">0</h2><p>Total événements</p></div>
@@ -111,9 +109,36 @@ tr:hover {
   <div class="card"><h2 id="mobile">0</h2><p>Visites mobile</p></div>
 </div>
 
-<div class="section">
-  <h2>Visites par jour</h2>
-  <canvas id="visitesChart" height="90"></canvas>
+<div class="chart-grid">
+  <div class="section">
+    <h2>Visites par jour</h2>
+    <canvas id="visitesChart"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>Téléchargements CV par jour</h2>
+    <canvas id="cvChart"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>Répartition des appareils</h2>
+    <canvas id="devicesChart"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>Pages consultées</h2>
+    <canvas id="pagesChart"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>Types d’événements</h2>
+    <canvas id="eventsChart"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>Engagement utilisateur</h2>
+    <canvas id="engagementChart"></canvas>
+  </div>
 </div>
 
 <div class="small-grid">
@@ -195,6 +220,60 @@ function formatDay(date) {
   return date.toLocaleDateString("fr-FR");
 }
 
+function buildDailyCount(rows, eventName) {
+  const result = {};
+  rows
+    .filter(r => r.type_evenement === eventName)
+    .forEach(r => {
+      const d = parseDate(r.date);
+      if (d) {
+        const day = formatDay(d);
+        result[day] = (result[day] || 0) + 1;
+      }
+    });
+  return result;
+}
+
+function makeChart(id, type, labels, values, label) {
+  new Chart(document.getElementById(id), {
+    type: type,
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label,
+        data: values,
+        backgroundColor: [
+          "#d96632",
+          "#17324f",
+          "#244463",
+          "#ef8a5a",
+          "#9ca3af",
+          "#536173",
+          "#f2b08f"
+        ],
+        borderColor: "#17324f",
+        borderWidth: type === "line" ? 2 : 0,
+        tension: 0.35,
+        fill: type === "line"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: type === "doughnut" || type === "pie"
+        }
+      },
+      scales: type === "doughnut" || type === "pie" ? {} : {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 }
+        }
+      }
+    }
+  });
+}
+
 async function chargerDashboard() {
   try {
     const response = await fetch(API_URL);
@@ -216,7 +295,11 @@ async function chargerDashboard() {
       return d && d >= weekAgo;
     });
 
-    const tempsRows = rows.filter(r => r.type_evenement === "Temps passé" && r.temps_reste);
+    const tempsRows = rows.filter(r =>
+      (r.type_evenement === "Temps passé" || r.type_evenement === "Temps page")
+      && r.temps_reste
+    );
+
     const seconds = tempsRows
       .map(r => parseInt(String(r.temps_reste).replace(/\D/g, "")))
       .filter(n => !isNaN(n));
@@ -234,8 +317,12 @@ async function chargerDashboard() {
     document.getElementById("contact").textContent = rows.filter(r => r.type_evenement === "Clic contact").length;
     document.getElementById("mobile").textContent = rows.filter(r => String(r.appareil).includes("mobile") || String(r.appareil).includes("Téléphone")).length;
 
-    renderTable("pagesTable", countBy(rows.filter(r => r.page), "page"));
-    renderTable("devicesTable", countBy(rows.filter(r => r.appareil), "appareil"));
+    const pagesData = countBy(rows.filter(r => r.page), "page");
+    const devicesData = countBy(rows.filter(r => r.appareil), "appareil");
+    const eventsData = countBy(rows.filter(r => r.type_evenement), "type_evenement");
+
+    renderTable("pagesTable", pagesData);
+    renderTable("devicesTable", devicesData);
 
     const locations = {};
     rows.forEach(r => {
@@ -244,41 +331,74 @@ async function chargerDashboard() {
     });
     renderTable("locationsTable", locations);
 
-    const byDay = {};
-    visites.forEach(r => {
-      const d = parseDate(r.date);
-      if (d) {
-        const day = formatDay(d);
-        byDay[day] = (byDay[day] || 0) + 1;
-      }
-    });
+    const visitesByDay = buildDailyCount(rows, "Visite portfolio");
+    const cvByDay = buildDailyCount(rows, "Téléchargement CV");
 
-    new Chart(document.getElementById("visitesChart"), {
-      type: "bar",
-      data: {
-        labels: Object.keys(byDay).reverse(),
-        datasets: [{
-          label: "Visites",
-          data: Object.values(byDay).reverse(),
-          backgroundColor: "#d96632"
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: { precision: 0 }
-          }
-        }
-      }
-    });
+    makeChart(
+      "visitesChart",
+      "bar",
+      Object.keys(visitesByDay).reverse(),
+      Object.values(visitesByDay).reverse(),
+      "Visites"
+    );
+
+    makeChart(
+      "cvChart",
+      "line",
+      Object.keys(cvByDay).reverse(),
+      Object.values(cvByDay).reverse(),
+      "Téléchargements CV"
+    );
+
+    makeChart(
+      "devicesChart",
+      "doughnut",
+      Object.keys(devicesData),
+      Object.values(devicesData),
+      "Appareils"
+    );
+
+    makeChart(
+      "pagesChart",
+      "bar",
+      Object.keys(pagesData),
+      Object.values(pagesData),
+      "Pages"
+    );
+
+    makeChart(
+      "eventsChart",
+      "doughnut",
+      Object.keys(eventsData),
+      Object.values(eventsData),
+      "Événements"
+    );
+
+    const engagementLabels = [
+      "Clic contact",
+      "Téléchargement CV",
+      "Clic LinkedIn",
+      "Clic Email",
+      "Scroll 50%",
+      "Scroll 100%"
+    ];
+
+    const engagementValues = engagementLabels.map(label =>
+      rows.filter(r => r.type_evenement === label).length
+    );
+
+    makeChart(
+      "engagementChart",
+      "bar",
+      engagementLabels,
+      engagementValues,
+      "Engagement"
+    );
 
     const tbody = document.getElementById("tbody");
-    rows.slice(0, 50).forEach(row => {
+    tbody.innerHTML = "";
+
+    rows.slice(0, 70).forEach(row => {
       tbody.innerHTML += `
         <tr>
           <td>${row.date || ""}</td>
