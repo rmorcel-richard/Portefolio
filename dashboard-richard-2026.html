@@ -71,7 +71,8 @@ h1 {
   margin-bottom: 26px;
 }
 
-.filter-btn {
+.filter-btn,
+.reset-btn {
   border: 1px solid var(--line);
   background: rgba(255,255,255,0.88);
   color: var(--marine);
@@ -85,6 +86,22 @@ h1 {
 .filter-btn.active {
   background: var(--marine);
   color: white;
+}
+
+.reset-btn {
+  background: var(--terracotta);
+  color: white;
+  border: none;
+}
+
+.delete-btn {
+  background: #f3e6dc;
+  color: var(--terracotta);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .grid {
@@ -165,7 +182,6 @@ h1 {
 
 .funnel-label {
   font-weight: 900;
-  color: var(--marine);
 }
 
 .funnel-bar {
@@ -261,6 +277,7 @@ tr:hover {
   <button class="filter-btn" data-view="visites">Vue visites</button>
   <button class="filter-btn" data-view="cv">Vue CV</button>
   <button class="filter-btn" data-view="engagement">Vue engagement</button>
+  <button class="reset-btn" id="resetDeletedRows">Réinitialiser les lignes effacées</button>
 </div>
 
 <div class="grid">
@@ -287,19 +304,16 @@ tr:hover {
       <div class="funnel-bar"><div class="funnel-fill" id="funnelVisites"></div></div>
       <div class="funnel-number" id="funnelVisitesNum">0</div>
     </div>
-
     <div class="funnel-step">
       <div class="funnel-label">Contact</div>
       <div class="funnel-bar"><div class="funnel-fill" id="funnelContact"></div></div>
       <div class="funnel-number" id="funnelContactNum">0</div>
     </div>
-
     <div class="funnel-step">
       <div class="funnel-label">LinkedIn / Email</div>
       <div class="funnel-bar"><div class="funnel-fill" id="funnelLinks"></div></div>
       <div class="funnel-number" id="funnelLinksNum">0</div>
     </div>
-
     <div class="funnel-step">
       <div class="funnel-label">CV téléchargé</div>
       <div class="funnel-bar"><div class="funnel-fill" id="funnelCV"></div></div>
@@ -309,45 +323,18 @@ tr:hover {
 </div>
 
 <div class="chart-grid">
-  <div class="section">
-    <h2>Visites par jour</h2>
-    <canvas id="visitesChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>Téléchargements CV par jour</h2>
-    <canvas id="cvChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>Répartition des appareils</h2>
-    <canvas id="devicesChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>Pages consultées</h2>
-    <canvas id="pagesChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>Types d’événements</h2>
-    <canvas id="eventsChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>Engagement utilisateur</h2>
-    <canvas id="engagementChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>Temps moyen par page</h2>
-    <canvas id="timeByPageChart"></canvas>
-  </div>
-
-  <div class="section">
-    <h2>Top villes</h2>
-    <canvas id="citiesChart"></canvas>
-  </div>
+  <div class="section"><h2>Visites par jour</h2><canvas id="visitesChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Accueil</h2><canvas id="accueilChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Projets personnels</h2><canvas id="personnelsChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Projets professionnels</h2><canvas id="professionnelsChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Me contacter</h2><canvas id="contactPageChart"></canvas></div>
+  <div class="section"><h2>Téléchargements CV par jour</h2><canvas id="cvChart"></canvas></div>
+  <div class="section"><h2>Répartition des appareils</h2><canvas id="devicesChart"></canvas></div>
+  <div class="section"><h2>Pages consultées</h2><canvas id="pagesChart"></canvas></div>
+  <div class="section"><h2>Types d’événements</h2><canvas id="eventsChart"></canvas></div>
+  <div class="section"><h2>Engagement utilisateur</h2><canvas id="engagementChart"></canvas></div>
+  <div class="section"><h2>Temps moyen par page</h2><canvas id="timeByPageChart"></canvas></div>
+  <div class="section"><h2>Top villes</h2><canvas id="citiesChart"></canvas></div>
 </div>
 
 <div class="small-grid">
@@ -390,6 +377,7 @@ tr:hover {
         <th>Ville</th>
         <th>Pays</th>
         <th>Temps</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -402,6 +390,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzJ_6fyBv-V6QisbpJBQOPZ
 let allRows = [];
 let currentFilter = "all";
 let charts = [];
+let deletedRows = JSON.parse(localStorage.getItem("deletedRowsDashboard")) || [];
 
 function destroyCharts() {
   charts.forEach(chart => chart.destroy());
@@ -419,6 +408,14 @@ function formatDay(date) {
 
 function extractSeconds(value) {
   return parseInt(String(value || "").replace(/\D/g, "")) || 0;
+}
+
+function normalizePage(page) {
+  return String(page || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
 
 function filterRows(rows) {
@@ -457,6 +454,7 @@ function renderTable(id, data) {
 
 function buildDailyCount(rows, eventName) {
   const result = {};
+
   rows
     .filter(r => r.type_evenement === eventName)
     .forEach(r => {
@@ -466,11 +464,35 @@ function buildDailyCount(rows, eventName) {
         result[day] = (result[day] || 0) + 1;
       }
     });
+
+  return result;
+}
+
+function buildDailyCountByPage(rows, pageName) {
+  const target = normalizePage(pageName);
+  const result = {};
+
+  rows
+    .filter(r =>
+      r.type_evenement === "Visite portfolio" &&
+      normalizePage(r.page) === target
+    )
+    .forEach(r => {
+      const d = parseDate(r.date);
+      if (d) {
+        const day = formatDay(d);
+        result[day] = (result[day] || 0) + 1;
+      }
+    });
+
   return result;
 }
 
 function makeChart(id, type, labels, values, label) {
-  const chart = new Chart(document.getElementById(id), {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+
+  const chart = new Chart(canvas, {
     type: type,
     data: {
       labels: labels,
@@ -549,10 +571,21 @@ function scoreLevel(score) {
   return "Début de signal";
 }
 
+function deleteRow(index) {
+  if (!deletedRows.includes(index)) {
+    deletedRows.push(index);
+    localStorage.setItem("deletedRowsDashboard", JSON.stringify(deletedRows));
+    renderDashboard();
+  }
+}
+
 function renderDashboard() {
   destroyCharts();
 
-  const rows = filterRows(allRows);
+  const rows = filterRows(
+    allRows.filter((_, index) => !deletedRows.includes(index))
+  );
+
   const visites = rows.filter(r => r.type_evenement === "Visite portfolio");
   const today = new Date();
   const weekAgo = new Date();
@@ -574,12 +607,14 @@ function renderDashboard() {
   );
 
   const seconds = tempsRows.map(r => extractSeconds(r.temps_reste)).filter(n => n > 0);
+
   const avgSeconds = seconds.length
     ? Math.round(seconds.reduce((a, b) => a + b, 0) / seconds.length)
     : 0;
 
   const cvCount = rows.filter(r => r.type_evenement === "Téléchargement CV").length;
   const contactCount = rows.filter(r => r.type_evenement === "Clic contact").length;
+
   const linksCount = rows.filter(r =>
     r.type_evenement === "Clic LinkedIn" ||
     r.type_evenement === "Clic Email"
@@ -594,7 +629,12 @@ function renderDashboard() {
   document.getElementById("temps").textContent = avgSeconds + " sec";
   document.getElementById("cv").textContent = cvCount;
   document.getElementById("contact").textContent = contactCount;
-  document.getElementById("mobile").textContent = rows.filter(r => String(r.appareil).includes("mobile") || String(r.appareil).includes("Téléphone")).length;
+  document.getElementById("mobile").textContent = rows.filter(r =>
+    String(r.appareil).toLowerCase().includes("mobile") ||
+    String(r.appareil).toLowerCase().includes("téléphone") ||
+    String(r.appareil).toLowerCase().includes("telephone")
+  ).length;
+
   document.getElementById("score").textContent = score;
   document.getElementById("scoreLevel").textContent = scoreLevel(score);
 
@@ -612,22 +652,46 @@ function renderDashboard() {
     const lieu = `${r.ville || "Ville inconnue"} / ${r.pays || "Pays inconnu"}`;
     locations[lieu] = (locations[lieu] || 0) + 1;
   });
+
   renderTable("locationsTable", locations);
 
   const visitesByDay = buildDailyCount(rows, "Visite portfolio");
   const cvByDay = buildDailyCount(rows, "Téléchargement CV");
 
-  makeChart("visitesChart", "bar", Object.keys(visitesByDay).reverse(), Object.values(visitesByDay).reverse(), "Visites");
-  makeChart("cvChart", "line", Object.keys(cvByDay).reverse(), Object.values(cvByDay).reverse(), "Téléchargements CV");
+  makeChart("visitesChart", "bar", Object.keys(visitesByDay), Object.values(visitesByDay), "Visites");
+  makeChart("cvChart", "line", Object.keys(cvByDay), Object.values(cvByDay), "Téléchargements CV");
+
+  const accueilData = buildDailyCountByPage(rows, "accueil");
+  const personnelsData = buildDailyCountByPage(rows, "Projets personnels");
+  const professionnelsData = buildDailyCountByPage(rows, "Projets professionnels");
+  const contactPageData = buildDailyCountByPage(rows, "me contacter");
+
+  makeChart("accueilChart", "line", Object.keys(accueilData), Object.values(accueilData), "Accueil");
+  makeChart("personnelsChart", "line", Object.keys(personnelsData), Object.values(personnelsData), "Projets personnels");
+  makeChart("professionnelsChart", "line", Object.keys(professionnelsData), Object.values(professionnelsData), "Projets professionnels");
+  makeChart("contactPageChart", "line", Object.keys(contactPageData), Object.values(contactPageData), "Me contacter");
+
   makeChart("devicesChart", "doughnut", Object.keys(devicesData), Object.values(devicesData), "Appareils");
   makeChart("pagesChart", "bar", Object.keys(pagesData), Object.values(pagesData), "Pages");
   makeChart("eventsChart", "doughnut", Object.keys(eventsData), Object.values(eventsData), "Événements");
 
-  const engagementLabels = ["Clic contact", "Téléchargement CV", "Clic LinkedIn", "Clic Email", "Scroll 50%", "Scroll 100%"];
-  const engagementValues = engagementLabels.map(label => rows.filter(r => r.type_evenement === label).length);
+  const engagementLabels = [
+    "Clic contact",
+    "Téléchargement CV",
+    "Clic LinkedIn",
+    "Clic Email",
+    "Scroll 50%",
+    "Scroll 100%"
+  ];
+
+  const engagementValues = engagementLabels.map(label =>
+    rows.filter(r => r.type_evenement === label).length
+  );
+
   makeChart("engagementChart", "bar", engagementLabels, engagementValues, "Engagement");
 
   const timeByPage = {};
+
   rows
     .filter(r => r.type_evenement === "Temps page" && r.page)
     .forEach(r => {
@@ -636,6 +700,7 @@ function renderDashboard() {
     });
 
   const timeLabels = Object.keys(timeByPage);
+
   const timeValues = timeLabels.map(page => {
     const values = timeByPage[page];
     return Math.round(values.reduce((a, b) => a + b, 0) / values.length);
@@ -644,6 +709,7 @@ function renderDashboard() {
   makeChart("timeByPageChart", "bar", timeLabels, timeValues, "Temps moyen par page");
 
   const cityData = countBy(rows.filter(r => r.ville), "ville");
+
   makeChart(
     "citiesChart",
     "bar",
@@ -656,6 +722,8 @@ function renderDashboard() {
   tbody.innerHTML = "";
 
   rows.slice(0, 80).forEach(row => {
+    const realIndex = allRows.indexOf(row);
+
     tbody.innerHTML += `
       <tr>
         <td>${row.date || ""}</td>
@@ -665,12 +733,16 @@ function renderDashboard() {
         <td>${row.ville || ""}</td>
         <td>${row.pays || ""}</td>
         <td>${row.temps_reste || ""}</td>
+        <td>
+          <button class="delete-btn" onclick="deleteRow(${realIndex})">Effacer</button>
+        </td>
       </tr>
     `;
   });
 
   document.getElementById("loading").style.display = "none";
   document.getElementById("activityTable").style.display = "table";
+
   document.getElementById("lastUpdate").textContent =
     "Mise à jour : " + new Date().toLocaleString("fr-FR");
 }
@@ -712,6 +784,12 @@ document.querySelectorAll("[data-view]").forEach(button => {
       document.getElementById("engagementChart").scrollIntoView({ behavior: "smooth" });
     }
   });
+});
+
+document.getElementById("resetDeletedRows").addEventListener("click", () => {
+  deletedRows = [];
+  localStorage.removeItem("deletedRowsDashboard");
+  renderDashboard();
 });
 
 chargerDashboard();
