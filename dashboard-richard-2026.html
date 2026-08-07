@@ -513,9 +513,22 @@ function renderVisitorMap(rows) {
   const grouped = new Map();
 
   sourceRows.forEach(r => {
-    const lat = Number(String(r.latitude ?? "").replace(",", "."));
-    const lon = Number(String(r.longitude ?? "").replace(",", "."));
-    if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return;
+    // Ne pas convertir une cellule vide en 0 : Number("") === 0 en JavaScript.
+    // Sinon les anciennes visites sans coordonnées apparaissent à (0, 0), dans l'océan.
+    const rawLat = String(r.latitude ?? "").trim();
+    const rawLon = String(r.longitude ?? "").trim();
+    if (!rawLat || !rawLon) return;
+
+    const lat = Number(rawLat.replace(",", "."));
+    const lon = Number(rawLon.replace(",", "."));
+
+    if (
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lon) ||
+      Math.abs(lat) > 90 ||
+      Math.abs(lon) > 180 ||
+      (lat === 0 && lon === 0)
+    ) return;
 
     const ville = String(r.ville || "Ville inconnue").trim();
     const pays = String(r.pays || "Pays inconnu").trim();
