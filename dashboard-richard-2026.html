@@ -479,10 +479,30 @@ function renderVisitorMap(rows) {
 
   if (!visitorMap) {
     visitorMap = L.map("visitorMap", { scrollWheelZoom: false }).setView([46.5, 2.5], 5);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    const osmTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(visitorMap);
+    });
+
+    const fallbackTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+      subdomains: "abcd",
+      maxZoom: 20,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    });
+
+    let tileErrors = 0;
+    let fallbackEnabled = false;
+
+    osmTiles.on("tileerror", () => {
+      tileErrors += 1;
+      if (!fallbackEnabled && tileErrors >= 2) {
+        fallbackEnabled = true;
+        visitorMap.removeLayer(osmTiles);
+        fallbackTiles.addTo(visitorMap);
+      }
+    });
+
+    osmTiles.addTo(visitorMap);
     visitorMarkers = L.layerGroup().addTo(visitorMap);
   }
 
