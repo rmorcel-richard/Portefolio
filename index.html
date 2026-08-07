@@ -1,1886 +1,836 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Richard Morcel - Portfolio</title>
-  <link rel="icon" type="image/png" href="Image/favicon.png">
-
-<meta name="robots" content="noindex, nofollow">
-
-<meta property="og:title" content="Richard Morcel - Portfolio professionnel">
-<meta property="og:description" content="Attaché d’administration de l’État spécialisé en conduite de projet, transformation numérique RH et accompagnement des utilisateurs.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://portefolio-beta-ten.vercel.app/">
-<meta property="og:image" content="https://portefolio-beta-ten.vercel.app/Image/og-richard-morcel.png">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Richard Morcel - Portfolio professionnel">
-<meta name="twitter:description" content="Portfolio professionnel orienté conduite de projet, coordination, transformation numérique et service public.">
-<meta name="twitter:image" content="https://portefolio-beta-ten.vercel.app/Image/og-richard-morcel.png">
-
-
-  <style>
-    
-    :root {
-      --marine: #17324f;
-      --marine-soft: #244463;
-      --terracotta: #d96632;
-      --terracotta-light: #ef8a5a;
-      --beige: #efe6da;
-      --cream: #fffaf3;
-      --panel: #f6efe7;
-      --panel-strong: #eee2d5;
-      --line: rgba(23, 50, 79, 0.16);
-      --texte: #263241;
-      --muted: #536173;
-      --white: #ffffff;
-      --shadow: 0 24px 60px rgba(23, 50, 79, 0.16);
-      --shadow-card: 0 16px 36px rgba(23, 50, 79, 0.14);
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      transition: background 0.35s ease, color 0.35s ease;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--texte);
-      background:
-        radial-gradient(circle at 8% 5%, rgba(217, 102, 50, 0.18), transparent 30%),
-        radial-gradient(circle at 95% 30%, rgba(23, 50, 79, 0.12), transparent 28%),
-        linear-gradient(135deg, #eadfd2 0%, #f7efe5 44%, #e6edf3 100%);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(23, 50, 79, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 50, 79, 0.025) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity: 0.35;
-      z-index: -1;
-    }
-
-    h1, h2, h3, .serif {
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--marine);
-      line-height: 1.07;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .justify {
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 250, 243, 0.90);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(23, 50, 79, 0.12);
-      box-shadow: 0 10px 25px rgba(23, 50, 79, 0.06);
-    }
-
-    .nav {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 900;
-      color: var(--marine);
-      font-size: 1rem;
-      white-space: nowrap;
-      letter-spacing: 0.02em;
-    }
-
-    .logo-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--marine), var(--terracotta));
-      display: grid;
-      place-items: center;
-      color: white;
-      font-weight: 900;
-      font-size: 0.88rem;
-      box-shadow: 0 12px 25px rgba(217, 102, 50, 0.28);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      list-style: none;
-      padding: 7px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid var(--line);
-      box-shadow: 0 8px 22px rgba(23, 50, 79, 0.08);
-    }
-
-    .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 16px;
-      border-radius: 999px;
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--marine);
-      transition: 0.25s ease;
-      white-space: nowrap;
-    }
-
-    .nav-links a:hover {
-      background: rgba(23, 50, 79, 0.08);
-    }
-
-    .nav-links a.active {
-      background: var(--marine);
-      color: white;
-      box-shadow: 0 10px 24px rgba(23, 50, 79, 0.22);
-    }
-
-    .menu-toggle {
-      display: none;
-      border: 0;
-      background: var(--marine);
-      color: white;
-      border-radius: 14px;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-weight: 900;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active-page {
-      display: block;
-    }
-
-    .section,
-    .home-section {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .section {
-      padding: 82px 0;
-    }
-
-    .home-section {
-      padding: 70px 0 86px;
-    }
-
-    .home-hero {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 34px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--terracotta);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.11em;
-      font-size: 0.82rem;
-      margin-bottom: 20px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 2px;
-      background: var(--terracotta);
-      display: inline-block;
-    }
-
-    .home-title-wrap {
-      max-width: 1080px;
-    }
-
-    .home-title-wrap h1 {
-      font-size: clamp(4.2rem, 9vw, 8.2rem);
-      margin-bottom: 26px;
-      letter-spacing: -0.07em;
-    }
-
-    .home-subtitle {
-      max-width: 900px;
-      margin: 0 0 18px;
-      color: var(--marine);
-      font-size: clamp(1.15rem, 2vw, 1.45rem);
-      font-weight: 900;
-      line-height: 1.35;
-    }
-
-    .home-lead {
-      max-width: 1040px;
-      font-size: clamp(1.08rem, 2vw, 1.32rem);
-      color: #425166;
-      margin-bottom: 34px;
-    }
-
-    .hero-actions,
-    .contact-actions,
-    .personal-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 20px;
-    }
-
-    .hero-actions {
-      margin-bottom: 34px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-weight: 900;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: 0.25s ease;
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, var(--terracotta), var(--terracotta-light));
-      box-shadow: 0 16px 32px rgba(217, 102, 50, 0.25);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 22px 42px rgba(217, 102, 50, 0.33);
-    }
-
-    .btn-secondary {
-      color: var(--marine);
-      background: rgba(255, 255, 255, 0.86);
-      border-color: rgba(23, 50, 79, 0.18);
-    }
-
-    .btn-secondary:hover {
-      background: white;
-      transform: translateY(-3px);
-    }
-
-    .btn-small {
-      padding: 10px 16px;
-      font-size: 0.92rem;
-    }
-
-    .home-cards,
-    .projects-grid,
-    .metrics,
-    .copro-gallery,
-    .training-grid,
-    .training-highlight {
-      display: grid;
-      gap: 18px;
-    }
-
-    .home-cards {
-      grid-template-columns: repeat(3, 1fr);
-      margin-top: 12px;
-    }
-
-    .projects-grid {
-      grid-template-columns: repeat(3, 1fr);
-      margin-bottom: 24px;
-    }
-
-    .projects-grid.four {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .metrics {
-      grid-template-columns: repeat(4, 1fr);
-      margin-top: 18px;
-      gap: 14px;
-    }
-
-    .surface,
-    .mini-card,
-    .project-card,
-    .personal-card,
-    .intro-panel,
-    .signature-card,
-    .contact-info-card,
-    .contact-photo-card,
-    .personal-feature {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .mini-card,
-    .project-card,
-    .personal-card,
-    .contact-info-card,
-    .contact-photo-card {
-      background: #ffffff;
-    }
-
-    .mini-card {
-      padding: 24px;
-      min-height: 178px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .icon,
-    .value-icon,
-    .training-icon,
-    .small-icon {
-      display: grid;
-      place-items: center;
-      color: white;
-      background: var(--marine);
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-
-    .icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      font-size: 1.15rem;
-      margin-bottom: 15px;
-    }
-
-    .icon.orange,
-    .value-icon.orange {
-      background: var(--terracotta);
-    }
-
-    .icon.gray,
-    .value-icon.gray {
-      background: #9ca3af;
-    }
-
-    .mini-card h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: var(--marine);
-    }
-
-    .mini-card p,
-    .project-card p,
-    .personal-feature p,
-    .personal-card p,
-    .training-card p {
-      color: #4b5563;
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-    }
-
-    .signature-card {
-      margin-top: 34px;
-      min-height: 360px;
-      border-radius: 34px;
-      padding: 34px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.97), rgba(255,247,239,0.92));
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .signature-content {
-      position: relative;
-      z-index: 5;
-      max-width: 600px;
-    }
-
-    .signature-content h2 {
-      font-size: clamp(2.3rem, 5vw, 4.2rem);
-      margin-bottom: 18px;
-      letter-spacing: -0.04em;
-    }
-
-    .signature-content p {
-      color: #4b5563;
-      max-width: 580px;
-      margin-bottom: 22px;
-    }
-
-    .signature-pills,
-    .training-tags,
-    .personal-icons-row,
-    .icon-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .signature-pill,
-    .training-tag,
-    .personal-mini-badge,
-    .small-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(23, 50, 79, 0.08);
-      color: var(--marine);
-      font-size: 0.86rem;
-      font-weight: 800;
-      border: 1px solid rgba(23, 50, 79, 0.08);
-    }
-
-    .signature-pill {
-      padding: 10px 14px;
-      font-size: 0.9rem;
-    }
-
-    .training-tag.orange,
-    .personal-mini-badge.orange,
-    .small-chip.orange {
-      background: rgba(217, 102, 50, 0.12);
-      color: var(--terracotta);
-      border-color: rgba(217, 102, 50, 0.18);
-    }
-
-    .signature-visual.useful-grid {
-      position: relative;
-      z-index: 5;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .value-card {
-      background: #ffffff;
-      border: 1px solid rgba(23, 50, 79, 0.16);
-      border-radius: 22px;
-      padding: 20px;
-      box-shadow: var(--shadow-card);
-      min-height: 180px;
-      transition: 0.25s ease;
-    }
-
-    .value-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      font-size: 1.1rem;
-      margin-bottom: 14px;
-    }
-
-    .value-card h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 1rem;
-      color: var(--marine);
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-
-    .value-card p {
-      font-size: 0.93rem;
-      color: #4b5563;
-    }
-
-    .value-card:hover,
-    .project-card:hover,
-    .personal-card:hover,
-    .personal-feature:hover,
-    .contact-info-card:hover,
-    .contact-photo-card:hover,
-    .training-card:hover,
-    .mini-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 58px rgba(23, 50, 79, 0.19);
-    }
-
-    .signature-bg-soft {
-      position: absolute;
-      right: 90px;
-      top: 60px;
-      width: 260px;
-      height: 140px;
-      background: rgba(156, 163, 175, 0.14);
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    .signature-bg-orange {
-      position: absolute;
-      right: -70px;
-      bottom: -55px;
-      width: 260px;
-      height: 170px;
-      background: rgba(217, 102, 50, 0.78);
-      border-radius: 70% 30% 0 0 / 100% 100% 0 0;
-      z-index: 1;
-    }
-
-    .page-head {
-      margin-bottom: 34px;
-    }
-
-    .intro-panel {
-      padding: 34px 34px 30px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,247,239,0.92));
-    }
-
-    .intro-panel::after,
-    .personal-feature::after,
-    .contact-hero::after {
-      content: "";
-      position: absolute;
-      right: -60px;
-      bottom: -70px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(217, 102, 50, 0.18), rgba(217, 102, 50, 0));
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .intro-panel h2 {
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      letter-spacing: -0.04em;
-      margin-bottom: 12px;
-    }
-
-    .intro-panel p {
-      color: #536173;
-      max-width: 760px;
-      font-size: 1.03rem;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(217, 102, 50, 0.14);
-      color: #c24f25;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      border: 1px solid rgba(217, 102, 50, 0.20);
-    }
-
-    .pro-section-wrap {
-      position: relative;
-    }
-
-    .pro-side-callout {
-      position: absolute;
-      right: -18px;
-      top: 185px;
-      z-index: 10;
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 11px;
-      border-radius: 999px;
-      background: rgba(23, 50, 79, 0.96);
-      color: white;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: 0 18px 38px rgba(23, 50, 79, 0.22);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    .pro-side-callout::before {
-      content: "↓";
-      writing-mode: horizontal-tb;
-      transform: rotate(180deg);
-      display: grid;
-      place-items: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--terracotta);
-      color: white;
-      font-size: 0.9rem;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 34px;
-    }
-
-    .poste {
-      border-radius: var(--radius-xl);
-      background: rgba(244, 236, 226, 0.94);
-      border: 1px solid rgba(23, 50, 79, 0.18);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .poste-header {
-      background: linear-gradient(135deg, var(--marine), var(--marine-soft));
-      color: white;
-      padding: 28px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .poste-header h3 {
-      font-family: Arial, Helvetica, sans-serif;
-      color: white;
-      font-size: 1.28rem;
-      margin-bottom: 4px;
-      line-height: 1.35;
-    }
-
-    .poste-header p {
-      opacity: 0.92;
-      font-weight: 700;
-    }
-
-    .poste-body {
-      padding: 30px;
-      background: linear-gradient(180deg, rgba(255, 250, 243, 0.94), rgba(238, 226, 213, 0.78));
-    }
-
-    .poste-intro {
-      color: #4b5563;
-      margin-bottom: 24px;
-    }
-
-    .project-card,
-    .personal-card,
-    .training-card {
-      padding: 24px;
-      transition: 0.25s ease;
-      background: #ffffff;
-      border: 1px solid rgba(23, 50, 79, 0.18);
-      box-shadow: var(--shadow-card);
-    }
-
-    .project-card h4,
-    .personal-feature h3,
-    .personal-card h4,
-    .training-card h4 {
-      color: var(--terracotta);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 1.03rem;
-      margin-bottom: 14px;
-      line-height: 1.35;
-    }
-
-    .project-card strong,
-    .personal-feature strong,
-    .personal-card strong,
-    .training-card strong {
-      color: var(--marine);
-    }
-
-    .metric {
-      padding: 18px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, #ffffff, #fff7ef);
-      border: 1px solid rgba(217, 102, 50, 0.22);
-      text-align: center;
-      box-shadow: 0 10px 22px rgba(23, 50, 79, 0.09);
-    }
-
-    .metric strong {
-      display: block;
-      color: var(--marine);
-      font-size: 1.35rem;
-      line-height: 1.1;
-      margin-bottom: 6px;
-    }
-
-    .metric span {
-      color: #536173;
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    .training-section {
-      margin-top: 46px;
-      position: relative;
-      overflow: hidden;
-      border-radius: 36px;
-      background: linear-gradient(135deg, rgba(23, 50, 79, 0.98), rgba(36, 68, 99, 0.96));
-      color: white;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .training-section::before {
-      content: "";
-      position: absolute;
-      right: -90px;
-      top: -120px;
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
-      background: rgba(217, 102, 50, 0.34);
-    }
-
-    .training-section::after {
-      content: "";
-      position: absolute;
-      left: -90px;
-      bottom: -130px;
-      width: 360px;
-      height: 260px;
-      border-radius: 60% 40% 0 0 / 100% 100% 0 0;
-      background: rgba(255, 250, 243, 0.08);
-    }
-
-    .training-inner {
-      position: relative;
-      z-index: 2;
-      padding: 38px;
-    }
-
-    .training-header {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 34px;
-      align-items: end;
-      margin-bottom: 28px;
-    }
-
-    .training-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: #ffd7c4;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.78rem;
-      margin-bottom: 16px;
-    }
-
-    .training-kicker::before {
-      content: "";
-      width: 34px;
-      height: 2px;
-      background: var(--terracotta-light);
-    }
-
-    .training-header h3 {
-      color: white;
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      letter-spacing: -0.04em;
-      margin-bottom: 14px;
-    }
-
-    .training-header p,
-    .training-mini-stat span {
-      color: rgba(255, 255, 255, 0.82);
-    }
-
-    .training-highlight {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .training-mini-stat {
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.11);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(10px);
-    }
-
-    .training-mini-stat strong {
-      display: block;
-      font-size: 1.65rem;
-      line-height: 1;
-      margin-bottom: 8px;
-      color: white;
-    }
-
-    .training-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .training-card {
-      border-radius: 26px;
-      background: #ffffff;
-      color: var(--texte);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.14);
-    }
-
-    .training-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 17px;
-      background: var(--terracotta);
-      margin-bottom: 16px;
-    }
-
-    .training-card:nth-child(2) .training-icon {
-      background: var(--marine);
-    }
-
-    .training-card:nth-child(3) .training-icon {
-      background: #9ca3af;
-    }
-
-    .personal-layout {
-      display: grid;
-      gap: 24px;
-    }
-
-    .personal-feature {
-      padding: 30px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,247,239,0.92));
-      transition: 0.25s ease;
-    }
-
-    .personal-grid-premium {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 22px;
-    }
-
-    .personal-card {
-      padding: 28px;
-    }
-
-    .personal-card-head {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .personal-card-body,
-    .personal-actions {
-      position: relative;
-      z-index: 2;
-    }
-
-    .copro-gallery {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 24px;
-      position: relative;
-      z-index: 3;
-    }
-
-    .copro-photo {
-      position: relative;
-      display: block;
-      height: 210px;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(23, 50, 79, 0.20);
-      box-shadow: 0 16px 34px rgba(23, 50, 79, 0.18);
-      background: #e7e3dd;
-    }
-
-    .copro-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.35s ease;
-    }
-
-    .copro-photo:hover img {
-      transform: scale(1.05);
-    }
-
-    .copro-photo span {
-      position: absolute;
-      left: 12px;
-      bottom: 12px;
-      background: rgba(23, 50, 79, 0.82);
-      color: white;
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 8px 10px;
-      border-radius: 12px;
-      backdrop-filter: blur(8px);
-    }
-
-    .contact-premium {
-      display: grid;
-      gap: 32px;
-    }
-
-    .contact-hero {
-      position: relative;
-      overflow: hidden;
-      padding: 38px 42px;
-      border-radius: var(--radius-xl);
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,247,239,0.92));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .contact-hero-text {
-      position: relative;
-      z-index: 2;
-      max-width: 820px;
-    }
-
-    .contact-hero h2 {
-      font-size: clamp(2.6rem, 5vw, 4.6rem);
-      letter-spacing: -0.05em;
-      margin-bottom: 14px;
-    }
-
-    .contact-hero p,
-    .contact-intro {
-      color: #4b5563;
-    }
-
-    .contact-hero-badge {
-      position: absolute;
-      right: 34px;
-      top: 34px;
-      z-index: 3;
-      padding: 11px 16px;
-      border-radius: 999px;
-      background: rgba(23, 50, 79, 0.08);
-      color: var(--marine);
-      font-size: 0.9rem;
-      font-weight: 900;
-      border: 1px solid rgba(23, 50, 79, 0.10);
-    }
-
-    .contact-premium-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .contact-info-card,
-    .contact-photo-card {
-      transition: 0.25s ease;
-    }
-
-    .contact-info-card {
-      padding: 38px;
-    }
-
-    .contact-label-small {
-      display: inline-flex;
-      margin-bottom: 18px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(217, 102, 50, 0.12);
-      color: var(--terracotta);
-      font-weight: 900;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .contact-info-card h3 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 12px;
-    }
-
-    .contact-intro {
-      margin-bottom: 28px;
-    }
-
-    .premium-list {
-      list-style: none;
-      display: grid;
-      gap: 18px;
-    }
-
-    .premium-list li {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      padding: 16px;
-      border-radius: 18px;
-      background: #fff8f0;
-      border: 1px solid rgba(23, 50, 79, 0.12);
-    }
-
-    .premium-list .small-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(217, 102, 50, 0.16), rgba(255, 250, 243, 0.95));
-      color: var(--terracotta);
-      border: 1px solid rgba(217, 102, 50, 0.22);
-      box-shadow: 0 8px 18px rgba(217, 102, 50, 0.12);
-      font-size: 0.9rem;
-    }
-
-    .premium-list strong {
-      display: block;
-      color: var(--marine);
-      margin-bottom: 2px;
-    }
-
-    .premium-list a,
-    .premium-list span {
-      color: #4b5563;
-      font-size: 0.96rem;
-      word-break: break-word;
-    }
-
-    .contact-photo-card {
-      min-height: 560px;
-      padding: 30px;
-      display: grid;
-      align-items: stretch;
-    }
-
-    .photo-frame {
-      position: relative;
-      z-index: 3;
-      height: 100%;
-      min-height: 500px;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid rgba(23, 50, 79, 0.16);
-      box-shadow: 0 20px 45px rgba(23, 50, 79, 0.16);
-      background: var(--panel-strong);
-    }
-
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .photo-caption {
-      position: absolute;
-      left: 54px;
-      right: 54px;
-      bottom: 54px;
-      z-index: 4;
-      padding: 18px 20px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.90);
-      border: 1px solid rgba(23, 50, 79, 0.14);
-      box-shadow: 0 14px 34px rgba(23, 50, 79, 0.16);
-      backdrop-filter: blur(12px);
-    }
-
-    .photo-caption strong {
-      display: block;
-      color: var(--marine);
-      margin-bottom: 4px;
-      font-size: 1rem;
-    }
-
-    .photo-caption span {
-      color: #4b5563;
-      font-size: 0.92rem;
-    }
-
-    .contact-shape-marine {
-      position: absolute;
-      left: -100px;
-      bottom: -120px;
-      width: 340px;
-      height: 240px;
-      background: var(--marine);
-      border-radius: 60% 40% 0 0 / 100% 100% 0 0;
-      z-index: 1;
-    }
-
-    .contact-shape-orange {
-      position: absolute;
-      right: -80px;
-      top: -80px;
-      width: 260px;
-      height: 260px;
-      background: rgba(217, 102, 50, 0.16);
-      border-radius: 50%;
-      z-index: 1;
-    }
-
-    .glossary {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto 8px;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(23, 50, 79, 0.14);
-      color: #536173;
-      font-size: 0.92rem;
-      display: none;
-      box-shadow: 0 12px 28px rgba(23, 50, 79, 0.08);
-    }
-
-    .glossary.visible {
-      display: block;
-    }
-
-    .footer {
-      padding: 24px 16px 34px;
-      text-align: center;
-      color: #617083;
-      border-top: 1px solid rgba(23, 50, 79, 0.10);
-      margin-top: 28px;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: 0.75s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 1180px) {
-      .pro-side-callout {
-        right: 8px;
-      }
-    }
-
-    @media (max-width: 1100px) {
-      .projects-grid.four {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .signature-card {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 980px) {
-      .pro-side-callout {
-        position: static;
-        writing-mode: horizontal-tb;
-        transform: none;
-        margin-bottom: 22px;
-      }
-
-      .pro-side-callout::before {
-        transform: none;
-      }
-
-      .training-header,
-      .contact-premium-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .training-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .training-highlight,
-      .home-cards,
-      .projects-grid,
-      .copro-gallery,
-      .metrics {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-photo-card {
-        min-height: 520px;
-      }
-
-      .photo-frame {
-        min-height: 460px;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .menu-toggle {
-        display: inline-flex;
-      }
-
-      .nav {
-        height: 74px;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 74px;
-        left: 16px;
-        right: 16px;
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        background: rgba(255, 250, 243, 0.96);
-        border: 1px solid rgba(23, 50, 79, 0.12);
-        border-radius: 22px;
-        padding: 12px;
-        box-shadow: var(--shadow);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        display: block;
-        justify-content: flex-start;
-      }
-
-      .section,
-      .home-section {
-        padding: 58px 0;
-      }
-
-      .home-title-wrap h1 {
-        font-size: clamp(3rem, 14vw, 4.6rem);
-      }
-
-      .home-cards,
-      .projects-grid,
-      .projects-grid.four,
-      .copro-gallery,
-      .metrics,
-      .training-highlight,
-      .signature-visual.useful-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .signature-card,
-      .poste-header,
-      .poste-body,
-      .contact-hero,
-      .contact-info-card,
-      .contact-photo-card,
-      .intro-panel,
-      .personal-feature,
-      .personal-card,
-      .training-inner {
-        padding: 24px;
-      }
-
-      .signature-card,
-      .value-card {
-        min-height: auto;
-      }
-
-      .contact-hero-badge {
-        position: static;
-        width: fit-content;
-        margin-top: 18px;
-      }
-
-      .photo-caption {
-        left: 38px;
-        right: 38px;
-        bottom: 38px;
-      }
-
-      .photo-frame {
-        min-height: 430px;
-      }
-
-      .contact-actions {
-        flex-direction: column;
-      }
-
-      .contact-actions .btn {
-        width: 100%;
-      }
-    }
-
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Portfolio - Richard Morcel</title>
+<link rel="icon" type="image/png" href="Image/favicon.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --marine: #17324f;
+  --marine-soft: #244463;
+  --terracotta: #d96632;
+  --terracotta-light: #ef8a5a;
+  --cream: #fffaf3;
+  --muted: #536173;
+  --line: rgba(23, 50, 79, 0.13);
+  --shadow: 0 18px 42px rgba(23, 50, 79, 0.13);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 32px;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 8% 5%, rgba(217,102,50,0.18), transparent 30%),
+    radial-gradient(circle at 96% 18%, rgba(23,50,79,0.13), transparent 28%),
+    linear-gradient(135deg, #efe6da, #f7efe5, #e6edf3);
+  color: var(--marine);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+}
+
+.badge {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 900;
+  color: var(--marine);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.filter-btn,
+.reset-btn {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.88);
+  color: var(--marine);
+  padding: 11px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(23,50,79,0.08);
+}
+
+.filter-btn.active {
+  background: var(--marine);
+  color: white;
+}
+
+.reset-btn {
+  background: var(--terracotta);
+  color: white;
+  border: none;
+}
+
+.delete-btn {
+  background: #f3e6dc;
+  color: var(--terracotta);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.card,
+.section {
+  background: rgba(255,255,255,0.93);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--terracotta);
+}
+
+.card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-weight: bold;
+}
+
+.score-card {
+  background: linear-gradient(135deg, var(--marine), var(--marine-soft));
+  color: white;
+}
+
+.score-card h2,
+.score-card p {
+  color: white;
+}
+
+.score-level {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.16);
+  font-weight: 900;
+}
+
+.section {
+  margin-bottom: 26px;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 22px;
+}
+
+.small-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.funnel {
+  display: grid;
+  gap: 14px;
+}
+
+.funnel-step {
+  display: grid;
+  grid-template-columns: 170px 1fr 70px;
+  align-items: center;
+  gap: 12px;
+}
+
+.funnel-label {
+  font-weight: 900;
+}
+
+.funnel-bar {
+  height: 22px;
+  border-radius: 999px;
+  background: #eef2f6;
+  overflow: hidden;
+}
+
+.funnel-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--terracotta), var(--terracotta-light));
+  width: 0%;
+}
+
+.funnel-number {
+  font-weight: 900;
+  color: var(--terracotta);
+  text-align: right;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: var(--marine);
+  color: white;
+  padding: 13px;
+  text-align: left;
+}
+
+td {
+  padding: 12px 13px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.92rem;
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+.loading {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 18px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .funnel-step {
+    grid-template-columns: 1fr;
+  }
+
+  .funnel-number {
+    text-align: left;
+  }
+
+  .section {
+    overflow-x: auto;
+  }
+}
+</style>
 </head>
 
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="#accueil" class="logo page-link" data-page="accueil">
-        <span class="logo-mark">RM</span>
-        Richard Morcel - Portfolio
-      </a>
 
-      <button class="menu-toggle" id="menuToggle">Menu</button>
+<header class="header">
+  <div>
+    <h1>Dashboard Portfolio — Richard Morcel</h1>
+    <p class="subtitle">Suivi des visites, clics, appareils, pages consultées, engagement et téléchargements CV.</p>
+  </div>
+  <div class="badge" id="lastUpdate">Chargement...</div>
+</header>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#accueil" class="page-link active" data-page="accueil">Accueil</a></li>
-        <li><a href="#projets-professionnels" class="page-link" data-page="projets-professionnels">Projets Professionnels</a></li>
-        <li><a href="#projets-personnels" class="page-link" data-page="projets-personnels">Projets Personnels</a></li>
-        <li><a href="#me-contacter" class="page-link" data-page="me-contacter">Me contacter</a></li>
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">Tout</button>
+  <button class="filter-btn" data-filter="7">7 jours</button>
+  <button class="filter-btn" data-filter="30">30 jours</button>
+  <button class="filter-btn" data-view="visites">Vue visites</button>
+  <button class="filter-btn" data-view="cv">Vue CV</button>
+  <button class="filter-btn" data-view="engagement">Vue engagement</button>
+  <button class="reset-btn" id="resetDeletedRows">Réinitialiser les lignes effacées</button>
+</div>
 
+<div class="grid">
+  <div class="card"><h2 id="total">0</h2><p>Total événements</p></div>
+  <div class="card"><h2 id="visites">0</h2><p>Visites portfolio</p></div>
+  <div class="card"><h2 id="today">0</h2><p>Visites aujourd’hui</p></div>
+  <div class="card"><h2 id="week">0</h2><p>Visites cette semaine</p></div>
+  <div class="card"><h2 id="temps">0 sec</h2><p>Temps moyen passé</p></div>
+  <div class="card"><h2 id="cv">0</h2><p>Téléchargements CV</p></div>
+  <div class="card"><h2 id="contact">0</h2><p>Clics contact</p></div>
+  <div class="card"><h2 id="mobile">0</h2><p>Visites mobile</p></div>
+  <div class="card score-card">
+    <h2 id="score">0</h2>
+    <p>Score d’engagement</p>
+    <span class="score-level" id="scoreLevel">Analyse en cours</span>
+  </div>
+</div>
 
-        
-      </ul>
-    </nav>
-  </header>
+<div class="section">
+  <h2>Funnel recruteur</h2>
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-label">Visites</div>
+      <div class="funnel-bar"><div class="funnel-fill" id="funnelVisites"></div></div>
+      <div class="funnel-number" id="funnelVisitesNum">0</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label">Contact</div>
+      <div class="funnel-bar"><div class="funnel-fill" id="funnelContact"></div></div>
+      <div class="funnel-number" id="funnelContactNum">0</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label">LinkedIn / Email</div>
+      <div class="funnel-bar"><div class="funnel-fill" id="funnelLinks"></div></div>
+      <div class="funnel-number" id="funnelLinksNum">0</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-label">CV téléchargé</div>
+      <div class="funnel-bar"><div class="funnel-fill" id="funnelCV"></div></div>
+      <div class="funnel-number" id="funnelCVNum">0</div>
+    </div>
+  </div>
+</div>
 
-  <main>
-    <section class="page active-page" id="accueil">
-      <div class="home-section">
-        <div class="home-hero">
-          <div class="home-title-wrap reveal">
-            <span class="eyebrow">Fonction publique · Transformation numérique</span>
-            <h1>Portfolio professionnel</h1>
-            <p class="home-subtitle">
-              Attaché d’administration de l’État, spécialisé en conduite de projet, transformation numérique RH et accompagnement des utilisateurs.
-            </p>
-            <p class="home-lead justify">
-              Fort de plusieurs années d’expérience en gestion et conduite de projets au sein des ministères, j’accompagne les services dans la mise en place d’outils et de dispositifs numériques, avec une approche fondée sur la coordination, la rigueur et le sens du service public.
-            </p>
+<div class="chart-grid">
+  <div class="section"><h2>Visites par jour</h2><canvas id="visitesChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Accueil</h2><canvas id="accueilChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Projets personnels</h2><canvas id="personnelsChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Projets professionnels</h2><canvas id="professionnelsChart"></canvas></div>
+  <div class="section"><h2>Visites par jour — Me contacter</h2><canvas id="contactPageChart"></canvas></div>
+  <div class="section"><h2>Téléchargements CV par jour</h2><canvas id="cvChart"></canvas></div>
+  <div class="section"><h2>Répartition des appareils</h2><canvas id="devicesChart"></canvas></div>
+  <div class="section"><h2>Pages consultées</h2><canvas id="pagesChart"></canvas></div>
+  <div class="section"><h2>Types d’événements</h2><canvas id="eventsChart"></canvas></div>
+  <div class="section"><h2>Engagement utilisateur</h2><canvas id="engagementChart"></canvas></div>
+  <div class="section"><h2>Temps moyen par page</h2><canvas id="timeByPageChart"></canvas></div>
+  <div class="section"><h2>Top villes</h2><canvas id="citiesChart"></canvas></div>
+</div>
 
-            <div class="hero-actions">
-              <a href="#projets-professionnels" class="btn btn-primary page-link" data-page="projets-professionnels">Découvrir mes projets</a>
-              <a href="#me-contacter" class="btn btn-secondary page-link" data-page="me-contacter">Me contacter</a>
-            </div>
-          </div>
-
-          <div class="home-cards reveal">
-            <article class="mini-card">
-              <div class="icon">●</div>
-              <h3>Mon profil</h3>
-              <p class="justify">Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et amélioration de processus.</p>
-            </article>
-
-            <article class="mini-card">
-              <div class="icon orange">▣</div>
-              <h3>Mes projets professionnels</h3>
-              <p class="justify">Des projets menés autour de la dématérialisation, du système d'information RH*, de la formation et du pilotage fonctionnel.</p>
-            </article>
-
-            <article class="mini-card">
-              <div class="icon gray">♡</div>
-              <h3>Mes projets personnels</h3>
-              <p class="justify">Copropriété, guide d’accueil, menuiserie, impression 3D et créations culinaires.</p>
-            </article>
-          </div>
-
-          <article class="signature-card reveal">
-            <div class="signature-bg-soft"></div>
-            <div class="signature-bg-orange"></div>
-
-            <div class="signature-content">
-              <span class="eyebrow">Positionnement</span>
-              <h2>Ce que je peux apporter</h2>
-              <p class="justify">
-                Une approche structurée, fiable et opérationnelle au service des projets, des utilisateurs et de l’action publique. Mon parcours combine coordination, accompagnement, outils numériques et sens du collectif.
-              </p>
-
-              <div class="signature-pills">
-                <span class="signature-pill">Pilotage</span>
-                <span class="signature-pill">Coordination</span>
-                <span class="signature-pill">Accompagnement</span>
-                <span class="signature-pill">Service public</span>
-              </div>
-            </div>
-
-            <div class="signature-visual useful-grid">
-              <article class="value-card">
-                <div class="value-icon">📁</div>
-                <h3>Pilotage de projets</h3>
-                <p>Organisation, coordination, suivi d’avancement et structuration des actions.</p>
-              </article>
-
-              <article class="value-card">
-                <div class="value-icon orange">💻</div>
-                <h3>Transformation numérique</h3>
-                <p>Dématérialisation, appui fonctionnel, outils RH et amélioration des processus.</p>
-              </article>
-
-              <article class="value-card">
-                <div class="value-icon gray">🎓</div>
-                <h3>Formation & accompagnement</h3>
-                <p>Transmission, supports pédagogiques, accompagnement des utilisateurs et montée en compétences.</p>
-              </article>
-
-              <article class="value-card">
-                <div class="value-icon">🏛️</div>
-                <h3>Culture du service public</h3>
-                <p>Rigueur, sens de l’intérêt général, adaptation aux environnements ministériels et travail collectif.</p>
-              </article>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section page" id="projets-professionnels">
-      <div class="pro-section-wrap">
-        <a href="#formation-transmission" class="pro-side-callout"><span>Voir la rubrique formation</span></a>
-
-        <div class="page-head reveal">
-          <div class="intro-panel">
-            <span class="eyebrow">Projets professionnels</span>
-            <h2>Des réalisations sélectionnées</h2>
-            <p class="justify">Chaque expérience est présentée avec quelques projets clés : le contexte, mon rôle, l’apport concret et les compétences développées.</p>
-          </div>
-        </div>
-
-        <div class="timeline">
-          <article class="poste reveal">
-            <div class="poste-header">
-              <div>
-                <h3>Chef de projet dématérialisation</h3>
-                <p>Ministère de la Transition écologique · Janvier 2024 – Aujourd'hui</p>
-              </div>
-              <span class="tag">Système d'information RH* · Dématérialisation · Déploiement</span>
-            </div>
-
-            <div class="poste-body">
-              <p class="poste-intro justify">Sur ce poste, j’ai participé à plusieurs projets de transformation numérique RH, avec une forte composante de dématérialisation, d’accompagnement des utilisateurs, de paramétrage fonctionnel et de déploiement.</p>
-
-              <div class="projects-grid four">
-                <article class="project-card"><div class="icon">✓</div><h4>Projet 1 — Pilotage fonctionnel et évolutions de l’outil GAUDDI</h4><p class="justify"><strong>Contexte :</strong> outil central de dématérialisation du dossier de l’agent nécessitant suivi, évolutions et assistance.</p><p class="justify"><strong>Mon rôle :</strong> maintien en condition opérationnelle, rédaction d’expressions de besoin, recette des évolutions, suivi des incidents, tests de non-régression et assistance de niveau 3.</p><p class="justify"><strong>Résultat :</strong> continuité de service, meilleure fiabilité des évolutions et accompagnement des gestionnaires.</p></article>
-                <article class="project-card"><div class="icon orange">✉</div><h4>Projet 2 — Ouverture du dossier agent et préparation du déploiement</h4><p class="justify"><strong>Contexte :</strong> ouverture du dossier individuel agent à la consultation et préparation d’une diffusion plus large des usages dématérialisés.</p><p class="justify"><strong>Mon rôle :</strong> suivi des incidents, recette, rédaction de modes opératoires, défense des besoins fonctionnels et accompagnement du métier.</p><p class="justify"><strong>Résultat :</strong> sécurisation du déploiement et meilleure appropriation des outils par les utilisateurs.</p></article>
-                <article class="project-card"><div class="icon gray">☑</div><h4>Projet 3 — Mise en œuvre de la Protection Sociale Complémentaire</h4><p class="justify"><strong>Contexte :</strong> chantier majeur à forts enjeux métiers, techniques et organisationnels.</p><p class="justify"><strong>Mon rôle :</strong> suivi des évolutions du système d'information RH*, recette, paramétrage, accompagnement des pré-affiliations, appui aux utilisateurs et maintien en condition opérationnelle du dispositif.</p><p class="justify"><strong>Résultat :</strong> contribution à la sécurisation du dispositif et à l’accompagnement des équipes.</p></article>
-                <article class="project-card"><div class="icon">◇</div><h4>Projet 4 — Évaluation des risques projets et actions de maîtrise</h4><p class="justify"><strong>Contexte :</strong> plusieurs projets structurants nécessitant une attention particulière sur les risques, les délais et la qualité de service.</p><p class="justify"><strong>Mon rôle :</strong> identification des risques, analyse des impacts et proposition d’actions de maîtrise adaptées.</p><p class="justify"><strong>Résultat :</strong> meilleure anticipation des difficultés et sécurisation de l’avancement des projets.</p></article>
-              </div>
-
-              <div class="metrics">
-                <div class="metric"><strong>2024</strong><span>démarrage du poste</span></div>
-                <div class="metric"><strong>4</strong><span>projets structurants</span></div>
-                <div class="metric"><strong>Niveau 3</strong><span>assistance utilisateurs</span></div>
-                <div class="metric"><strong>RH</strong><span>transformation numérique</span></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="poste reveal">
-            <div class="poste-header"><div><h3>Chargé du réseau financier</h3><p>Ministère des Armées · Septembre 2021 – Décembre 2023</p></div><span class="tag">Paie · Référentiels · Pilotage</span></div>
-            <div class="poste-body">
-              <p class="poste-intro justify">Sur ce poste, j’ai contribué à la fiabilisation des référentiels de paie, au pilotage d’opérations de transfert comptable et à la coordination fonctionnelle de plusieurs acteurs de la chaîne paie.</p>
-              <div class="projects-grid">
-                <article class="project-card"><div class="icon">▤</div><h4>Projet 1 — Fiabilisation des référentiels financiers de la paie en PSOP</h4><p class="justify"><strong>Contexte :</strong> préparation du transfert d’assignation sur un comptable unique et nécessité de fiabiliser la cartographie financière de la paie.</p><p class="justify"><strong>Mon rôle :</strong> actualisation des outils et référentiels concourant à la paie en PSOP, en veillant à la cohérence des données et à leur exploitation.</p><p class="justify"><strong>Résultat :</strong> consolidation des bases de travail et sécurisation des opérations préparatoires.</p></article>
-                <article class="project-card"><div class="icon orange">☷</div><h4>Projet 2 — Pilotage du transfert d’assignation comptable</h4><p class="justify"><strong>Contexte :</strong> chantier structurant nécessitant une vision globale des étapes, des risques et des actions à conduire.</p><p class="justify"><strong>Mon rôle :</strong> construction et actualisation d’un calendrier de pilotage de type GANTT, avec identification des sous-chantiers et des risques.</p><p class="justify"><strong>Résultat :</strong> mise à disposition d’un fonds de dossier complet, utile à la gouvernance et à la poursuite du projet.</p></article>
-                <article class="project-card"><div class="icon gray">⚙</div><h4>Projet 3 — Refonte du calendrier de paie</h4><p class="justify"><strong>Contexte :</strong> besoin d’alléger certaines opérations de traitement de la paie et d’améliorer la performance technique des nuits applicatives.</p><p class="justify"><strong>Mon rôle :</strong> contribution à la concertation avec le ministère des Armées, le Service liaison rémunération de la Marne et la direction générale des finances publiques.</p><p class="justify"><strong>Résultat :</strong> finalisation d’une évolution de processus permettant un fonctionnement plus fluide et mieux structuré.</p></article>
-              </div>
-              <div class="metrics"><div class="metric"><strong>2021–2023</strong><span>période du poste</span></div><div class="metric"><strong>3</strong><span>projets structurants</span></div><div class="metric"><strong>Paie</strong><span>coordination fonctionnelle</span></div><div class="metric"><strong>Réseau</strong><span>travail partenarial</span></div></div>
-            </div>
-          </article>
-
-          <article class="poste reveal">
-            <div class="poste-header"><div><h3>Formation d’attaché d’administration de l’État</h3><p>IRA de Metz · Mars 2021 – Septembre 2021</p></div><span class="tag">Formation · Administration · Catégorie A</span></div>
-            <div class="poste-body">
-              <p class="poste-intro justify">À la suite de ma réussite au concours interne des IRA, j’ai suivi une formation professionnalisante à l’IRA de Metz. Cette étape a marqué un tournant dans mon parcours en consolidant mon positionnement de cadre administratif.</p>
-              <div class="projects-grid">
-                <article class="project-card"><div class="icon">▰</div><h4>Projet 1 — Consolidation de la culture administrative</h4><p class="justify"><strong>Contexte :</strong> passage vers des fonctions d’attaché d’administration de l’État avec une approche plus stratégique des politiques publiques.</p><p class="justify"><strong>Mon rôle :</strong> approfondissement des fondamentaux administratifs, juridiques, budgétaires et organisationnels.</p><p class="justify"><strong>Résultat :</strong> meilleure compréhension des enjeux de l’action publique et renforcement du positionnement professionnel.</p></article>
-                <article class="project-card"><div class="icon orange">◇</div><h4>Projet 2 — Développement de la posture de cadre</h4><p class="justify"><strong>Contexte :</strong> préparation à des fonctions nécessitant davantage d’autonomie, d’analyse, de coordination et d’aide à la décision.</p><p class="justify"><strong>Mon rôle :</strong> travail sur la prise de recul, la structuration des idées, la communication professionnelle et la conduite de travaux collectifs.</p><p class="justify"><strong>Résultat :</strong> montée en compétences sur la conduite de projet, la synthèse et l’accompagnement des équipes.</p></article>
-                <article class="project-card"><div class="icon gray">✓</div><h4>Projet 3 — Préparation à la conduite de projets publics</h4><p class="justify"><strong>Contexte :</strong> formation orientée vers la mise en œuvre concrète de politiques publiques et la coordination d’acteurs.</p><p class="justify"><strong>Mon rôle :</strong> appropriation de méthodes de diagnostic, de pilotage, de priorisation et de restitution.</p><p class="justify"><strong>Résultat :</strong> capacité renforcée à structurer une démarche, formaliser des propositions et accompagner le changement.</p></article>
-              </div>
-              <div class="metrics"><div class="metric"><strong>6 mois</strong><span>formation IRA</span></div><div class="metric"><strong>Cat. A</strong><span>nouveau positionnement</span></div><div class="metric"><strong>Metz</strong><span>formation interministérielle</span></div><div class="metric"><strong>Projet</strong><span>pilotage public</span></div></div>
-            </div>
-          </article>
-
-          <article class="poste reveal">
-            <div class="poste-header"><div><h3>Contrôle interne & dialogue de gestion</h3><p>Ministère de la Transition écologique · Avril 2017 – Février 2021</p></div><span class="tag">Données · Paie · Pilotage</span></div>
-            <div class="poste-body">
-              <p class="poste-intro justify">Avant ma formation à l’IRA, j’ai occupé deux postes qui m’ont permis de consolider mes bases professionnelles : contrôle interne, données de paie et dialogue de gestion.</p>
-              <div class="projects-grid">
-                <article class="project-card"><div class="icon">▤</div><h4>Projet 1 — Suivi d’activité, contrôle interne et données de paie</h4><p class="justify"><strong>Contexte :</strong> production et fiabilisation de données destinées au pilotage de l’activité et au suivi des bureaux de gestion.</p><p class="justify"><strong>Mon rôle :</strong> préparation de fiches et tableaux de bord, analyse de données, suivi de demandes, contribution au contrôle interne de la paie et appui aux outils métiers.</p><p class="justify"><strong>Résultat :</strong> meilleure lisibilité de l’activité, données plus structurées et appui régulier aux équipes.</p></article>
-                <article class="project-card"><div class="icon orange">◈</div><h4>Projet 2 — Dialogue de gestion et dispositifs de performance</h4><p class="justify"><strong>Contexte :</strong> préparation du dialogue de gestion, mise à jour des supports, suivi des indicateurs et appui à l’organisation des réunions stratégiques.</p><p class="justify"><strong>Mon rôle :</strong> contribution aux calendriers, documents d’engagement, supports intranet, analyses d’indicateurs et travaux graphiques ou cartographiques.</p><p class="justify"><strong>Résultat :</strong> appui à la préparation des échanges de gestion et amélioration de la capitalisation des données.</p></article>
-                <article class="project-card"><div class="icon gray">☑</div><h4>Projet 3 — Capitalisation et structuration des connaissances</h4><p class="justify"><strong>Contexte :</strong> besoin de centraliser, actualiser et rendre exploitables des informations utiles au pilotage des activités.</p><p class="justify"><strong>Mon rôle :</strong> alimentation de supports partagés, mise à jour d’informations, appui à la production de synthèses et contribution aux travaux de capitalisation.</p><p class="justify"><strong>Résultat :</strong> amélioration de la traçabilité, meilleure disponibilité de l’information et continuité du service.</p></article>
-              </div>
-              <div class="metrics"><div class="metric"><strong>2017–2021</strong><span>parcours consolidé</span></div><div class="metric"><strong>2</strong><span>postes regroupés</span></div><div class="metric"><strong>Données</strong><span>analyse et pilotage</span></div><div class="metric"><strong>Paie</strong><span>contrôle interne</span></div></div>
-            </div>
-          </article>
-        </div>
-
-        <section class="training-section reveal" id="formation-transmission">
-          <div class="training-inner">
-            <div class="training-header">
-              <div>
-                <span class="training-kicker">Compétence transversale</span>
-                <h3>Formation, transmission & accompagnement des utilisateurs</h3>
-                <p class="justify">En complément de mon parcours principal, j’ai développé une pratique régulière de la formation et de l’accompagnement. Cette dimension valorise ma capacité à vulgariser des sujets techniques, à structurer des supports clairs et à accompagner la montée en compétences de publics variés.</p>
-              </div>
-
-              <div class="training-highlight">
-                <div class="training-mini-stat"><strong>IRA</strong><span>Lille & Nanterre</span></div>
-                <div class="training-mini-stat"><strong>RenoiRH</strong><span>Formation métier</span></div>
-                <div class="training-mini-stat"><strong>GA/GF</strong><span>Modules RH</span></div>
-                <div class="training-mini-stat"><strong>Requête</strong><span>Exploitation des données</span></div>
-              </div>
-            </div>
-
-            <div class="training-grid">
-              <article class="training-card"><div class="training-icon">🎓</div><h4>Interventions à l’IRA de Lille et à l’IRA de Nanterre</h4><p class="justify"><strong>Modules animés :</strong> LibreOffice et animation de la transition écologique dans une filière.</p><p class="justify"><strong>Résultat :</strong> transmission de méthodes concrètes, vulgarisation de contenus et adaptation aux besoins des apprenants.</p><div class="training-tags"><span class="training-tag">LibreOffice</span><span class="training-tag orange">Transition écologique</span><span class="training-tag">Pédagogie</span></div></article>
-              <article class="training-card"><div class="training-icon">🧩</div><h4>Formation métier sur RenoiRH</h4><p class="justify"><strong>Contexte :</strong> accompagnement des utilisateurs sur le système d'information RH* RenoiRH au ministère de la Transition écologique.</p><p class="justify"><strong>Modules :</strong> GA/GF et modules Requête, avec une approche opérationnelle orientée usage.</p><div class="training-tags"><span class="training-tag">RenoiRH</span><span class="training-tag orange">GA/GF</span><span class="training-tag">Requête</span></div></article>
-              <article class="training-card"><div class="training-icon">📄</div><h4>Supports pédagogiques & accompagnement</h4><p class="justify"><strong>Objectif :</strong> rendre des contenus techniques ou administratifs plus accessibles à des publics aux niveaux variés.</p><p class="justify"><strong>Résultat :</strong> supports plus lisibles, meilleure compréhension des notions et continuité possible après la formation.</p><div class="training-tags"><span class="training-tag">Supports</span><span class="training-tag orange">Vulgarisation</span><span class="training-tag">Autonomie</span></div></article>
-            </div>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section class="section page" id="projets-personnels">
-      <div class="page-head reveal">
-        <div class="intro-panel">
-          <span class="eyebrow">Projets personnels</span>
-          <h2>Des engagements utiles au parcours</h2>
-          <p class="justify">Des projets choisis pour montrer mon sens de l’organisation, ma capacité à structurer des actions concrètes et mon goût pour les réalisations utiles, sans entrer dans ma vie privée.</p>
-        </div>
-      </div>
-
-      <div class="personal-layout">
-        <article class="personal-feature reveal">
-          <span class="eyebrow">Projet collectif</span>
-          <h3>Implication dans la copropriété & guide des nouveaux arrivants</h3>
-          <p class="justify">
-            Recherche d’entreprises, pilotage et suivi du syndic, participation au suivi des travaux et contribution à une gestion saine des finances de la copropriété. J’ai également travaillé à la rédaction d’un guide d’accueil destiné aux nouveaux arrivants, afin de faciliter leur intégration et de clarifier les repères utiles.
-          </p>
-          <p class="justify"><strong>Compétences :</strong> responsabilité, suivi de prestataires, coordination, gestion budgétaire, communication, rédaction.</p>
-
-          <div class="personal-icons-row">
-            <span class="personal-mini-badge">🏢 Suivi collectif</span>
-            <span class="personal-mini-badge orange">📘 Guide d’accueil</span>
-            <span class="personal-mini-badge">💶 Finances saines</span>
-            <span class="personal-mini-badge orange">🔧 Travaux</span>
-          </div>
-
-          <div class="personal-actions">
-            <a href="guide-nouveaux-arrivants.pdf" class="btn btn-primary btn-small" download>Télécharger le guide</a>
-          </div>
-
-          <div class="copro-gallery">
-            <a href="Image/Image1.png" class="copro-photo" target="_blank" rel="noopener noreferrer">
-              <img src="Image/Image1.png" alt="Vue extérieure de la copropriété">
-              <span>Vue extérieure de la copropriété</span>
-            </a>
-
-            <a href="Image/Image2.png" class="copro-photo" target="_blank" rel="noopener noreferrer">
-              <img src="Image/Image2.png" alt="Hall d’entrée de la copropriété">
-              <span>Hall d’entrée de la copropriété</span>
-            </a>
-
-            <a href="Image/Image3.png" class="copro-photo" target="_blank" rel="noopener noreferrer">
-              <img src="Image/Image3.png" alt="Vue de la copropriété depuis la rue">
-              <span>Vue depuis la rue</span>
-            </a>
-          </div>
-        </article>
-
-        <div class="personal-grid-premium reveal">
-          <article class="personal-card">
-            <div class="personal-card-head">
-              <div class="icon orange">✦</div>
-              <div><h4>Menuiserie, impression 3D, solutions pratiques & créations culinaires</h4></div>
-            </div>
-            <div class="personal-card-body">
-              <p class="justify">Conception et réalisation de petits objets ou solutions utiles, avec une approche créative, technique et orientée usage. En parallèle, développement de recettes maison autour de la glace, avec un intérêt particulier pour les associations originales comme le yaourt glacé lavande miel.</p>
-              <p class="justify"><strong>Compétences :</strong> créativité, autonomie, expérimentation, logique de conception, résolution de problèmes, précision, sens du détail, curiosité et recherche d’équilibre.</p>
-              <div class="icon-group">
-                <span class="small-chip">🛠️ Menuiserie</span>
-                <span class="small-chip orange">🖨️ Impression 3D</span>
-                <span class="small-chip">🧊 Glaces maison</span>
-                <span class="small-chip orange">🍯 Lavande miel</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section page" id="me-contacter">
-      <div class="contact-premium">
-        <div class="contact-hero reveal">
-          <div class="contact-hero-text">
-            <span class="eyebrow">Me contacter</span>
-            <h2>Échanger autour de mon parcours</h2>
-            <p class="justify">Pour échanger sur mon parcours, mes projets ou une opportunité professionnelle, vous pouvez me contacter via les informations ci-dessous.</p>
-          </div>
-
-          <div class="contact-hero-badge"><span>Disponible pour échanger</span></div>
-        </div>
-
-        <div class="contact-premium-grid">
-          <article class="contact-info-card reveal">
-            <span class="contact-label-small">Coordonnées</span>
-            <h3>Richard Morcel</h3>
-            <p class="contact-intro justify">Attaché d’administration de l’État, orienté conduite de projet, coordination, structuration et transformation numérique.</p>
-
-            <ul class="premium-list">
-              <li><span class="small-icon">✉</span><div><strong>Email</strong><a href="mailto:rmorcel@gmail.com">rmorcel@gmail.com</a></div></li>
-              <li><span class="small-icon">in</span><div><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/richard-morcel/" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/richard-morcel/</a></div></li>
-              <li><span class="small-icon">⌖</span><div><strong>Localisation</strong><span>Région Île-de-France</span></div></li>
-            </ul>
-
-            <div class="contact-actions">
-<a 
-  href="CV/CV_Richard_Morcel.pdf"
-  class="btn btn-primary"
-  onclick="trackCVDownload(event)"
->
-  Télécharger mon CV
-</a>
-              <a href="mailto:rmorcel@gmail.com" class="btn btn-secondary">M’écrire</a>
-            </div>
-          </article>
-
-          <article class="contact-photo-card reveal">
-            <div class="photo-frame">
-              <img src="Image/Photo_Richard_MORCEL.png" alt="Photo de Richard Morcel">
-            </div>
-            <div class="photo-caption"><strong>Portfolio professionnel</strong><span>Parcours · Projets · Coordination · Service public</span></div>
-            <div class="contact-shape-marine"></div>
-            <div class="contact-shape-orange"></div>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="glossary" id="glossary">
-    <strong>* Système d'information RH :</strong> ensemble des outils numériques utilisés pour gérer les ressources humaines.
+<div class="small-grid">
+  <div class="section">
+    <h2>Pages les plus consultées</h2>
+    <table>
+      <thead><tr><th>Page</th><th>Nombre</th></tr></thead>
+      <tbody id="pagesTable"></tbody>
+    </table>
   </div>
 
-  <footer class="footer">© 2026 — Richard Morcel. Portfolio professionnel.</footer>
+  <div class="section">
+    <h2>Appareils</h2>
+    <table>
+      <thead><tr><th>Appareil</th><th>Nombre</th></tr></thead>
+      <tbody id="devicesTable"></tbody>
+    </table>
+  </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <div class="section">
+    <h2>Villes / Pays</h2>
+    <table>
+      <thead><tr><th>Lieu</th><th>Nombre</th></tr></thead>
+      <tbody id="locationsTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Dernières activités</h2>
+  <div class="loading" id="loading">Chargement des données...</div>
+
+  <table id="activityTable" style="display:none;">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Événement</th>
+        <th>Page</th>
+        <th>Appareil</th>
+        <th>Ville</th>
+        <th>Pays</th>
+        <th>Temps</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
 
 <script>
-  emailjs.init("_MEC0s1SvOkyQota0");
+const API_URL = "https://script.google.com/macros/s/AKfycbxP17-i4QG80trg78dRI9T18V39AdWpsZD8Wu4ZB6HJWHAdYmOcDLFSxTbsMTRqUZo7NQ/exec";
 
-  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxP17-i4QG80trg78dRI9T18V39AdWpsZD8Wu4ZB6HJWHAdYmOcDLFSxTbsMTRqUZo7NQ/exec";
+let allRows = [];
+let currentFilter = "all";
+let charts = [];
+let deletedRows = JSON.parse(localStorage.getItem("deletedRowsDashboard")) || [];
 
-  const menuToggle = document.getElementById("menuToggle");
-  const navLinks = document.getElementById("navLinks");
-  const pageLinks = [...document.querySelectorAll(".page-link")];
-  const pages = [...document.querySelectorAll(".page")];
-  const revealEls = [...document.querySelectorAll(".reveal")];
-  const glossary = document.getElementById("glossary");
-
-  const startTime = Date.now();
-  let currentPage = "accueil";
-
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
-  });
-
-  function updateGlossary(pageId) {
-    if (pageId === "projets-professionnels") {
-      glossary.classList.add("visible");
-    } else {
-      glossary.classList.remove("visible");
-    }
-  }
-
-  function detectDevice() {
-    const ua = navigator.userAgent;
-
-    if (/Tablet|iPad/i.test(ua)) {
-      return "Tablette";
-    }
-
-    if (/Mobi|Android|iPhone/i.test(ua)) {
-      return "Téléphone mobile";
-    }
-
-    return "Ordinateur";
-  }
-
-  async function getLocation() {
-    try {
-      const response = await fetch("https://ipapi.co/json/");
-      const data = await response.json();
-
-      return {
-        ville: data.city || "Inconnue",
-        pays: data.country_name || "Inconnu"
-      };
-    } catch (error) {
-      return {
-        ville: "Inconnue",
-        pays: "Inconnu"
-      };
-    }
-  }
-
-  async function sendTracking(typeEvenement, page = "", tempsReste = "") {
-    try {
-      const location = await getLocation();
-
-      await fetch(TRACKING_URL, {
-        method: "POST",
-        mode: "no-cors",
-        keepalive: true,
-        body: JSON.stringify({
-          type_evenement: typeEvenement,
-          page: page,
-          appareil: detectDevice(),
-          taille_ecran: window.innerWidth + "x" + window.innerHeight,
-          ville: location.ville,
-          pays: location.pays,
-          navigateur: navigator.userAgent,
-          source: window.location.href,
-          temps_reste: tempsReste,
-          date_visite: new Date().toLocaleString("fr-FR")
-        })
-      });
-    } catch (error) {
-      console.log("Erreur tracking :", error);
-    }
-  }
-
-  function showPage(pageId) {
-    currentPage = pageId;
-
-    pages.forEach(page => {
-      page.classList.remove("active-page");
-      page.style.display = "none";
-    });
-
-    const selectedPage = document.getElementById(pageId);
-
-    if (selectedPage) {
-      selectedPage.classList.add("active-page");
-      selectedPage.style.display = "block";
-    }
-
-    pageLinks.forEach(link => {
-      const isMenuLink = link.closest(".nav-links");
-
-      link.classList.toggle(
-        "active",
-        isMenuLink && link.dataset.page === pageId
-      );
-    });
-
-    updateGlossary(pageId);
-
-    navLinks.classList.remove("open");
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-    history.replaceState(null, "", "#" + pageId);
-
-    sendTracking("Navigation", pageId);
-  }
-
-  pageLinks.forEach(link => {
-    link.addEventListener("click", event => {
-      event.preventDefault();
-
-      const pageId = link.dataset.page;
-
-      if (pageId === "projets-personnels") {
-        sendTracking("Clic projets personnels", pageId);
-      }
-
-      if (pageId === "projets-professionnels") {
-        sendTracking("Clic projets professionnels", pageId);
-      }
-
-      if (pageId === "me-contacter") {
-        sendTracking("Clic contact", pageId);
-      }
-
-      showPage(pageId);
-    });
-  });
-
-  revealEls.forEach(el => {
-    el.classList.add("visible");
-  });
-
-  const initialPage = window.location.hash
-    ? window.location.hash.replace("#", "")
-    : "accueil";
-
-  if (pages.some(page => page.id === initialPage)) {
-    showPage(initialPage);
-  } else {
-    showPage("accueil");
-  }
-
-  sendTracking("Visite portfolio", currentPage);
-
-function trackCVDownload(event) {
-  event.preventDefault();
-
-  sendTracking("Téléchargement CV", "me-contacter");
-
-  setTimeout(() => {
-    window.location.href = "CV/CV_Richard_Morcel.pdf";
-  }, 400);
+function destroyCharts() {
+  charts.forEach(chart => chart.destroy());
+  charts = [];
 }
 
-  
-  window.addEventListener("beforeunload", () => {
-    const seconds = Math.round((Date.now() - startTime) / 1000);
+function parseDate(value) {
+  if (!value) return null;
 
-    navigator.sendBeacon(
-      TRACKING_URL,
-      JSON.stringify({
-        type_evenement: "Temps passé",
-        page: currentPage,
-        appareil: detectDevice(),
-        taille_ecran: window.innerWidth + "x" + window.innerHeight,
-        ville: "",
-        pays: "",
-        navigateur: navigator.userAgent,
-        source: window.location.href,
-        temps_reste: seconds + " secondes",
-        date_visite: new Date().toLocaleString("fr-FR")
-      })
+  // Format français provenant de Google Sheets : JJ/MM/AAAA HH:MM:SS
+  const fr = String(value).trim().match(
+    /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ ,T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+  );
+
+  if (fr) {
+    const [, day, month, year, hour = "0", minute = "0", second = "0"] = fr;
+    const d = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second)
     );
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  // Secours pour les dates ISO
+  const d = new Date(value);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function formatDay(date) {
+  return date.toLocaleDateString("fr-FR");
+}
+
+function extractSeconds(value) {
+  return parseInt(String(value || "").replace(/\D/g, "")) || 0;
+}
+
+function normalizePage(page) {
+  return String(page || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+function filterRows(rows) {
+  if (currentFilter === "all") return rows;
+
+  const days = Number(currentFilter);
+  const limit = new Date();
+  limit.setDate(limit.getDate() - days);
+
+  return rows.filter(row => {
+    const d = parseDate(row.date);
+    return d && d >= limit;
   });
+}
+
+function countBy(rows, key) {
+  const result = {};
+  rows.forEach(row => {
+    const value = row[key] || "Non renseigné";
+    result[value] = (result[value] || 0) + 1;
+  });
+  return result;
+}
+
+function renderTable(id, data) {
+  const tbody = document.getElementById(id);
+  tbody.innerHTML = "";
+
+  Object.entries(data)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .forEach(([label, count]) => {
+      tbody.innerHTML += `<tr><td>${label}</td><td>${count}</td></tr>`;
+    });
+}
+
+function buildDailyCount(rows, eventName) {
+  const result = {};
+
+  rows
+    .filter(r => r.type_evenement === eventName)
+    .forEach(r => {
+      const d = parseDate(r.date);
+      if (d) {
+        const day = formatDay(d);
+        result[day] = (result[day] || 0) + 1;
+      }
+    });
+
+  return result;
+}
+
+function buildDailyCountByPage(rows, pageName) {
+  const target = normalizePage(pageName);
+  const result = {};
+
+  rows
+    .filter(r =>
+      r.type_evenement === "Visite portfolio" &&
+      normalizePage(r.page) === target
+    )
+    .forEach(r => {
+      const d = parseDate(r.date);
+      if (d) {
+        const day = formatDay(d);
+        result[day] = (result[day] || 0) + 1;
+      }
+    });
+
+  return result;
+}
+
+function makeChart(id, type, labels, values, label) {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+
+  const chart = new Chart(canvas, {
+    type: type,
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label,
+        data: values,
+        backgroundColor: [
+          "#d96632",
+          "#17324f",
+          "#244463",
+          "#ef8a5a",
+          "#9ca3af",
+          "#536173",
+          "#f2b08f"
+        ],
+        borderColor: "#17324f",
+        borderWidth: type === "line" ? 2 : 0,
+        tension: 0.35,
+        fill: type === "line"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: type === "doughnut" || type === "pie"
+        }
+      },
+      scales: type === "doughnut" || type === "pie" ? {} : {
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0 }
+        }
+      }
+    }
+  });
+
+  charts.push(chart);
+}
+
+function updateFunnel(visites, contact, links, cv) {
+  const max = Math.max(visites, 1);
+
+  const values = [
+    ["funnelVisites", "funnelVisitesNum", visites],
+    ["funnelContact", "funnelContactNum", contact],
+    ["funnelLinks", "funnelLinksNum", links],
+    ["funnelCV", "funnelCVNum", cv]
+  ];
+
+  values.forEach(([barId, numId, value]) => {
+    document.getElementById(barId).style.width = Math.min((value / max) * 100, 100) + "%";
+    document.getElementById(numId).textContent = value;
+  });
+}
+
+function calculateScore(rows) {
+  const count = type => rows.filter(r => r.type_evenement === type).length;
+
+  return (
+    count("Visite portfolio") * 1 +
+    count("Clic contact") * 2 +
+    count("Téléchargement CV") * 4 +
+    count("Clic LinkedIn") * 3 +
+    count("Clic Email") * 3 +
+    count("Scroll 50%") * 1 +
+    count("Scroll 100%") * 2 +
+    count("Temps page") * 1
+  );
+}
+
+function scoreLevel(score) {
+  if (score >= 40) return "Très fort intérêt";
+  if (score >= 20) return "Fort intérêt";
+  if (score >= 8) return "Intérêt modéré";
+  return "Début de signal";
+}
+
+function deleteRow(index) {
+  if (!deletedRows.includes(index)) {
+    deletedRows.push(index);
+    localStorage.setItem("deletedRowsDashboard", JSON.stringify(deletedRows));
+    renderDashboard();
+  }
+}
+
+function renderDashboard() {
+  destroyCharts();
+
+  const rows = filterRows(
+    allRows.filter((_, index) => !deletedRows.includes(index))
+  );
+
+  const visites = rows.filter(r => r.type_evenement === "Visite portfolio");
+  const today = new Date();
+  const weekAgo = new Date();
+  weekAgo.setDate(today.getDate() - 7);
+
+  const visitesToday = visites.filter(r => {
+    const d = parseDate(r.date);
+    return d && d.toDateString() === today.toDateString();
+  });
+
+  const visitesWeek = visites.filter(r => {
+    const d = parseDate(r.date);
+    return d && d >= weekAgo;
+  });
+
+  const tempsRows = rows.filter(r =>
+    (r.type_evenement === "Temps passé" || r.type_evenement === "Temps page") &&
+    r.temps_reste
+  );
+
+  const seconds = tempsRows.map(r => extractSeconds(r.temps_reste)).filter(n => n > 0);
+
+  const avgSeconds = seconds.length
+    ? Math.round(seconds.reduce((a, b) => a + b, 0) / seconds.length)
+    : 0;
+
+  const cvCount = rows.filter(r => r.type_evenement === "Téléchargement CV").length;
+  const contactCount = rows.filter(r => r.type_evenement === "Clic contact").length;
+
+  const linksCount = rows.filter(r =>
+    r.type_evenement === "Clic LinkedIn" ||
+    r.type_evenement === "Clic Email"
+  ).length;
+
+  const score = calculateScore(rows);
+
+  document.getElementById("total").textContent = rows.length;
+  document.getElementById("visites").textContent = visites.length;
+  document.getElementById("today").textContent = visitesToday.length;
+  document.getElementById("week").textContent = visitesWeek.length;
+  document.getElementById("temps").textContent = avgSeconds + " sec";
+  document.getElementById("cv").textContent = cvCount;
+  document.getElementById("contact").textContent = contactCount;
+  document.getElementById("mobile").textContent = rows.filter(r =>
+    String(r.appareil).toLowerCase().includes("mobile") ||
+    String(r.appareil).toLowerCase().includes("téléphone") ||
+    String(r.appareil).toLowerCase().includes("telephone")
+  ).length;
+
+  document.getElementById("score").textContent = score;
+  document.getElementById("scoreLevel").textContent = scoreLevel(score);
+
+  updateFunnel(visites.length, contactCount, linksCount, cvCount);
+
+  const pagesData = countBy(rows.filter(r => r.page), "page");
+  const devicesData = countBy(rows.filter(r => r.appareil), "appareil");
+  const eventsData = countBy(rows.filter(r => r.type_evenement), "type_evenement");
+
+  renderTable("pagesTable", pagesData);
+  renderTable("devicesTable", devicesData);
+
+  const locations = {};
+  rows.forEach(r => {
+    const lieu = `${r.ville || "Ville inconnue"} / ${r.pays || "Pays inconnu"}`;
+    locations[lieu] = (locations[lieu] || 0) + 1;
+  });
+
+  renderTable("locationsTable", locations);
+
+  const visitesByDay = buildDailyCount(rows, "Visite portfolio");
+  const cvByDay = buildDailyCount(rows, "Téléchargement CV");
+
+  makeChart("visitesChart", "bar", Object.keys(visitesByDay), Object.values(visitesByDay), "Visites");
+  makeChart("cvChart", "line", Object.keys(cvByDay), Object.values(cvByDay), "Téléchargements CV");
+
+  const accueilData = buildDailyCountByPage(rows, "accueil");
+  const personnelsData = buildDailyCountByPage(rows, "Projets personnels");
+  const professionnelsData = buildDailyCountByPage(rows, "Projets professionnels");
+  const contactPageData = buildDailyCountByPage(rows, "me contacter");
+
+  makeChart("accueilChart", "line", Object.keys(accueilData), Object.values(accueilData), "Accueil");
+  makeChart("personnelsChart", "line", Object.keys(personnelsData), Object.values(personnelsData), "Projets personnels");
+  makeChart("professionnelsChart", "line", Object.keys(professionnelsData), Object.values(professionnelsData), "Projets professionnels");
+  makeChart("contactPageChart", "line", Object.keys(contactPageData), Object.values(contactPageData), "Me contacter");
+
+  makeChart("devicesChart", "doughnut", Object.keys(devicesData), Object.values(devicesData), "Appareils");
+  makeChart("pagesChart", "bar", Object.keys(pagesData), Object.values(pagesData), "Pages");
+  makeChart("eventsChart", "doughnut", Object.keys(eventsData), Object.values(eventsData), "Événements");
+
+  const engagementLabels = [
+    "Clic contact",
+    "Téléchargement CV",
+    "Clic LinkedIn",
+    "Clic Email",
+    "Scroll 50%",
+    "Scroll 100%"
+  ];
+
+  const engagementValues = engagementLabels.map(label =>
+    rows.filter(r => r.type_evenement === label).length
+  );
+
+  makeChart("engagementChart", "bar", engagementLabels, engagementValues, "Engagement");
+
+  const timeByPage = {};
+
+  rows
+    .filter(r => r.type_evenement === "Temps page" && r.page)
+    .forEach(r => {
+      if (!timeByPage[r.page]) timeByPage[r.page] = [];
+      timeByPage[r.page].push(extractSeconds(r.temps_reste));
+    });
+
+  const timeLabels = Object.keys(timeByPage);
+
+  const timeValues = timeLabels.map(page => {
+    const values = timeByPage[page];
+    return Math.round(values.reduce((a, b) => a + b, 0) / values.length);
+  });
+
+  makeChart("timeByPageChart", "bar", timeLabels, timeValues, "Temps moyen par page");
+
+  const cityData = countBy(rows.filter(r => r.ville), "ville");
+
+  makeChart(
+    "citiesChart",
+    "bar",
+    Object.keys(cityData).slice(0, 8),
+    Object.values(cityData).slice(0, 8),
+    "Top villes"
+  );
+
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+
+  [...rows].reverse().slice(0, 80).forEach(row => {
+    const realIndex = allRows.indexOf(row);
+
+    tbody.innerHTML += `
+      <tr>
+        <td>${row.date || ""}</td>
+        <td>${row.type_evenement || ""}</td>
+        <td>${row.page || ""}</td>
+        <td>${row.appareil || ""}</td>
+        <td>${row.ville || ""}</td>
+        <td>${row.pays || ""}</td>
+        <td>${row.temps_reste || ""}</td>
+        <td>
+          <button class="delete-btn" onclick="deleteRow(${realIndex})">Effacer</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("activityTable").style.display = "table";
+
+  document.getElementById("lastUpdate").textContent =
+    "Mise à jour : " + new Date().toLocaleString("fr-FR");
+}
+
+async function chargerDashboard() {
+  try {
+    const response = await fetch(API_URL, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data.success === false) {
+      throw new Error(data.error || "Erreur renvoyée par Google Apps Script");
+    }
+
+    if (!Array.isArray(data.rows)) {
+      throw new Error("Réponse invalide : rows est absent ou n'est pas un tableau");
+    }
+
+    allRows = data.rows;
+    renderDashboard();
+  } catch (error) {
+    document.getElementById("loading").textContent =
+      "Erreur de chargement du dashboard : " + error.message;
+    document.getElementById("lastUpdate").textContent = "Connexion impossible";
+    console.error(error);
+  }
+}
+
+document.querySelectorAll("[data-filter]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("[data-filter]").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    currentFilter = button.dataset.filter;
+    renderDashboard();
+  });
+});
+
+document.querySelectorAll("[data-view]").forEach(button => {
+  button.addEventListener("click", () => {
+    const view = button.dataset.view;
+
+    if (view === "visites") {
+      document.getElementById("visitesChart").scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (view === "cv") {
+      document.getElementById("cvChart").scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (view === "engagement") {
+      document.getElementById("engagementChart").scrollIntoView({ behavior: "smooth" });
+    }
+  });
+});
+
+document.getElementById("resetDeletedRows").addEventListener("click", () => {
+  deletedRows = [];
+  localStorage.removeItem("deletedRowsDashboard");
+  renderDashboard();
+});
+
+chargerDashboard();
 </script>
+
 </body>
 </html>
