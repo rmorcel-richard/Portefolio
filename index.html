@@ -1694,7 +1694,7 @@
 <script>
   emailjs.init("_MEC0s1SvOkyQota0");
 
-  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbzJ_6fyBv-V6QisbpJBQOPZDrixr9BgJSx1Dh49lTaq4SL2qGx5JNZ2O6QuahkrgWJuig/exec";
+  const TRACKING_URL = "https://script.google.com/macros/s/AKfycbxP17-i4QG80trg78dRI9T18V39AdWpsZD8Wu4ZB6HJWHAdYmOcDLFSxTbsMTRqUZo7NQ/exec";
 
   const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
@@ -1755,6 +1755,8 @@
 
       await fetch(TRACKING_URL, {
         method: "POST",
+        mode: "no-cors",
+        keepalive: true,
         body: JSON.stringify({
           type_evenement: typeEvenement,
           page: page,
