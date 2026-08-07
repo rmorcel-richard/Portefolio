@@ -508,16 +508,12 @@ function renderVisitorMap(rows) {
 
   visitorMarkers.clearLayers();
 
-  const visits = rows.filter(r => r.type_evenement === "Visite portfolio");
-  const sourceRows = visits.length ? visits : rows;
-  const grouped = new Map();
-
-  sourceRows.forEach(r => {
-    // Ne pas convertir une cellule vide en 0 : Number("") === 0 en JavaScript.
-    // Sinon les anciennes visites sans coordonnées apparaissent à (0, 0), dans l'océan.
+  // On valide d'abord les coordonnées. Cela évite que d'anciennes lignes
+  // « Visite portfolio » sans latitude/longitude masquent les nouvelles lignes valides.
+  const rowsWithCoords = rows.map(r => {
     const rawLat = String(r.latitude ?? "").trim();
     const rawLon = String(r.longitude ?? "").trim();
-    if (!rawLat || !rawLon) return;
+    if (!rawLat || !rawLon) return null;
 
     const lat = Number(rawLat.replace(",", "."));
     const lon = Number(rawLon.replace(",", "."));
@@ -528,7 +524,24 @@ function renderVisitorMap(rows) {
       Math.abs(lat) > 90 ||
       Math.abs(lon) > 180 ||
       (lat === 0 && lon === 0)
-    ) return;
+    ) return null;
+
+    return { row: r, lat, lon };
+  }).filter(Boolean);
+
+  const visitsWithCoords = rowsWithCoords.filter(item =>
+    item.row.type_evenement === "Visite portfolio"
+  );
+
+  // Si aucune vraie visite n'a encore de coordonnées, on utilise temporairement
+  // les autres événements géolocalisés afin que la ville apparaisse quand même.
+  const sourceRows = visitsWithCoords.length ? visitsWithCoords : rowsWithCoords;
+  const grouped = new Map();
+
+  sourceRows.forEach(item => {
+    const r = item.row;
+    const lat = item.lat;
+    const lon = item.lon;
 
     const ville = String(r.ville || "Ville inconnue").trim();
     const pays = String(r.pays || "Pays inconnu").trim();
