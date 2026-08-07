@@ -6,6 +6,8 @@
 <title>Dashboard Portfolio - Richard Morcel</title>
 <link rel="icon" type="image/png" href="Image/favicon.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
 :root {
@@ -231,6 +233,20 @@ tr:hover {
   color: var(--muted);
 }
 
+#visitorMap {
+  height: 480px;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.map-note {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.92rem;
+}
+
 @media (max-width: 700px) {
   body {
     padding: 18px;
@@ -337,6 +353,13 @@ tr:hover {
   <div class="section"><h2>Top villes</h2><canvas id="citiesChart"></canvas></div>
 </div>
 
+
+<div class="section">
+  <h2>Carte des visiteurs</h2>
+  <p class="map-note">Un point par ville connue. Le nombre indique les visites du portfolio enregistrées dans cette ville.</p>
+  <div id="visitorMap" aria-label="Carte géographique des villes des visiteurs"></div>
+</div>
+
 <div class="small-grid">
   <div class="section">
     <h2>Pages les plus consultées</h2>
@@ -390,6 +413,8 @@ const API_URL = "https://script.google.com/macros/s/AKfycbxP17-i4QG80trg78dRI9T1
 let allRows = [];
 let currentFilter = "all";
 let charts = [];
+let visitorMap = null;
+let visitorMarkers = null;
 let deletedRows = JSON.parse(localStorage.getItem("deletedRowsDashboard")) || [];
 
 function destroyCharts() {
@@ -398,8 +423,29 @@ function destroyCharts() {
 }
 
 function parseDate(value) {
+  if (!value) return null;
+
+  // Format français provenant de Google Sheets : JJ/MM/AAAA HH:MM:SS
+  const fr = String(value).trim().match(
+    /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ ,T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+  );
+
+  if (fr) {
+    const [, day, month, year, hour = "0", minute = "0", second = "0"] = fr;
+    const d = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second)
+    );
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  // Secours pour les dates ISO
   const d = new Date(value);
-  return isNaN(d) ? null : d;
+  return isNaN(d.getTime()) ? null : d;
 }
 
 function formatDay(date) {
@@ -416,6 +462,74 @@ function normalizePage(page) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .trim();
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function renderVisitorMap(rows) {
+  const mapEl = document.getElementById("visitorMap");
+  if (!mapEl || typeof L === "undefined") return;
+
+  if (!visitorMap) {
+    visitorMap = L.map("visitorMap", { scrollWheelZoom: false }).setView([46.5, 2.5], 5);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(visitorMap);
+    visitorMarkers = L.layerGroup().addTo(visitorMap);
+  }
+
+  visitorMarkers.clearLayers();
+
+  const visits = rows.filter(r => r.type_evenement === "Visite portfolio");
+  const sourceRows = visits.length ? visits : rows;
+  const grouped = new Map();
+
+  sourceRows.forEach(r => {
+    const lat = Number(String(r.latitude ?? "").replace(",", "."));
+    const lon = Number(String(r.longitude ?? "").replace(",", "."));
+    if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return;
+
+    const ville = String(r.ville || "Ville inconnue").trim();
+    const pays = String(r.pays || "Pays inconnu").trim();
+    const key = `${ville.toLowerCase()}|${pays.toLowerCase()}|${lat.toFixed(3)}|${lon.toFixed(3)}`;
+
+    if (!grouped.has(key)) grouped.set(key, { ville, pays, lat, lon, count: 0 });
+    grouped.get(key).count += 1;
+  });
+
+  const bounds = [];
+  grouped.forEach(item => {
+    const radius = Math.min(18, 7 + Math.sqrt(item.count) * 2);
+    const marker = L.circleMarker([item.lat, item.lon], {
+      radius,
+      color: "#17324f",
+      weight: 2,
+      fillColor: "#d96632",
+      fillOpacity: 0.78
+    }).bindPopup(
+      `<strong>${escapeHtml(item.ville)}, ${escapeHtml(item.pays)}</strong><br>${item.count} visite${item.count > 1 ? "s" : ""}`
+    );
+    marker.addTo(visitorMarkers);
+    bounds.push([item.lat, item.lon]);
+  });
+
+  if (bounds.length === 1) {
+    visitorMap.setView(bounds[0], 8);
+  } else if (bounds.length > 1) {
+    visitorMap.fitBounds(bounds, { padding: [28, 28], maxZoom: 8 });
+  } else {
+    visitorMap.setView([46.5, 2.5], 5);
+  }
+
+  setTimeout(() => visitorMap.invalidateSize(), 0);
 }
 
 function filterRows(rows) {
@@ -654,6 +768,7 @@ function renderDashboard() {
   });
 
   renderTable("locationsTable", locations);
+  renderVisitorMap(rows);
 
   const visitesByDay = buildDailyCount(rows, "Visite portfolio");
   const cvByDay = buildDailyCount(rows, "Téléchargement CV");
@@ -721,7 +836,7 @@ function renderDashboard() {
   const tbody = document.getElementById("tbody");
   tbody.innerHTML = "";
 
-  rows.slice(0, 80).forEach(row => {
+  [...rows].reverse().slice(0, 80).forEach(row => {
     const realIndex = allRows.indexOf(row);
 
     tbody.innerHTML += `
@@ -749,13 +864,29 @@ function renderDashboard() {
 
 async function chargerDashboard() {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ${response.status}`);
+    }
+
     const data = await response.json();
-    allRows = data.rows || [];
+
+    if (data.success === false) {
+      throw new Error(data.error || "Erreur renvoyée par Google Apps Script");
+    }
+
+    if (!Array.isArray(data.rows)) {
+      throw new Error("Réponse invalide : rows est absent ou n'est pas un tableau");
+    }
+
+    allRows = data.rows;
     renderDashboard();
   } catch (error) {
-    document.getElementById("loading").textContent = "Erreur de chargement du dashboard.";
-    console.log(error);
+    document.getElementById("loading").textContent =
+      "Erreur de chargement du dashboard : " + error.message;
+    document.getElementById("lastUpdate").textContent = "Connexion impossible";
+    console.error(error);
   }
 }
 
